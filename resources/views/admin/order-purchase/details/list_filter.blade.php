@@ -170,13 +170,13 @@
 				<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
 		    </td>
 		    <td style="background-color:#E8ECF1;" class="editETA" id="{{ $data->ID }}">
-		         @if(!empty($data->ETD))
+		         @if(!empty($data->ETA))
 				    @php 
-                        $ETA = date("d M  Y", strtotime($data->ETD)); 
+                        $ETA = date("d M  Y", strtotime($data->ETA)); 
                     @endphp
                 @else
                     @php 
-                        $ETA =  $data->ETD; 
+                        $ETA =  $data->ETA; 
                     @endphp
                 @endif
 				<span id="ETA_{{ $data->ID }}" class="text">{{ $ETA }}</span>

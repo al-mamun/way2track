@@ -49,11 +49,11 @@ class LoginController extends Controller
     public function logout() {
 
         if( Auth::user()->hasRole('super admin')){
-        Auth::logout();
-        return redirect('/admin_login')->with([
-            'status' => 1,
-            'error' => "Your user role isn't assigned. You can't login. Please contact to PCB.",
-        ]);
+            Auth::logout();
+            return redirect('/user/login')->with([
+                'status' => 1,
+                'error' => "Your user role isn't assigned. You can't login. Please contact to PCB.",
+            ]);
         }
        Auth::logout();
     return redirect()->route('login');

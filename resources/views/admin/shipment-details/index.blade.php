@@ -31,6 +31,9 @@
     .card-foote.date-formr {
         margin-top: 32px;
     }
+    
+
+
 </style>
 <!-- Main content -->
   <div class="content-wrapper">
@@ -161,9 +164,15 @@
                 <div class="card-body">
                     <div class="card"  style="padding:10px;">
                         
-                        <!-- /.card-header -->
-                        <div class="card-content table-reponsive list_of_card_result" style="width: 100%;display: block;overflow-x: scroll;">
-        		            <table class="table table-bordered " id="listShipment" border="1">
+                        
+                        <!--<div class="large-table-container-3">-->
+                        <div class="card-content table-reponsive list_of_card_result " style="width: 100%;display: block;overflow-x: scroll;">
+                            <!-- /.card-header -->
+                            <div class="large-table-fake-top-scroll-container-3">
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="top_scroll">
+        		                <table class="table table-bordered " id="listShipment" border="1">
         		                <thead>
             		              <tr style="color:#000">
                                         <th style="display:none">SL.</th>
@@ -176,7 +185,8 @@
                                         <th>Supplier</th>
                                         <th>PO No</th>
                                         <!--<th>WIP</th>-->
-                                        <th>Warehouse Date</th>
+                                        <!--<th>Warehouse Date</th>-->
+                                        <th>Receive Date</th>
                                         <th>Item</th>
                                         <th>Description  </th>
                                         <th>Comments </th>
@@ -240,18 +250,19 @@
                     						<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
                     						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
                     				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editWAREHOUSEDATE" id="{{ $data->ID }}">
-                    				       @if(!empty($data->WAREHOUSE_DATE))
+                    			
+                    				    <td style="background-color:#E8ECF1;" class="editSHIPMENTRECDDATE" id="{{ $data->ID }}">
+                    				       @if(!empty($data->SHIPMENT_RECD_DATE))
                             				    @php 
-                                                    $WAREHOUSE_DATE = date("d M  Y", strtotime( $data->WAREHOUSE_DATE)); 
+                                                    $SHIPMENT_RECD_DATE = date("d M  Y", strtotime( $data->SHIPMENT_RECD_DATE)); 
                                                 @endphp
                                             @else
                                                 @php 
-                                                    $WAREHOUSE_DATE =  $data->WAREHOUSE_DATE; 
+                                                    $SHIPMENT_RECD_DATE =  $data->SHIPMENT_RECD_DATE; 
                                                 @endphp
                                             @endif
-                    						<span id="WAREHOUSE_DATE_{{ $data->ID }}" class="text">{{ $WAREHOUSE_DATE }}</span>
-                    						<input type="date" value="{{ $WAREHOUSE_DATE}}" class="editbox" id="WAREHOUSE_DATE_input_{{ $data->ID }}" style="display:none">
+                    						<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
+                    						<input type="date" value="{{ $SHIPMENT_RECD_DATE}}" class="editbox" id="SHIPMENT_RECD_DATE_input_{{ $data->ID }}" style="display:none">
                     				  </td>
                     				  <!--<td style="background-color:#E8ECF1;" class="editWIP" id="{{ $data->ID }}">-->
                     						<!--<span id="WIP_{{ $data->ID }}" class="text">{{ $data->WIP }}</span>-->
@@ -263,8 +274,10 @@
                     						<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
                     				  </td>
             		                   <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
-                    						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
-                    						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
+                    						<span style="width:300px; display:block">
+                        						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
+                        						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
+                    						</span>
                     				  </td>
                     				  <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
                     						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
@@ -327,7 +340,7 @@
             		              @endforeach
         		              </tbody>
         		          </table>
-
+                            </div>
 	                    </div>
                     </div>
                 </div>
@@ -348,6 +361,8 @@
 <!-- /.content-wrapper -->
 <!-- /.content-wrapper -->
 <script type="text/javascript">
+
+
      function deleteDataList(ID) {
              Swal.fire({
               title: 'Are you sure?',
@@ -647,6 +662,31 @@
             url: baseUrl +'/shipment_details_update' , 
             success: function(html) {
                 $("#WAREHOUSE_DATE_"+ID).html(html);
+            }
+        });
+    }).change(function() { });
+    
+    $(document).on('keyup click change', '.editSHIPMENTRECDDATE', function() {
+        
+        var ID    = $(this).attr('id');
+        
+        $("#SHIPMENT_RECD_DATE_"+ID).hide();
+        $("#SHIPMENT_RECD_DATE_input_"+ID).show();
+        
+        var ID    = $(this).attr('id');
+        var first = $("#SHIPMENT_RECD_DATE_input_"+ID).val();
+            
+        $.ajax({
+            type: "POST",
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'id': $(this).attr('id'),
+                'SHIPMENT_RECD_DATE': $("#SHIPMENT_RECD_DATE_input_"+ID).val(),
+                'type':18
+            },
+            url: baseUrl +'/shipment_details_update' , 
+            success: function(html) {
+                $("#SHIPMENT_RECD_DATE_"+ID).html(html);
             }
         });
     }).change(function() { });

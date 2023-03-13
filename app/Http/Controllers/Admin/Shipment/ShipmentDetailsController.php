@@ -13,6 +13,8 @@ use Session;
 use Carbon\Carbon;
 use DB;
 use Validator;
+use App\Models\PoHeader;
+use App\Models\PoDetails;
 
 class ShipmentDetailsController extends Controller
 {
@@ -373,6 +375,140 @@ class ShipmentDetailsController extends Controller
             
             return $date;
             
+        }  else if($type == 18) {
+           
+           if(empty($request->SHIPMENT_RECD_DATE)) {
+               return 0;
+           }
+            DB::table('w2t_shipment_details')
+                ->where('ID', $request->id)
+                ->update([
+                    'SHIPMENT_RECD_DATE' => $request->SHIPMENT_RECD_DATE,
+                    'SHIPMENT_STATUS' => 'WAREHOUSE'
+                ]);
+            
+            
+            $shipmentDetailsInfo = DB::table('w2t_shipment_details')
+                ->where('ID', $request->id)
+                ->first();
+                
+            $SHIPMENTRECDDATEE = $request->SHIPMENT_RECD_DATE;
+            
+            $date = Carbon::createFromFormat('Y-m-d', $SHIPMENTRECDDATEE)->format('d M Y');
+            
+            $poHeader = PoHeader::where('PO_NO', $shipmentDetailsInfo->PO_NO)->first();
+            
+            if(!empty($poHeader)) {
+                
+                $poDetailsInfo = ShipmentDetail::where('PO_NO', $shipmentDetailsInfo->PO_NO)
+                    ->whereNotNull('SHIPMENT_RECD_DATE')
+                    ->orderBy('ID', 'desc')
+                    ->pluck('PO_DETAILS_ID');
+                
+                
+                // $allPONo = PoHeader::where('WIP', $shipmentDetailsInfo->WIP)->pluck('PO_NO');
+                
+                $poDetailsInfoCheck = PoDetails::where('PO_NO', $shipmentDetailsInfo->PO_NO)
+                    ->whereNotIn('ID', $poDetailsInfo)
+                    ->count();
+                
+            
+                if(!$poDetailsInfoCheck) {
+                    
+                    DB::table('w2t_po_header')
+                        ->where('PO_NO', $shipmentDetailsInfo->PO_NO)
+                        ->update(['ASSIGN_STATUS' => 1]);
+                        
+                    
+                    $wipInfo = DB::table('w2t_sales_order_detail')
+                        ->where('WIP', $shipmentDetailsInfo->WIP)
+                        ->where('EX_COMMENTS', 'SHIPPED')
+                        ->get();
+                        
+              
+                    foreach($wipInfo as $supplierInfo){
+                    
+                        if(!empty($supplierInfo)) {
+                            
+                            $checkSupplier = explode(',', $supplierInfo->SUPPLIER);
+                            
+                            $supplierList = [];
+                            
+                            foreach($checkSupplier as $supplierInfoArray) {
+                                $supplierList [] = trim($supplierInfoArray);
+                            }
+                            
+                            $checkHeaderStatus = PoHeader::whereIn('SUPPLIER_NAME', $supplierList)
+                                ->where('WIP', $shipmentDetailsInfo->WIP)
+                                ->where('ASSIGN_STATUS', 0)
+                                ->count();
+                                
+                            if(!$checkHeaderStatus) {
+                                
+                                $allPoNO =  PoHeader::whereIn('SUPPLIER_NAME', $supplierList)
+                                    ->where('WIP', $shipmentDetailsInfo->WIP)
+                                    ->where('ASSIGN_STATUS', 1)
+                                    ->pluck('PO_NO');
+                                
+                                $shipmentDetailsCHeck = ShipmentDetail::whereIn('PO_NO', $allPoNO)
+                                    ->whereNotNull('SHIPMENT_RECD_DATE')
+                                    ->orderBy('ID', 'desc')
+                                    ->pluck('PO_DETAILS_ID');
+                            
+                                
+                                $allPODetailsInfo = PoDetails::whereIn('PO_NO', $allPoNO)
+                                    ->whereNotIn('ID', $shipmentDetailsCHeck)
+                                    ->count();
+                                    
+                                if(!$allPODetailsInfo) {
+                                    
+                                    $shipmentDetailsInfoUpdate  = DB::table('w2t_sales_order_detail')
+                                        ->where('ID', $supplierInfo->ID)
+                                        ->where('EX_COMMENTS', 'SHIPPED')
+                                        ->update(['EX_COMMENTS' => 'WAREHOUSE']);
+                                }
+                                // echo "<pre>";
+                                // print_r($supplierInfo->ID);
+                                
+                            }      
+                                        
+                                        
+                            
+                      
+                                   
+                            // foreach($checkSupplier as $suppliers) {
+                            //     $supp = trim($suppliers);
+                            
+                          
+                            //     if($supp == $shipmentDetailsInfo->SUPPLIER) {
+                                    
+                                  
+                            //         $checkHeaderStatus = PoHeader::whereIn('SUPPLIER_NAME', $checkSupplier)
+                            //             ->where('WIP', $shipmentDetailsInfo->WIP)
+                            //             ->where('ASSIGN_STATUS', 0)
+                            //             ->count();
+                                    
+                            //         if(!$checkHeaderStatus) {
+                                        
+                                        
+                            //             $shipmentDetailsInfoUpdate  = DB::table('w2t_sales_order_detail')
+                            //                 ->where('ID', $supplierInfo->ID)
+                            //                 ->where('EX_COMMENTS', 'SHIPPED')
+                            //                 ->update(['EX_COMMENTS' => 'WAREHOUSE']);
+                            //         }
+                            //     }
+                            // }
+                      
+                        }
+                    }
+                    
+                 
+                }
+                  
+            } 
+       
+            return $date;
+            
         } 
     }
     
@@ -418,7 +554,7 @@ class ShipmentDetailsController extends Controller
             
         } else if($type == 5) {
            
-             $ETD = $request->ETD;
+            $ETD = $request->ETD;
             
             
             $date = Carbon::createFromFormat('d/F/Y', $ETD)->format('Y-m-d');
@@ -427,7 +563,6 @@ class ShipmentDetailsController extends Controller
              ->whereIn('ID', $request->detailsID)
             ->update(['ETD' => $date]);
             
-           
             
             return $date;
             
@@ -533,7 +668,120 @@ class ShipmentDetailsController extends Controller
             
             
             
-        }
+        }  else if($type == 18) {
+           
+            $rcvDate = $request->SHIPMENT_RECD_DATE;
+            
+            $date = Carbon::createFromFormat('d/F/Y', $rcvDate)->format('Y-m-d'); 
+            
+            DB::table('w2t_shipment_details')
+                ->whereIn('ID', $request->detailsID)
+                ->update([
+                    'SHIPMENT_RECD_DATE' => $date,
+                    'SHIPMENT_STATUS' => 'WAREHOUSE'
+                
+                ]);
+            
+            
+            $listOfCopyToAll = DB::table('w2t_shipment_details')
+                ->whereIn('ID', $request->detailsID)
+                ->get();
+                
+            
+            foreach($listOfCopyToAll as $key=> $shipmentDetailsInfo) {
+         
+                
+                // $SHIPMENTRECDDATEE = $request->SHIPMENT_RECD_DATE;
+                
+                // $date = Carbon::createFromFormat('Y-m-d', $SHIPMENTRECDDATEE)->format('d M Y');
+                
+                $poHeader = PoHeader::where('PO_NO', $shipmentDetailsInfo->PO_NO)->first();
+                
+                if(!empty($poHeader)) {
+                    
+                    $poDetailsInfo = ShipmentDetail::where('PO_NO', $shipmentDetailsInfo->PO_NO)
+                        ->whereNotNull('SHIPMENT_RECD_DATE')
+                        ->orderBy('ID', 'desc')
+                        ->pluck('PO_DETAILS_ID');
+                    
+                 
+                    $poDetailsInfoCheck = PoDetails::where('PO_NO', $shipmentDetailsInfo->PO_NO)
+                        ->whereNotIn('ID', $poDetailsInfo)
+                        ->count();
+                    
+                
+                    if(!$poDetailsInfoCheck) {
+                        
+                        DB::table('w2t_po_header')
+                            ->where('PO_NO', $shipmentDetailsInfo->PO_NO)
+                            ->update(['ASSIGN_STATUS' => 1]);
+                            
+                        
+                        $wipInfo = DB::table('w2t_sales_order_detail')
+                            ->where('WIP', $shipmentDetailsInfo->WIP)
+                            ->where('EX_COMMENTS', 'SHIPPED')
+                            ->get();
+                        
+              
+                        foreach($wipInfo as $supplierInfo){
+                        
+                            if(!empty($supplierInfo)) {
+                                
+                                $checkSupplier = explode(',', $supplierInfo->SUPPLIER);
+                                
+                                $supplierList = [];
+                                
+                                foreach($checkSupplier as $supplierInfoArray) {
+                                    $supplierList [] = trim($supplierInfoArray);
+                                }
+                                
+                                $checkHeaderStatus = PoHeader::whereIn('SUPPLIER_NAME', $supplierList)
+                                    ->where('WIP', $shipmentDetailsInfo->WIP)
+                                    ->where('ASSIGN_STATUS', 0)
+                                    ->count();
+                                    
+                                if(!$checkHeaderStatus) {
+                                    
+                                    $allPoNO =  PoHeader::whereIn('SUPPLIER_NAME', $supplierList)
+                                        ->where('WIP', $shipmentDetailsInfo->WIP)
+                                        ->where('ASSIGN_STATUS', 1)
+                                        ->pluck('PO_NO');
+                                    
+                                    $shipmentDetailsCHeck = ShipmentDetail::whereIn('PO_NO', $allPoNO)
+                                        ->whereNotNull('SHIPMENT_RECD_DATE')
+                                        ->orderBy('ID', 'desc')
+                                        ->pluck('PO_DETAILS_ID');
+                                
+                                    
+                                    $allPODetailsInfo = PoDetails::whereIn('PO_NO', $allPoNO)
+                                        ->whereNotIn('ID', $shipmentDetailsCHeck)
+                                        ->count();
+                                        
+                                    if(!$allPODetailsInfo) {
+                                        
+                                        $shipmentDetailsInfoUpdate  = DB::table('w2t_sales_order_detail')
+                                            ->where('ID', $supplierInfo->ID)
+                                            ->where('EX_COMMENTS', 'SHIPPED')
+                                            ->update(['EX_COMMENTS' => 'WAREHOUSE']);
+                                    }
+                                    // echo "<pre>";
+                                    // print_r($supplierInfo->ID);
+                                    
+                                }      
+                                            
+                                  
+                          
+                            }
+                        }
+                            
+                     
+                    }
+                      
+                } 
+            
+            }
+            
+        } 
     }
 }
 

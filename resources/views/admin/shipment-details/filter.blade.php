@@ -23,7 +23,12 @@
 <input type="text" value="{{ $data->ID }}" name="details_id" id="detailsID_{{ $data->ID }}" style="display:none">
 @endforeach
 <div id="success"> </div>
-<table class="table table-bordered " id="listShipment" border="1">
+ <!-- /.card-header -->
+<div class="large-table-fake-top-scroll-container-3">
+    <div>&nbsp;</div>
+</div>
+<div class="top_scroll">
+    <table class="table table-bordered " id="listShipment" border="1">
     <thead>
       <tr style="color:#000">
           
@@ -36,7 +41,8 @@
             <th>ETA <br><span class="eta_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
             <th>Supplier <br><span class="supplier_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
             <th>PO No <br><span class="po_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
-            <th>Warehouse Date <br><span class="wip_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+            <!--<th>Warehouse Date <br><span class="wip_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>-->
+            <th>Receive Date<br><span class="receivecopy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
             <th>Item <br><span class="item_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
             <th>Description  <br><span class="description_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
             <th>Comments <br><span class="comments_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>  </th>
@@ -100,16 +106,19 @@
                     <button class="btn btn-success" onclick="savePoNo()" style="width: 35%;float: left;font-size: 10px;">Save</button>
                 </div>
             </td>
-             <td>
-                  <div class="waireHouse_td box_header" style="display:none; width:150px;">
-                    <input type="text"  class="waireHuseDate" id="waireHuseDate" name="waireHuseDate" style="width: 65%;float: left;font-size: 15px;">
-                    <button class="btn btn-success" onclick="saveWare()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+            <!-- <td>-->
+            <!--      <div class="waireHouse_td box_header" style="display:none; width:150px;">-->
+            <!--        <input type="text"  class="waireHuseDate" id="waireHuseDate" name="waireHuseDate" style="width: 65%;float: left;font-size: 15px;">-->
+            <!--        <button class="btn btn-success" onclick="saveWare()" style="width: 35%;float: left;font-size: 10px;">Save</button>-->
+            <!--    </div>-->
+               
+            <!--</td>-->
+            <td>
+               <div class="receive_date_td box_header" style="display:none; width:150px;">
+                    <input type="text"  class="receiveDate" id="receiveDate" name="receiveDate" style="width: 65%;float: left;font-size: 15px;">
+                    <button class="btn btn-success" onclick="savereceiveDate()" style="width: 35%;float: left;font-size: 10px;">Save</button>
                 </div>
-                <!--<div class="wip_td box_header" style="display:none; width:150px;">-->
-                    <!--<input type="text"  class="wip_box" id="wip_box" style="width: 65%;float: left;font-size: 15px;">-->
-                <!--    <input type="text" class="wip_box" id="wip_box" name="wip_box"  style="width: 65%;float: left;font-size: 15px;">-->
-                <!--    <button class="btn btn-success" onclick="saveWIP()" style="width: 35%;float: left;font-size: 10px;">Save</button>-->
-                <!--</div>-->
+                
             </td>
             <td>
                 
@@ -165,7 +174,7 @@
             <td></td>
         </tr>
     </thead>
-  <tbody>
+    <tbody>
      @foreach($newShipmentView as $key=>$data)
        <tr id="{{ $data->SHIPMENT_ID }}">
           <td style="display:none">{{ $key+1 }}</td>
@@ -217,19 +226,19 @@
 				<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
 				<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
 		  </td>
-		   <td style="background-color:#E8ECF1;" class="editWAREHOUSEDATE" id="{{ $data->ID }}">
-		       @if(!empty($data->WAREHOUSE_DATE))
+	
+		   <td style="background-color:#E8ECF1;" class="editSHIPMENTRECDDATE" id="{{ $data->ID }}">
+		         @if(!empty($data->SHIPMENT_RECD_DATE))
 				    @php 
-                        $WAREHOUSE_DATE = date("d M  Y", strtotime( $data->WAREHOUSE_DATE)); 
+                        $SHIPMENT_RECD_DATE = date("d M  Y", strtotime( $data->SHIPMENT_RECD_DATE)); 
                     @endphp
                 @else
                     @php 
-                        $WAREHOUSE_DATE =  $data->WAREHOUSE_DATE; 
+                        $SHIPMENT_RECD_DATE =  $data->SHIPMENT_RECD_DATE; 
                     @endphp
                 @endif
-				<span id="WAREHOUSE_DATE_{{ $data->ID }}" class="text">{{ $WAREHOUSE_DATE }}</span>
-				
-				<input type="date" value="{{ $WAREHOUSE_DATE}}" class="editbox" id="WAREHOUSE_DATE_input_{{ $data->ID }}" style="display:none">
+				<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
+				<input type="date" value="{{ $SHIPMENT_RECD_DATE}}" class="editbox" id="SHIPMENT_RECD_DATE_input_{{ $data->ID }}" style="display:none">
 		  </td>
          
           <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
@@ -302,10 +311,26 @@
       @endforeach
   </tbody>
 </table>
+</div>
    <script src="{{ URL::asset( 'js/shipment_details.js') }}"></script>
    <!-- /.content-wrapper -->
     <script type="text/javascript">
-    
+        $(function () {
+          var tableContainer = $(".top_scroll");
+          var table = $(".top_scroll table");
+          var fakeContainer = $(".large-table-fake-top-scroll-container-3");
+          var fakeDiv = $(".large-table-fake-top-scroll-container-3 div");
+        
+          var tableWidth = table.width();
+          fakeDiv.width(tableWidth);
+        
+          fakeContainer.scroll(function () {
+            tableContainer.scrollLeft(fakeContainer.scrollLeft());
+          });
+          tableContainer.scroll(function () {
+            fakeContainer.scrollLeft(tableContainer.scrollLeft());
+          });
+        });
         function deleteData(ID) {
              Swal.fire({
               title: 'Are you sure?',
@@ -737,7 +762,7 @@
     }).change(function() { });
     
     
-     $(document).on('keyup click', '.editMBL_MAWB', function() {
+    $(document).on('keyup click', '.editMBL_MAWB', function() {
         
         var ID    = $(this).attr('id');
         
@@ -787,7 +812,7 @@
         });
     }).change(function() { });
     
-     $(document).on('keyup click change', '.editWAREHOUSEDATE', function() {
+    $(document).on('keyup click change', '.editWAREHOUSEDATE', function() {
         
         var ID    = $(this).attr('id');
         
@@ -836,7 +861,7 @@
         });
     }).change(function() { });
     
-   $('#listShipment').DataTable( {
+        $('#listShipment').DataTable( {
          buttons: [
           {
                 extend: 'excelHtml5',

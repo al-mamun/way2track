@@ -343,10 +343,8 @@ class OrderController extends Controller
                     				  </div>';
                 	})
                 	->editColumn('DESCRIPTION', function ($dataInfo) {
-                	     return '
-                    						<span id="DESCRIPTION_'.$dataInfo->ID.'" class="text">'.$dataInfo->DESCRIPTION.'</span>
-                    						<input type="text" value="'. $dataInfo->DESCRIPTION.'" class="editbox" id="DESCRIPTION_input_'. $dataInfo->ID.'" style="display:none">
-                    				 ';
+                	     return view('admin.order.details.descraption',compact('dataInfo'));
+                	
                 	})
                 	->editColumn('EXP_DELIVERY', function ($dataInfo) {
                 	     return '
@@ -380,6 +378,7 @@ class OrderController extends Controller
                     				';
                 	})
                 	->editColumn('SUPPLIER', function ($dataInfo) {
+                	    
                 	    
                 	         return '
                     						<span id="SUPPLIER_'.$dataInfo->ID.'" class="text">'.$dataInfo->SUPPLIER.'</span>

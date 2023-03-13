@@ -724,9 +724,10 @@ class purchaseOrderDetails extends Controller
             
         } 
         else if($type == 8) {
+            
             $detailsID = $request->detailsID;
-            $ETDDT = $request->get('ETD');
-            $ETD = Carbon::createFromFormat('d/F/Y', $ETDDT)->format('Y-m-d');
+            $ETDDT     = $request->get('ETD');
+            $ETD       = Carbon::createFromFormat('d/F/Y', $ETDDT)->format('Y-m-d');
             
             foreach($detailsID as  $ID) { 
                 DB::table('w2t_po_details')
@@ -735,16 +736,20 @@ class purchaseOrderDetails extends Controller
             }
             
         }   else if($type == 9) {
-            $detailsID = $request->detailsID;
-            $ETADT = $request->get('ETA');
-            $ETA= Carbon::createFromFormat('d/F/Y', $ETADT)->format('Y-m-d');
             
+            $detailsID = $request->detailsID;
+            $ETADT     = $request->get('ETA');
+            $ETA       = Carbon::createFromFormat('d/F/Y', $ETADT)->format('Y-m-d');
+         
             foreach($detailsID as  $ID) { 
-                 
+               
                 DB::table('w2t_po_details')
                     ->where('ID', $ID)
                     ->update(['ETA' => $ETA]);
-             }
+            }
+            
+            
+            die(); 
             
         }  
     }

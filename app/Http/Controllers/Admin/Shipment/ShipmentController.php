@@ -252,9 +252,9 @@ class ShipmentController extends Controller
                     ->whereNotIn('ID', $poDetailsInfo)
                     ->count();
                 
-                echo "<pre>";
-                print_r($poDetailsInfoCheck);
-                echo "</pre>";
+                // echo "<pre>";
+                // print_r($poDetailsInfoCheck);
+                // echo "</pre>";
                 
                 if(!$poDetailsInfoCheck) {
                     
@@ -269,56 +269,57 @@ class ShipmentController extends Controller
                         ->get();
                         
                   
-                    foreach($wipInfo as $supplierInfo){
-                    
-                        if(!empty($supplierInfo)) {
-                            
-                            $checkSupplier = explode(',', $supplierInfo->SUPPLIER);
+                        foreach($wipInfo as $supplierInfo) {
                         
-                            foreach($checkSupplier as $suppliers) {
-                                $supp = trim($suppliers);
+                            if(!empty($supplierInfo)) {
                                 
-                                // echo "<pre>";
-                                //         print_r($tempInfo->SUPPLIER);
-                                //         echo"<brtr<br>";
-                                //         print_r($supp);
-                                //         echo "</pre>"  ;
-                          
-                                if($supp == $tempInfo->SUPPLIER) {
+                                $checkSupplier = explode(',', $supplierInfo->SUPPLIER);
+                                
+                                $supplierList = [];
+                                
+                                foreach($checkSupplier as $supplierInfoArray) {
+                                    $supplierList [] = trim($supplierInfoArray);
+                                }
+                                
+                                $checkHeaderStatus = PoHeader::whereIn('SUPPLIER_NAME', $supplierList)
+                                    ->where('WIP', $tempInfo->WIP)
+                                    ->where('ASSIGN_STATUS', 0)
+                                    ->count();
                                     
-                                      
-                
-                                    $checkHeaderStatus = PoHeader::whereIn('SUPPLIER_NAME', $checkSupplier)
+                                if(!$checkHeaderStatus) {
+                                    
+                                    $allPoNO =  PoHeader::whereIn('SUPPLIER_NAME', $supplierList)
                                         ->where('WIP', $tempInfo->WIP)
-                                        ->where('ASSIGN_STATUS', 0)
-                                        ->count();
+                                        ->where('ASSIGN_STATUS', 1)
+                                        ->pluck('PO_NO');
                                     
-                                    if(!$checkHeaderStatus) {
+                                    $shipmentDetailsCHeck = ShipmentDetail::whereIn('PO_NO', $allPoNO)
+                                        ->orderBy('ID', 'desc')
+                                        ->pluck('PO_DETAILS_ID');
+                                
+                                    
+                                    $allPODetailsInfo = PoDetails::whereIn('PO_NO', $allPoNO)
+                                        ->whereNotIn('ID', $shipmentDetailsCHeck)
+                                        ->count();
                                         
-                                        $shipmentDetailsInfo  = DB::table('w2t_sales_order_detail')
+                                    if(!$allPODetailsInfo) {
+                                        
+                                        $shipmentDetailsInfoUpdate  = DB::table('w2t_sales_order_detail')
                                             ->where('ID', $supplierInfo->ID)
                                             ->where('EX_COMMENTS', 'ORDERED')
                                             ->update(['EX_COMMENTS' => 'SHIPPED']);
                                     }
-                                }
+                                    // echo "<pre>";
+                                    // print_r($supplierInfo->ID);
+                                    
+                                }      
+                                            
+                                  
+                          
                             }
-                      
                         }
-                    }
                     
-                    // $totalWIPSTATUS       = PoHeader::where('WIP', $tempInfo->WIP)->count();
-                    
-                    // $totalWIPAssignSTATUS = PoHeader::where('WIP', $tempInfo->WIP)
-                    //     ->where('ASSIGN_STATUS',1 )
-                    //     ->count();
-                        
-                    // if($totalWIPSTATUS == $totalWIPAssignSTATUS) {
-                        
-                    //     $shipmentDetailsInfo  = DB::table('w2t_sales_order_detail')
-                    //         ->where('WIP', $tempInfo->WIP)
-                    //         ->where('EX_COMMENTS', 'ORDERED')
-                    //         ->update(['EX_COMMENTS' => 'SHIPPED']);
-                    // }
+                  
                 }
                   
             } 

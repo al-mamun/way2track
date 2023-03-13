@@ -12,6 +12,7 @@ class DeliveryDetail extends Model
     protected $fillable=[
     	'DELIVERY_ID',
     	'SHIPMENT_ID',
+    	'SHIPMENT_DETAIL_ID',
     	'CONTAINER_NO',
     	'PO_NO',
     	'ITEM',

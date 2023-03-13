@@ -90,7 +90,7 @@
                 'SHIPMENT_ID': SHIPMENT_ID,
                 'itemID': itemID,
             },
-            success: function(result) { 
+            success: function(result1) { 
                 
                     $('.assignResult').html('<div class="alert alert-primary" role="alert">Susccesfully assigned </div>');
                     
@@ -104,7 +104,8 @@
                         'type': 1,
                     },
                     success: function(result) { 
-                        $('#resultOfShipmentResult').html(result);
+                        window.location.replace(baseUrl +'/edit/delivery/detail/token/' + result1);
+                        $('#resultOfShipmentResult').html(result1);
                          $('#modal-lg').modal('hide');
                     
                     }

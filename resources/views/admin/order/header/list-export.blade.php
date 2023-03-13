@@ -179,14 +179,18 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                            </div>
                         @endif
                         
-                        <div class="table_result table-responsive" >
+                        <!-- /.card-header -->
+                        <div class="large-table-fake-top-scroll-container-3">
+                            <div>&nbsp;</div>
+                        </div>
+                        <div class="table_result table-responsive top_scroll" >
                             <table id="tableResponsive2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="display:none">Sl</th>
                                          <th scope="col">WIP</th>
                                         <th scope="col">Customer</th>
-                                       
+                                        <th scope="col">Customer Po No</th>
                                         <th scope="col"><span style="width:100px; display:block">Status</span></th>
                                         <th scope="col">Project Name</th>
                                         <th scope="col">Expected Handover Date</th>
@@ -212,7 +216,10 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                     						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_NAME }}" class="editboxStatus" id="CUSTOMER_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
                     				 	</td>
           
-                                       
+                                       <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_PO_NO" id="{{ $salesOrderInfo->ID }}">
+                    						<span id="CUSTOMER_PO_NO_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_PO_NO }}  </span>
+                    						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_PO_NO }}" class="editboxStatus" id="CUSTOMER_PO_NO_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                    				 	</td>
                     				 	
                                         <td style="background-color:#E8ECF1;" class="edit_status" id="{{ $salesOrderInfo->ID }}">
                     						 <span id="status_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SO_STATUS }}</span>
@@ -278,8 +285,9 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                                 <tfoot>
                                     <tr>
                                         <th  style="display:none">SL.</th>
-                                         <th scope="col">WIP</th>
+                                        <th scope="col">WIP</th>
                                         <th scope="col">Customer</th>
+                                        <th scope="col">Customer Po No</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Project Name</th>
                                         <th scope="col">Expected Handover Date</th>
@@ -658,6 +666,34 @@ function edit(ID) {
         url: baseUrl +'/sales_update' , 
         success: function(html) {
             $("#CUSTOMER_NAME_"+ID).html(first);
+            }
+        });
+
+}).change(function() {
+
+});
+
+$(document).on('keyup click change', '.edit_CUSTOMER_PO_NO', function() {
+
+    var ID = $(this).attr('id');
+    
+    $("#CUSTOMER_PO_NO_"+ID).hide();
+    $("#CUSTOMER_PO_NO_input_"+ID).show();
+    
+    var ID    = $(this).attr('id');
+    var first = $("#CUSTOMER_PO_NO_input_"+ID).val();
+        
+    $.ajax({
+        type: "POST",
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'id': $(this).attr('id'),
+            'CUSTOMER_PO_NO': $("#CUSTOMER_PO_NO_input_"+ID).val(),
+            'type':11
+        },
+        url: baseUrl +'/sales_update' , 
+        success: function(html) {
+            $("#CUSTOMER_PO_NO_"+ID).html(first);
             }
         });
 

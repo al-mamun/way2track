@@ -1,6 +1,17 @@
 @extends('admin.master.app')
 
 @section('content')
+<style>
+    .col-md-12.wip_number {
+        width: 100%;
+        float: left;
+        margin-bottom: 10px;
+    }
+    .col-md-6.left_wip {
+        width: 40%;
+        float: left;
+    }
+</style>
 <!-- Main content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -60,8 +71,15 @@
                   
                         <div class="card-body">
                            <div class="form-group">
-                                <label for="po-no">WIP<span style="color:red">*</span></label>
-                                <input type="text" class="form-control" id="WIP" name="WIP" placeholder="Enter WIP">
+                                <label for="WIP" style="width:100%; clear:both">WIP<span style="color:red">*</span></label>
+                                <div class="col-md-12 wip_number" style="padding-left:0px;">
+                                    <div class="col-md-6 left_wip" style="padding-left:0px;">
+                                        <input type="text" class="form-control" id="WIP1" name="WIP1" placeholder="Enter WIP Prefix">
+                                    </div>
+                                    <div class="col-md-6 left_wip">
+                                        <input type="text" class="form-control" id="WIP" name="WIP" placeholder="Enter WIP">
+                                    </div>
+                                </div>
                             </div>
                             <!--  <div class="form-group">-->
                             <!--    <label for="po-no">PO_NO<span style="color:red">*</span></label>-->
@@ -72,8 +90,12 @@
                                 <input type="text" class="form-control" id="customer" name="customer" placeholder="Enter Customer Name">
                             </div>
                             <div class="form-group">
+                                <label for="customer"> Customer Po No<span style="color:red">*</span></label>
+                                <input type="text" class="form-control" id="CUSTOMER_PO_NO" name="CUSTOMER_PO_NO" placeholder="Enter Customer PO Number">
+                            </div>
+                            <div class="form-group">
                                 <label for="status">Status <span style="color:red">*</span></label>
-                                <select name="status" id="status" class="form-control" aria-label="Default select example" required>
+                                <select name="status" id="status" class="form-control" aria-label="Select Status" required>
                                     <option value="" selected>Select Status</option>
                                     <option value="LIVE">Live</option>
                                     <option value="CLOSED">Closed</option>
@@ -147,7 +169,6 @@
 	       	
 		event.preventDefault();                          // for demo
 
-
 	    $.ajax({
 	        data:new FormData(this),
 	        dataType:'JSON',
@@ -181,12 +202,13 @@
             }
 	    }); 
 	}); 
-	  function printErrorMsg (msg) {
-            $(".print-error-msg").find("ul").html('');
-            $(".print-error-msg").css('display','block');
-            $.each( msg, function( key, value ) {
-                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-            });
-        }
+	
+    function printErrorMsg (msg) {
+        $(".print-error-msg").find("ul").html('');
+        $(".print-error-msg").css('display','block');
+        $.each( msg, function( key, value ) {
+            $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+        });
+    }
 </script>
 @endsection

@@ -25,6 +25,12 @@ button.btn.btn-success.assign_button {
     margin-left: 10px;
     margin-top: 20px;
 }
+.card-foote.date-formr {
+    margin-top: 31px;
+}
+table#listShipment {
+    width: 100% !important;
+}
 </style>
 <!-- Main content -->
   <div class="content-wrapper">
@@ -71,11 +77,54 @@ button.btn.btn-success.assign_button {
         	          </div>
         	        @endif
 
-
+                  <div class="card">
+                        <div class="card-body">
+                            <div class="card-content">
+                                <div class="col-md-12 pull-right" style="float:right">
+                                <div class="row">
+                                     <div class="col-sm-2" >
+                                        <!-- checkbox -->
+                                        <div class="form-group">
+                                            <div class="form-group input-from">
+                                                <label > Delivery ID  </label>
+                                                <input type="text" class="form-control" id="delivery_id" name="delivery_id" placeholder="Delivery ID" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" >
+                                        <!-- checkbox -->
+                                        <div class="form-group">
+                                            <div class="form-group input-from">
+                                                <label >Shipment ID  </label>
+                                                <input type="text" class="form-control" id="shipment_id" name="shipment_id" placeholder="Shipment ID" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                   <div class="col-sm-2" >
+                                        <!-- checkbox -->
+                                        <div class="form-group">
+                                            <div class="form-group input-from">
+                                                <label >PO No  </label>
+                                                <input type="text"  class="form-control" id="PO_NO" name="PO_NO" placeholder="PO No" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                    
+                                    <div class="col-sm-1" style="float:left">
+                                        <div class="card-foote date-formr">
+                                          <button type="submit" class="btn btn-primary" onclick="filterExportDelivery()" class="filterExportDelivery">Filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
               <!-- /.card-header -->
                 <div class="card-body">
-                    <div class="card"  style="padding:10px;">
-                        
+                    <div class="card list_of_card_result"  style="padding:10px;" >
                         <!-- /.card-header -->
                         <div class="card-content table-reponsive" style="width: 100%;display: block;overflow-x: scroll;">
         		            <table class="table table-bordered " id="listShipment" border="1">
@@ -87,7 +136,8 @@ button.btn.btn-success.assign_button {
                                         <th>PO No</th>
                                         <th>Item</th>
                                         <th>Qty</th>
-                                        <th>Description </th>
+                                        <th>Description</th>
+                                        <th>Delivery Date</th>
             		                    <th>Action</th>	              
             		                </tr>
             		            </thead>
@@ -119,7 +169,16 @@ button.btn.btn-success.assign_button {
                     						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
                     						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
                     				  </td>
-            		           
+            		                   <td style="background-color:#E8ECF1;" class="editDELIVERYDATE" id="{{ $data->ID }}">
+            		                       @if(!empty($data->DELIVERY_DATE))
+                				            @php $DELIVERY_DATE = date("d M  Y", strtotime($data->DELIVERY_DATE))  @endphp
+                				        @else
+                				            @php $DELIVERY_DATE =$data->DELIVERY_DATE; @endphp
+                				        @endif
+                		                    
+                    						<span id="DELIVERYDATE_{{ $data->ID }}" class="text">{{ $DELIVERY_DATE }}</span>
+                    						<input type="date" value="{{ $DELIVERY_DATE }}" class="editbox" id="DELIVERYDATE_input_{{ $data->ID }}" style="display:none">
+                    				  </td>
             		                  <td>
                                           <!--<a href="javascript:void(0)" onClick="edit('{{ $data->ID }}')"  class="btn btn-primary btn-circle btn-sm">Edit</a> -->
                                            <button  onClick="deleteData('{{  $data->ID }}')" id="deleteID" type="button" class="btn  btn-danger btn-sm">Delete</button>
@@ -322,6 +381,31 @@ button.btn.btn-success.assign_button {
     }).change(function() { });
     
     
+    $(document).on('keyup click change', '.editDELIVERYDATE', function() {
+    
+        var ID    = $(this).attr('id');
+        
+        $("#DELIVERYDATE_"+ID).hide();
+        $("#DELIVERYDATE_input_"+ID).show();
+        
+        var ID    = $(this).attr('id');
+        var first = $("#DELIVERYDATE_input_"+ID).val();
+            
+        $.ajax({
+            type: "POST",
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'id': $(this).attr('id'),
+                'DELIVERY_DATE': $("#DELIVERYDATE_input_"+ID).val(),
+                'type':5
+            },
+            url: baseUrl +'/delivery_details_update' , 
+            success: function(html) {
+                $("#DELIVERYDATE_"+ID).html(html);
+            }
+        });
+    }).change(function() { });
+    
     
     function assignBy() {
         
@@ -376,6 +460,32 @@ button.btn.btn-success.assign_button {
         $("#itemID").val(id);
         
     });
+    
+    function filterExportDelivery(){
+        
+        var shipment_id     = $("#shipment_id").val();
+        var delivery_id            = $("#delivery_id").val();
+        var PO_NO           = $("#PO_NO").val();
+        var shapment_status = $("#shapment_status").val();
+      
+        $('.list_of_card_result').html(' <div class="loader"></div>');
+        
+        $.ajax({
+            type: "POST",
+            url: baseUrl +'/export/delivery/details/search', 
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'shipment_id': shipment_id,
+                'delivery_id': delivery_id,
+                'PO_NO': PO_NO,
+ 
+            },
+            success: function(result) { 
+                $('.list_of_card_result').html(result);
+            
+            }
+        });  
+    }
 
 </script>
 @endsection

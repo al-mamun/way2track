@@ -28,6 +28,10 @@
 @foreach($salesOrderDetails as $key=>$data)
 <input type="text" value="{{ $data->ID }}" name="details_id" id="detailsID_{{ $data->ID }}" style="display:none">
 @endforeach
+<div class="large-table-fake-top-scroll-container-3">
+    <div>&nbsp;</div>
+</div>
+<div class="top_scroll">
 <table class="table table-bordered" id="listOfOrderDetails" border="1">
     <thead>
         <tr style="color:#000">
@@ -44,9 +48,7 @@
               <th>Image </th>
               <th>Action</th>
           </tr>
-    </thead>
-    <tbody>
-        <tr class="showCommentsDetails" style="display:none">
+         <tr class="showCommentsDetails" style="display:none">
             <td style="display:none"></td>
             <td>
                 <div class="WIP_td box_header" style="display:none; width:150px;">
@@ -110,9 +112,12 @@
             <td></td>
             <td></td>
         </tr>
+    </thead>
+    <tbody>
+        @php $sl =1 @endphp
         @foreach($salesOrderDetails as $key=>$data)
              <tr id="sales_id_{{$data->ID}}">
-                 
+                    <td style="display:none">{{ $sl++}}</td>
                   <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $data->ID }}">
 						<span id="wip_{{ $data->ID }}" class="text">{{ $data->WIP }}</span>
 						<input type="text" value="{{ $data->WIP }}" class="editbox" id="wip_input_{{ $data->ID }}" style="display:none">
@@ -248,7 +253,23 @@
         @endforeach
   </tbody>
 </table>
+</div>
 <script type="text/javascript">
+ $(function () {
+          var tableContainer = $(".top_scroll");
+          var table = $(".top_scroll table");
+          var fakeContainer = $(".large-table-fake-top-scroll-container-3");
+          var fakeDiv = $(".large-table-fake-top-scroll-container-3 div");
+        
+          var tableWidth = table.width();
+          fakeDiv.width(tableWidth);
+        
+          fakeContainer.scroll(function () {
+            tableContainer.scrollLeft(fakeContainer.scrollLeft());
+          });
+          tableContainer.scroll(function () {
+            fakeContainer.scrollLeft(tableContainer.scrollLeft());
+          });
     function deleteData(ID) {
              Swal.fire({
               title: 'Are you sure?',

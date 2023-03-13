@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Delivery;
 use App\Models\PoHeader;
 use App\Models\DeliveryDetail;
+use App\Models\DeliveryDetailTemp;
 use App\Models\Shipment;
 use App\Models\ShipmentDetail;
 
@@ -26,6 +27,14 @@ class DeliveryController extends Controller
         $deliveryView = Delivery::latest()->get();
         
         return view('admin.delivery.index',compact('deliveryView'));
+        
+    }
+    
+    public function deliveryViewTemp($token) {
+
+        $deliveryExportDetails = DeliveryDetailTemp::latest()->get();
+        
+        return view('admin.delivery.check_temp_list',compact('deliveryExportDetails','token'));
         
     }
     
@@ -107,15 +116,15 @@ class DeliveryController extends Controller
     public function DeliveryUpdate(Request $request, $id) {
 
          $this->validate($request, [
-            'DELIVERY_ID'=>'required',
-    	    'SIZE'=>'required',
-    	    'NO_OF_TRUCKS'=>'required',
-    	    'VEHICLE_PLATES'=>'required',
-    	    'LAST_DESPATCH_TIME'=>'required',
-    	    'EXPECTED_DELIVERY'=>'required',
-    	    'DELIVERY_STATUS'=>'required',
-    	    'DELIVERY_TIME'=>'required',
-    	    'DELIVERY_ADDRESS'=>'required',
+            'DELIVERY_ID'        => 'required',
+    	    'SIZE'               => 'required',
+    	    'NO_OF_TRUCKS'       => 'required',
+    	    'VEHICLE_PLATES'     => 'required',
+    	    'LAST_DESPATCH_TIME' => 'required',
+    	    'EXPECTED_DELIVERY'  => 'required',
+    	    'DELIVERY_STATUS'    => 'required',
+    	    'DELIVERY_TIME'      => 'required',
+    	    'DELIVERY_ADDRESS'   => 'required',
         ]);
         
         $newDelivery = Delivery::find($id);
@@ -143,6 +152,13 @@ class DeliveryController extends Controller
         return 201;
     }
     
+     public function tempDeliveryDelete($DELIVERY_ID){
+        
+        DeliveryDetailTemp::where('ID', $DELIVERY_ID)->delete();
+       
+        return 201;
+    }
+    
     public function listDeliveryOrderDetails(Request $request) {
         
         $DELIVERY_ID = $request->DELIVERY_ID;
@@ -157,7 +173,7 @@ class DeliveryController extends Controller
         $itemID = $request->itemID;
         // $deliveryInfo = Shipment::get();
         
-        $shipmentHeader = Shipment::get();
+        $shipmentHeader = Shipment::where('ASSIGN_STATUS' , 0)->get();
         
         $deliveryInfo = [];
         foreach($shipmentHeader as $hedingInfo) {
@@ -185,16 +201,26 @@ class DeliveryController extends Controller
     
      public function listPurchaseorderAssignShipment(Request $request) {
         
-        $itemID = $request->itemID;
+        $itemID     = $request->itemID;
         $SHIPMENTID = $request->SHIPMENT_ID;
+        
+        if(empty($itemID)) {
+            return 401;
+        }
+        $token = date('Ymdhim');
         
         foreach($SHIPMENTID as $number) {
                 
             $shipmientInfo = explode(',', $number);
             // $poHeaderInfo = PoHeader::where('WIP', $wp_number)->first();
             
+             $shipmentDetailsInfo = DeliveryDetail::where('SHIPMENT_ID',  $shipmientInfo[0])
+                ->orderBy('ID', 'desc')
+                ->pluck('SHIPMENT_DETAIL_ID');
+                
             $shipmentDetailsInfo = ShipmentDetail::where('SHIPMENT_ID', $shipmientInfo[0])
                 ->where('PO_NO', $shipmientInfo[1])
+                ->whereNotIn("ID", $shipmentDetailsInfo )
                 ->orderBY('Id', 'desc')
                 ->get();
             
@@ -203,18 +229,23 @@ class DeliveryController extends Controller
                 $poDetailsInfo = PoDetails::where('PO_NO',  $shipmientInfo[1])->first();
              
                 if(!empty($shipmentDetailsList)) {
-                        $shipmentDetails = new DeliveryDetail();
-                        $shipmentDetails->SHIPMENT_ID      = $shipmientInfo[0]; // shpipment id
-                        $shipmentDetails->DELIVERY_ID      = $itemID;
-                        $shipmentDetails->PO_NO            = $shipmientInfo[1]; // po no
-                        $shipmentDetails->ITEM             = !empty($shipmentDetailsList->ITEM) ? $shipmentDetailsList->ITEM : ' ';
-                        $shipmentDetails->DESCRIPTION      = !empty($shipmentDetailsList->DESCRIPTION) ? $shipmentDetailsList->DESCRIPTION : ' ';
-                        $shipmentDetails->QTY              = !empty($shipmentDetailsList->Qty) ? $shipmentDetailsList->Qty: 0;
-                        $shipmentDetails->save(); 
+                    $shipmentDetails = new DeliveryDetailTemp();
+                    $shipmentDetails->SHIPMENT_ID         = $shipmientInfo[0]; // shpipment id
+                    $shipmentDetails->DELIVERY_ID         = $itemID;
+                    $shipmentDetails->SHIPMENT_DETAIL_ID  = $shipmentDetailsList->ID;
+                    $shipmentDetails->PO_NO               = $shipmientInfo[1]; // po no
+                    $shipmentDetails->ITEM                = !empty($shipmentDetailsList->ITEM) ? $shipmentDetailsList->ITEM : ' ';
+                    $shipmentDetails->DESCRIPTION         = !empty($shipmentDetailsList->DESCRIPTION) ? $shipmentDetailsList->DESCRIPTION : ' ';
+                    $shipmentDetails->QTY                 = !empty($shipmentDetailsList->Qty) ? $shipmentDetailsList->Qty: 0;
+                    $shipmentDetails->TOKEN               = $token;
+                    $shipmentDetails->save(); 
                 }
             }
         
         }
+        
+        return $token;
+        
      
     }
     

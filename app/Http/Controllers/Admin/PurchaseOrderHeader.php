@@ -52,7 +52,7 @@ class PurchaseOrderHeader extends Controller
     public function store(Request $request) {
 
         $customer = $request->get('customer');
-        $firstLastPONO = $request->get('PO_NO_FIRST').'-'. $request->get('PO_NO') .'-'. $request->get('PO_NO_LAST');
+        $firstLastPONO =  $request->get('PO_NO') .'-'. $request->get('PO_NO_LAST');
         
         $poOrderHeader = PoHeader::where('PO_NO', $firstLastPONO)->count();
         
@@ -90,7 +90,6 @@ class PurchaseOrderHeader extends Controller
                     ]);  
             }
             
-            
             // Po date
             $PO_DATE = $request->get('PO_DATE');
             $PODATE = Carbon::createFromFormat('d/F/Y', $PO_DATE)->format('Y-m-d');
@@ -100,8 +99,6 @@ class PurchaseOrderHeader extends Controller
             if(!empty($ACKDATEE)) {
                $ACKDATEE = Carbon::createFromFormat('d/F/Y', $ACKDATEE)->format('Y-m-d'); 
             }
-            
-            
             
             // REQD EXF date
             $REQDEXFDATE = $request->get('REQD_EXF_DATE');
@@ -456,6 +453,8 @@ class PurchaseOrderHeader extends Controller
             curl_close($curl);
                 $token = date('Ymdhim');
                 Session::flash('success','File uploaded. PLEASE REVIEW AND CLICK SAVE BELOW.');
+               
+                // die();
                 return redirect('list/purchase/order/details?token='.$token);
             // }
             
@@ -491,7 +490,7 @@ class PurchaseOrderHeader extends Controller
     
         // Execute request
         $result = curl_exec($curl);
-        
+       
         if (curl_errno($curl) == 0)
         {
             $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -511,14 +510,14 @@ class PurchaseOrderHeader extends Controller
                         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
                         curl_setopt($ch, CURLOPT_TIMEOUT, 20); 
                         $responseData = curl_exec($ch);
-                        
+                
                         curl_close($ch);
                         $dataRes = json_decode($responseData)->document->page;
                         
                         $couttoalpage =    explode('"@pageCount": "', $responseData); 
                         $couttoalpage1 =    explode('",', $couttoalpage[1]); 
                         $totalPageas = $couttoalpage1[0];
-                     
+                           
                          for($i =0; $i <$totalPageas; $i++) {
                             
                           
@@ -650,7 +649,8 @@ class PurchaseOrderHeader extends Controller
                             }
                             } else {
                                   $data =  $dataRes->row;
-                                  
+                //                       echo "<pre>";
+                // print_r($data);
                                   foreach($data as $key=>$dataInfo) {
                                     
                                     
@@ -685,13 +685,21 @@ class PurchaseOrderHeader extends Controller
                                         $descraption2 = $code[0]; 
                                     }
                                     
+                                     
+                                    
                                     $qtyInfo = 0;
                                     $productQty = '';
+                                    
+                                    
+                                     
                                     if(!empty($data[$key]->column[6]->text)) {
                                         $productQty= $data[$key]->column[6]->text;
                                     }
                                     
+                                
+                                    
                                     $productqty = json_encode($productQty);
+                                    
                                     $qtyexplodeInfo2 =    explode('text":"', $productqty); 
                                     
                                     if(!empty($qtyexplodeInfo2[1])) {
@@ -713,6 +721,8 @@ class PurchaseOrderHeader extends Controller
                                         }
                                     }
                                     
+                                    
+                                    
                                     $qtyInfo8 =0;
                                     
                                     if(!empty($data[$key]->column[8]->text)){
@@ -726,10 +736,24 @@ class PurchaseOrderHeader extends Controller
                                         }
                                     }
                                     
+                                    $qtyInfo4 =0;
+                                    
+                                    if(!empty($data[$key]->column[4]->text)){
+                                        $qtyInfo4 = $data[$key]->column[4]->text;
+                                        $productqty4 = json_encode($qtyInfo4);
+                                        $qtyexplodeInfo42 =    explode('text":"', $productqty4); 
+                                        
+                                        if(!empty($qtyexplodeInfo42[1])) {
+                                            $codeqtyInfo4 = $qtyexplodeInfo42 =    explode('"}', $qtyexplodeInfo42[1]); 
+                                            $qtyInfo4 = $codeqtyInfo4[0]; 
+                                        }
+                                    }
+                                    
                                     $array =[
                                         'qty6' =>   $qtyInfo,  
                                         'qty7' =>   $qtyInfo7,
                                         'qty8' =>   $qtyInfo8,
+                                        'qty4' =>   $qtyInfo4,
                                     ];
                                     
                                     $descraption = $descraption;
@@ -767,6 +791,22 @@ class PurchaseOrderHeader extends Controller
                                              $poDetails->token = $token;
                                             $poDetails->save();
                                         }
+                                        
+                                         if(is_numeric($qtyInfo4) && $qtyInfo4 > 0) {
+                                            $poDetails = new PoDetailsTemp(); 
+                                            $poDetails->PO_NO         = $wip;
+                                            $poDetails->ITEM          = $itemCode;
+                                            $poDetails->DESCRIPTION   = preg_replace("/[^a-zA-Z0-9]+/", " ", $descraption);
+                                            $poDetails->QTY           = $qtyInfo4;
+                                            $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                                            $poDetails->ETD           = date('Y-m-d');
+                                            $poDetails->ETA           = date('Y-m-d');
+                                            $poDetails->CONFIRMED_EXF = date('Y-m-d');
+                                             $poDetails->COMMENTS     = 'ORDERED';
+                                             $poDetails->token        = $token;
+                                            $poDetails->save();
+                                        }
+                                        
                                         
                                     }
                                    

@@ -151,6 +151,11 @@ table#joblist {
 .red_color_image {
     display: block; border:2px solid red 
 }
+#moreText {
+      
+    /* Display nothing for the element */
+    display: none;
+}
 </style>
 {{ csrf_field() }}
 <!-- Main content -->
@@ -166,7 +171,62 @@ table#joblist {
         </div>
       </div><!-- /.container-fluid -->
     </section>
+<style>
+    /* Initially, hide the extra text that
+        can be revealed with the button */
+    
+</style>
+  
 
+
+<script>
+    function toggleText() {
+      
+        // Get all the elements from the page
+        var points = 
+            document.getElementById("points");
+      
+        var showMoreText =
+            document.getElementById("moreText");
+      
+        var buttonText =
+            document.getElementById("textButton");
+      
+        // If the display property of the dots 
+        // to be displayed is already set to 
+        // 'none' (that is hidden) then this 
+        // section of code triggers
+        if (points.style.display === "none") {
+      
+            // Hide the text between the span
+            // elements
+            showMoreText.style.display = "none";
+      
+            // Show the dots after the text
+            points.style.display = "inline";
+      
+            // Change the text on button to 
+            // 'Show More'
+            buttonText.innerHTML = "Show More";
+        }
+      
+        // If the hidden portion is revealed,
+        // we will change it back to be hidden
+        else {
+      
+            // Show the text between the
+            // span elements
+            showMoreText.style.display = "inline";
+      
+            // Hide the dots after the text
+            points.style.display = "none";
+      
+            // Change the text on button
+            // to 'Show Less'
+            buttonText.innerHTML = "Show Less";
+        }
+    }
+</script>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -414,7 +474,11 @@ table#joblist {
                         <div class="card card-primary">
                         
                           <!-- /.card-header -->
-                            <div class="card-content list_of_card_result table-responsive" style="padding:10px">
+                            <div class="card-content list_of_card_result" style="padding:10px">
+                                <div class="large-table-fake-top-scroll-container-3">
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="top_scroll">
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
@@ -434,7 +498,7 @@ table#joblist {
                                     <tbody>
                                     </tbody>
                                 </table>
-            		           
+            		            </div>
     	                    </div>
     	                 
                         </div>
@@ -1173,7 +1237,7 @@ table#joblist {
             columns: [
                 {data: 'WIP', name: 'WIP',className: "edit_wip_no globalcss"},
                 {data: 'ITEM', name: 'ITEM',className: "editITEM globalcss"},
-                {data: 'DESCRIPTION', name: 'DESCRIPTION',className: "editDESCRIPTION globalcss"},
+                {data: 'DESCRIPTION', name: 'DESCRIPTION',className: "globalcss"},
                 {data: 'QTY', name: 'QTY',className: "editQty globalcss"},
                  {data: 'EXP_DELIVERY', name: 'EXP_DELIVERY',className: "editEXP_DELIVERY globalcss"},
                 {data: 'EXP_HANDOVER_DT', name: 'EXP_HANDOVER_DT',className: "editEXP_HANDOVER_DT globalcss"},

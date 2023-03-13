@@ -104,7 +104,7 @@ $router->group( ['middleware' => 'auth'] , function($router) {
      Route::post( '/purchase_details_comments_update', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseUpdateOfSalesCopy' );
      
     Route::get( '/list/purchase/order/delete/{id}', 'App\Http\Controllers\Admin\purchaseOrderDetails@delete' )->name('purchase_order.delete');
-    // Route::post( '/list/order/details/show/{id}', 'App\Http\Controllers\Admin\purchaseOrderDetails@listOfOrderDetailsShow');
+    Route::post( '/purchase_details_update_list', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseDetailsUpdateList');
     // Route::get( '/sales/order/list', 'App\Http\Controllers\Admin\purchaseOrderDetails@dashboard' );
     
     
@@ -114,6 +114,7 @@ $router->group( ['middleware' => 'auth'] , function($router) {
     Route::get( '/create/shipment', 'App\Http\Controllers\Admin\Shipment\ShipmentController@createShipment');
     Route::post( '/create/shipment/submit', 'App\Http\Controllers\Admin\Shipment\ShipmentController@createShipmentStore');
     Route::get( '/edit/shipment/details', 'App\Http\Controllers\Admin\Shipment\ShipmentController@ShipmentView');
+    //  Route::get( '/edit/shipment/detail/token/{token}', 'App\Http\Controllers\Admin\Shipment\ShipmentController@ShipmentViewTemporaryData');
     Route::post( '/list/purchase/order/header/modal', 'App\Http\Controllers\Admin\Shipment\ShipmentController@listPurchaseorderheaderModal');
     Route::post( '/list/purchase/order/assign/shipment', 'App\Http\Controllers\Admin\Shipment\ShipmentController@listPurchaseorderAssignShipment');
     Route::post( '/list/purchase/order/assign/shipment/submit', 'App\Http\Controllers\Admin\Shipment\ShipmentController@listPurchaseorderAssignShipmentSubmit');
@@ -141,25 +142,36 @@ $router->group( ['middleware' => 'auth'] , function($router) {
     
     // Delivery
     Route::get( '/create/delivery', 'App\Http\Controllers\Admin\Delivery\DeliveryController@createDelivery');
+    
     Route::post( '/create/delivery/submit', 'App\Http\Controllers\Admin\Delivery\DeliveryController@createDeliveryStore');
     Route::get( '/edit/delivery/details', 'App\Http\Controllers\Admin\Delivery\DeliveryController@deliveryView');
+    Route::get( '/edit/delivery/detail/token/{token}', 'App\Http\Controllers\Admin\Delivery\DeliveryController@deliveryViewTemp');
     Route::get( '/export/deliverys', 'App\Http\Controllers\Admin\Delivery\DeliveryController@exportDelivery');
     Route::get( '/edit/delivery/details/{id}', 'App\Http\Controllers\Admin\Delivery\DeliveryController@deliverySingleView');
     Route::post( '/edit/delivery/details/delete/{id}', 'App\Http\Controllers\Admin\Delivery\DeliveryController@deliveryDelete');
+    Route::post( '/export/temp/delivery/details/delete/{id}', 'App\Http\Controllers\Admin\Delivery\DeliveryController@tempDeliveryDelete');
+    
     
     Route::post( '/list/delivery/single/order/details', 'App\Http\Controllers\Admin\Delivery\DeliveryController@listDeliveryOrderDetails');
     Route::post( '/list/delivery/order/header/modal', 'App\Http\Controllers\Admin\Delivery\DeliveryController@listPurchaseorderheaderModal');
     Route::post( '/list/delivery/order/assign/shipment', 'App\Http\Controllers\Admin\Delivery\DeliveryController@listPurchaseorderAssignShipment'); 
-    Route::post( '/delivery_update', 'App\Http\Controllers\Admin\Delivery\DeliveryController@deliveryUpdateInline' );  
+    Route::post( '/delivery_update', 'App\Http\Controllers\Admin\Delivery\DeliveryController@deliveryUpdateInline' );
+    
     
     // Deliver Details
     Route::get( '/add/delivery/details', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@addDeliveryDetails');
+    
     Route::post( '/add/delivery/details/submit', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@adddeliveryDetailStore');
+    Route::post( '/temp/delivery/details/submit', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@tempdeliveryDetailSubmit');
     Route::get( '/export/delivery/details', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsExport');
+    Route::post( '/export/delivery/details/search', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsExportSearch');
+    
     Route::get( '/export/delivery/details/view/{id}', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsExportView');
    
     Route::post( '/export/delivery/details/delete/{id}', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryExportDelete');
     Route::post( '/delivery_details_update', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsUpdateInline' );
+    Route::post( '/delivery_details_copy_update', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsCopyUPdate' );
+    Route::post( '/delivery_details_update_list', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsUpdateList' );
     
     
 });

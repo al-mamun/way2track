@@ -109,6 +109,25 @@
           -webkit-animation: spin 2s linear infinite; /* Safari */
           animation: spin 2s linear infinite;
         }
+        
+            /*Top and bottom scrollbar*/
+        .top_scroll {
+          max-width: 100%;
+          overflow-x: scroll;
+          overflow-y: auto;
+        }
+        .top_scroll table {
+        }
+        .large-table-fake-top-scroll-container-3 {
+            max-width: 100%;
+            overflow-x: scroll;
+            overflow-y: auto;
+        }
+        .large-table-fake-top-scroll-container-3 div {
+          /*background-color: red;*/
+          font-size: 1px;
+          line-height: 1px;
+        }
     </style>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     
@@ -176,7 +195,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="https://devpt.way2track.com/public/assets/img/logo.png" alt="Total Office Logo" height="30px" width="auto">
+    <img class="animation__shake" src="{{ URL::asset( 'assets/img/logo.png') }}" alt="Total Office Logo" height="30px" width="auto">
   </div>
 
   <!-- Navbar -->
@@ -463,7 +482,22 @@
 <!-- ./wrapper -->
 
 <script>
+$(function () {
+  var tableContainer = $(".top_scroll");
+  var table = $(".top_scroll table");
+  var fakeContainer = $(".large-table-fake-top-scroll-container-3");
+  var fakeDiv = $(".large-table-fake-top-scroll-container-3 div");
 
+  var tableWidth = table.width();
+  fakeDiv.width(tableWidth);
+
+  fakeContainer.scroll(function () {
+    tableContainer.scrollLeft(fakeContainer.scrollLeft());
+  });
+  tableContainer.scroll(function () {
+    fakeContainer.scrollLeft(tableContainer.scrollLeft());
+  });
+});
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,

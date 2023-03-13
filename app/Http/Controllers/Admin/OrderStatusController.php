@@ -72,44 +72,46 @@ class OrderStatusController extends Controller
             
             $customer = $request->get('customer');
             $salesOrder = new SalesOrderHeader();
-            $salesOrder->WIP                     = $request->get('WIP');
-            $salesOrder->CUSTOMER_NAME           = $request->get('customer');
-            $salesOrder->CUSTOMER_PO_NO          = $request->get('customer');
-            $salesOrder->PROJECT_NAME            = $request->get('PROJECT_NAME');
-            $salesOrder->SO_STATUS               = $request->get('status');
-            $salesOrder->TGT_HANDOVER_DT         = $TGT_HANDOVER_DT;
-            $salesOrder->SALESPERSON             = $request->get('SALESPERSON');
-            $salesOrder->PROJECTMANAGER          = $request->get('PROJECTMANAGER');
-            $salesOrder->PROJECTMANAGER_EMAIL    = $request->get('PROJECTMANAGER_EMAIL');
-            $salesOrder->SALESPERSON_EMAIL       = $request->get('SALESPERSON_EMAIL');
-            $salesOrder->COMMENTS                = $request->get('comments');
-       
-            if( $salesOrder->save()) {
             
-                $digits_needed = 8;
-                $random_number=''; // set up a blank string
-                $count = 0;
+            if(!empty( $request->get('WIP1')) && !empty( $request->get('WIP') )) {
+                $salesOrder->WIP                     =  $request->get('WIP1').'-'.$request->get('WIP');
+                $salesOrder->CUSTOMER_NAME           = $request->get('customer');
+                $salesOrder->CUSTOMER_PO_NO          = $request->get('CUSTOMER_PO_NO');
+                $salesOrder->PROJECT_NAME            = $request->get('PROJECT_NAME');
+                $salesOrder->SO_STATUS               = $request->get('status');
+                $salesOrder->TGT_HANDOVER_DT         = $TGT_HANDOVER_DT;
+                $salesOrder->SALESPERSON             = $request->get('SALESPERSON');
+                $salesOrder->PROJECTMANAGER          = $request->get('PROJECTMANAGER');
+                $salesOrder->PROJECTMANAGER_EMAIL    = $request->get('PROJECTMANAGER_EMAIL');
+                $salesOrder->SALESPERSON_EMAIL       = $request->get('SALESPERSON_EMAIL');
+                $salesOrder->COMMENTS                = $request->get('comments');
+           
+                if( $salesOrder->save()) {
                 
-                while ( $count < $digits_needed ) {
-                    $random_digit = mt_rand(0, 9);
+                    $digits_needed = 8;
+                    $random_number=''; // set up a blank string
+                    $count = 0;
                     
-                    $random_number .= $random_digit;
-                    $count++;
+                    while ( $count < $digits_needed ) {
+                        $random_digit = mt_rand(0, 9);
+                        
+                        $random_number .= $random_digit;
+                        $count++;
+                    }
+        
+                    $wpNoGenerate = new Wips();
+                    $wpNoGenerate->WIP         = $request->get('WIP');
+                    $wpNoGenerate->RAND_NO       = $random_number;
+                    $wpNoGenerate->save();
+                    
+                    return response()->json(
+                            [
+                                'success'=>'Added new records.',
+                                'id'=> $salesOrder->id,
+                            ]);
                 }
-    
-                $wpNoGenerate = new Wips();
-                $wpNoGenerate->WIP         = $request->get('WIP');
-                $wpNoGenerate->RAND_NO       = $random_number;
-                $wpNoGenerate->save();
-                
-                return response()->json(
-                        [
-                            'success'=>'Added new records.',
-                            'id'=> $salesOrder->id,
-                        ]);
-            }
          
-          
+            }
         }
          return response()->json(['error'=>$validator->errors()->all()]);
         
@@ -194,6 +196,13 @@ class OrderStatusController extends Controller
             DB::table('w2t_sales_order_header')
             ->where('ID', $request->id)
             ->update(['PROJECTMANAGER' => $request->PROJECTMANAGER]);
+            
+        } else if($type == 11) {
+           
+          
+            DB::table('w2t_sales_order_header')
+            ->where('ID', $request->id)
+            ->update(['CUSTOMER_PO_NO' => $request->CUSTOMER_PO_NO]);
             
         }
           

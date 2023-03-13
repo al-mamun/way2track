@@ -532,9 +532,15 @@ div#listShipment_filter {
     }
     
     function assign() {
+        
         var itemID = $("#itemID").val();
         var to   = $("#to").val();
-    
+        
+        if(itemID == 0) {
+            $('.table_result').html('<div class="alert alert-danger" role="alert"> please select header first! </div>');
+            return true;
+        }
+        
         $.ajax({
             type: "POST",
             url: baseUrl +'/list/delivery/order/header/modal', 

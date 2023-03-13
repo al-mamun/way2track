@@ -341,7 +341,7 @@
 								<tr>
 									<th scope="col">Customer</th>
 									<th scope="col">Status</th>
-									<th scope="col">Expected Handover Date</th>
+									<th scope="col"> Client Expectation </th>
 									<th scope="col">Overall Status</th>
 								</tr>
 							</thead>
@@ -382,11 +382,13 @@
 								<tr>
 								    <th scope="col" style="display:none">Sl </th>
 									<th scope="col">Item </th>
+									<th scope="col"> Image</th>
 									<th scope="col">Description</th>
 									<th scope="col" style=" padding-right: 10px;text-align: right;">Quantity </th>
 									<th scope="col" >Fulfilment Status</th>
-									<th scope="col" style="text-align:center;">Expected Delivery</th>
-									<th scope="col"> Image</th>
+									<th scope="col" style="text-align:center;">Goods Ready Date</th>
+									<th scope="col" style="text-align:center;">Ship Date</th>
+									<th scope="col" style="text-align:center;">Arrival Date</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -406,6 +408,11 @@
 										<th>
 											<a style="width: 120px; display: block;" class="example-image-link" href="{{ URL::asset( 'images/'. $salesInfo->thumbnail_image) }}" data-lightbox="example-1"> {{ $salesInfo->ITEM }} </a>
 										</th>
+										<td>
+											<a style=" display: block;" class="example-image-link" href="{{ URL::asset( 'images/'. $salesInfo->THUMBNAIL_IMAGE) }}" data-lightbox="example-1">
+									        <img style="max-width: 80px; display: block;" class="example-image-link" src="{{ URL::asset( 'images/'. $salesInfo->THUMBNAIL_IMAGE) }}" > </a>
+
+										</td>
 										<td>
 											<div  class="light_box_{{ $salesInfo->ID }}">
 
@@ -439,9 +446,32 @@
                                             @endif
                                         
                                         </td>
+                                         <td style="text-align:center;">
+                                            
+                                            @if(!empty($salesInfo->EXP_DELIVERY))
+                                                @php
+                                                    $date = date("d M  Y", strtotime( $salesInfo->EXP_DELIVERY));
+                                                @endphp
+                                                {{ $date }}
+                                            @else
+                                                {{  $salesInfo->EXP_DELIVERY }}
+                                            @endif
+                                        
+                                        </td>
+                                         <td style="text-align:center;">
+                                            
+                                            @if(!empty($salesInfo->EXP_DELIVERY))
+                                                @php
+                                                    $date = date("d M  Y", strtotime( $salesInfo->EXP_DELIVERY));
+                                                @endphp
+                                                {{ $date }}
+                                            @else
+                                                {{  $salesInfo->EXP_DELIVERY }}
+                                            @endif
+                                        
+                                        </td>
 {{--
 										<td>
-
 
 										    <div class="light_box_{{ $salesInfo->ID }}">
 
@@ -464,11 +494,7 @@
 
 										</td> --}}
 
-										<td>
-											<a style=" display: block;" class="example-image-link" href="{{ URL::asset( 'images/'. $salesInfo->THUMBNAIL_IMAGE) }}" data-lightbox="example-1">
-									        <img style="max-width: 80px; display: block;" class="example-image-link" src="{{ URL::asset( 'images/'. $salesInfo->THUMBNAIL_IMAGE) }}" > </a>
-
-										</td>
+										
 								    </tr>
 								    	<script type="text/javascript">
 

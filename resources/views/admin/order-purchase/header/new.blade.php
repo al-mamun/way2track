@@ -56,12 +56,12 @@
                             </div>
                             <div class="row">
                                 <label for="po-no" style="width:100%;padding-left:10px;">PO No<span style="color:red">*</span></label>
-                                <div class="col-md-3">
-                                    <div class="form-group">
+                                <!--<div class="col-md-3">-->
+                                <!--    <div class="form-group">-->
                                         
-                                        <input type="text"  class="form-control" id="PO_NO_FIRST" name="PO_NO_FIRST" placeholder="Enter PO NO" >
-                                    </div>  
-                                </div>
+                                <!--        <input type="text"  class="form-control" id="PO_NO_FIRST" name="PO_NO_FIRST" placeholder="Enter PO NO" >-->
+                                <!--    </div>  -->
+                                <!--</div>-->
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <!--<label for="po-no">PO No<span style="color:red">*</span></label>-->
