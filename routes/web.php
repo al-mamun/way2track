@@ -99,11 +99,17 @@ $router->group( ['middleware' => 'auth'] , function($router) {
     Route::get( '/list/purchase/order/details', 'App\Http\Controllers\Admin\purchaseOrderDetails@list' );
     Route::get( '/purchase/order/detail/view/{id}', 'App\Http\Controllers\Admin\purchaseOrderDetails@detailsViewList' );
     Route::post( '/list/purchase/order/details/expected/delivery', 'App\Http\Controllers\Admin\purchaseOrderDetails@listFitler' );
+ 
+    Route::post( '/sortable/data/sync', 'App\Http\Controllers\Admin\purchaseOrderDetails@sortableDataSync' );
+    Route::post( '/purchase/details/column/switch', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseDetailsColumnSwitch' );
+    
+    Route::post( '/purchase/details/duplicate', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseDetailsDuplicate' );
+    
     Route::post( '/purchase_details_update', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseUpdate' );
     Route::post( '/purchase_update', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseUpdateOfSales' );
      Route::post( '/purchase_details_comments_update', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseUpdateOfSalesCopy' );
      
-    Route::get( '/list/purchase/order/delete/{id}', 'App\Http\Controllers\Admin\purchaseOrderDetails@delete' )->name('purchase_order.delete');
+    Route::post( '/list/purchase/order/delete/{id}', 'App\Http\Controllers\Admin\purchaseOrderDetails@delete' )->name('purchase_order.delete');
     Route::post( '/purchase_details_update_list', 'App\Http\Controllers\Admin\purchaseOrderDetails@purchaseDetailsUpdateList');
     // Route::get( '/sales/order/list', 'App\Http\Controllers\Admin\purchaseOrderDetails@dashboard' );
     
@@ -174,6 +180,23 @@ $router->group( ['middleware' => 'auth'] , function($router) {
     Route::post( '/delivery_details_update_list', 'App\Http\Controllers\Admin\Delivery\DeliveryDetailsController@deliveryDetailsUpdateList' );
     
     
+    
+    // Create GRN report
+    Route::get( '/create/grn/report', 'App\Http\Controllers\Admin\GRN\GRNController@createGRN');
+    Route::post( '/list/grn/header', 'App\Http\Controllers\Admin\GRN\GRNController@createShipmentList');
+    Route::post( '/grn/generate/list', 'App\Http\Controllers\Admin\GRN\GRNController@grnGenerateList');
+    Route::post( '/grn/generate/shipmentid/wise/list', 'App\Http\Controllers\Admin\GRN\GRNController@grnshipmentWiseList');
+    Route::post( '/grn/reports/generate', 'App\Http\Controllers\Admin\GRN\GRNController@grnReportsGenerate');
+    Route::get( '/grn/reports/pdf/{shipment_id}', 'App\Http\Controllers\Admin\GRN\GRNController@grnReportsGeneratePdf');
+    
+    
+    // Create GRN report
+    Route::get( '/create/delivery/order/report', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@createGRN');
+    Route::post( '/list/delivery/order/report', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@createDeliveryList');
+    Route::post( '/delivery/order/report/generate/list', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@grnGenerateList');
+    Route::post( '/delivery/generate/shipmentid/wise/list', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@grnshipmentWiseList');
+    Route::post( '/do/reports/generate', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@doReportsGenerate');
+    Route::get( '/delivery/reports/pdf/{shipment_id}', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@grnReportsGeneratePdf');
 });
 
 
