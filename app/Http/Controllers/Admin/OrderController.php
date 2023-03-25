@@ -276,14 +276,14 @@ class OrderController extends Controller
         // if($saverOrder->save()) {
         //     return redirect('/list/order/details')->with([
         //         'status' => 1,
-        //         'success' => "Success fully order details create.",
+        //         'success' => "Success fully order details create."f
         //     ]);
         // }
 
     }
     
-     public function listOfOrderDetailWIPWise (Request $request,$wip) {
-        
+     public function listOfOrderDetailWIPWise(Request $request,$wip) {
+  
         $salesOrderDetails = SalesOrderDetails::latest()->where('WIP', $wip)->get();
         $status     = 5;
         $menu_open  = 2;
@@ -292,8 +292,11 @@ class OrderController extends Controller
         
   
         $sodCommentValue = SodCommentValue::get();
-         
-        return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue'));
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
+        
+        return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue','wip','columnSync'));
      }
     /**
      * [listOfOrderDetails description]
@@ -313,8 +316,12 @@ class OrderController extends Controller
         }
         
         $sodCommentValue = SodCommentValue::get();
-         
-        return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue'));
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
+        
+        return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue','columnSync'));
 
     }
     
@@ -326,7 +333,16 @@ class OrderController extends Controller
 
          if ($request->ajax()) {
              
-            $data = SalesOrderDetails::select('*')->orderBy('id','desc');
+            $wip = $request->wip;
+            
+            if(!empty($wip)) {
+                $data = SalesOrderDetails::select('*')
+                    ->where('WIP', $wip)
+                    ->orderBy('id','desc');
+            } else {
+                $data = SalesOrderDetails::select('*')->orderBy('id','desc');
+            }
+            
             
             return Datatables::of($data)
                     ->addIndexColumn()
@@ -439,8 +455,12 @@ class OrderController extends Controller
         
         $type       = $request->type;
         $checkobx   = $request->checkbox;
-    
-         if($type == 3 ) {
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
+        
+        if($type == 3 ) {
             
             
             $WIP        = $request->WIP;
@@ -457,6 +477,7 @@ class OrderController extends Controller
                
                 return view('admin.order.details.result',[
                     'salesOrderDetails' =>  $salesOrderDetails,
+                    'columnSync'        =>  $columnSync,
                     'status'            => 3,
                     'menu_open'         => 2,
                 ]);
@@ -561,6 +582,7 @@ class OrderController extends Controller
 
        return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -648,9 +670,14 @@ class OrderController extends Controller
         }
          
         
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
+        
             
         return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -667,6 +694,10 @@ class OrderController extends Controller
         
         $hand_over_from = $request->hand_over_from;
         $hand_over_to   = $request->hand_over_to;
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
         
         if($checkobx =='Yes') {
             
@@ -829,6 +860,7 @@ class OrderController extends Controller
         
         return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -842,6 +874,10 @@ class OrderController extends Controller
         $to         = $request->to;
         $hand_over_from = $request->hand_over_from;
         $hand_over_to   = $request->hand_over_to;
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
         
         if(!empty($from) && !empty($to) && !empty($hand_over_from) && !empty($hand_over_to)) {
 
@@ -880,6 +916,7 @@ class OrderController extends Controller
             
         return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]); 
@@ -1104,9 +1141,12 @@ class OrderController extends Controller
         $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
             ->whereIn('ID', $detailsID)
             ->get(); 
+        $columnSync        = DB::table('w2t_setting_table')->first();
         
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
         return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
         ]);
     }
   

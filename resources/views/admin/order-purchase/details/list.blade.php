@@ -1,106 +1,108 @@
 @extends('admin.master.app')
 
 @section('content')
-<style>
-tr {
-    cursor: pointer;
-}
-tr.selected {
-    background: #eee;
-}
-input#file {
-    float: left;
-    width: 176px;
-    border: 1px solid #218838;
-    padding: 3px;
-    background: #218838;
-}
-button.btn.btn-success {
-    border-radius: 0px;
-}
-.row.data-button {
-    margin-bottom: 15px;
-}
-<style>
-.row.data-button {
-    padding: 14px 19px;
-}
-input#file {
-    width: 100px;
-    float: left;
-}
-svg.w-5.h-5 {
-    font-size: .875rem!important;
-    width: 21px;
-}
-.form-check {
-    position: relative;
-    display: block;
-    padding-left: 1.25rem;
-    float: left;
-    margin-right: 13px;
-}
-.date-form {
-    width: 46%;
-    float: left;
-    margin-top: 10px;
-    margin-right: 4%;
-}
-.card-foote.date-formr {
-    margin-top: 40px;
-}
-.date-formr {
-    width: 18%;
-    float: left;
-    margin-top: 10px;
-    margin-right: 0%;
-}
-h5.by_date_check.by_staus {
-    float: left;
-    margin-top: 0px;
-    margin-right: 20px;
-    font-weight: bold;
-    font-size: 17px;
-}
-h5.by_date_check.by_date {
-    font-weight: bold;
-    font-size: 16px;
-    float: left;
-    margin-top: 10px;
-    margin-right: 20px;
-}
-h5.by_date_check {
-    font-weight: normal;
-    margin-top: 21px;
-}
-h5.by_date_check.by_date {
-    width: 100%;
-}
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-}
-button.btn.btn-secondary.buttons-excel.buttons-html5 {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-}
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
+    <style>
+        tr {
+            cursor: pointer;
+        }
+        tr.selected {
+            background: #eee;
+        }
+        input#file {
+            float: left;
+            width: 176px;
+            border: 1px solid #218838;
+            padding: 3px;
+            background: #218838;
+        }
+        button.btn.btn-success {
+            border-radius: 0px;
+        }
+        .row.data-button {
+            margin-bottom: 15px;
+        }
+        
+        .row.data-button {
+            padding: 14px 19px;
+        }
+        input#file {
+            width: 100px;
+            float: left;
+        }
+        svg.w-5.h-5 {
+            font-size: .875rem!important;
+            width: 21px;
+        }
+        .form-check {
+            position: relative;
+            display: block;
+            padding-left: 1.25rem;
+            float: left;
+            margin-right: 13px;
+        }
+        .date-form {
+            width: 46%;
+            float: left;
+            margin-top: 10px;
+            margin-right: 4%;
+        }
+        .card-foote.date-formr {
+            margin-top: 40px;
+        }
+        .date-formr {
+            width: 18%;
+            float: left;
+            margin-top: 10px;
+            margin-right: 0%;
+        }
+        h5.by_date_check.by_staus {
+            float: left;
+            margin-top: 0px;
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        h5.by_date_check.by_date {
+            font-weight: bold;
+            font-size: 16px;
+            float: left;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+        h5.by_date_check {
+            font-weight: normal;
+            margin-top: 21px;
+        }
+        h5.by_date_check.by_date {
+            width: 100%;
+        }
+        .loader {
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 120px;
+          height: 120px;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+        button.btn.btn-secondary.buttons-excel.buttons-html5 {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+  
+        
+    </style>
+    
+    <style>
+        
+    </style>
+    <style>
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 </style>
+
+
+
 <!-- Main content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -349,24 +351,73 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                                 </div>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <div class="dropdown column_list_dropdown" >
+                                <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                    Customize column
+                                </button>
+                                <div class="dropdown-menu dropdown_menu_list">
+                                    <ul id="sortable">
+                                        @if(!empty($columnSync))
+                                            @foreach($columnSync as $key => $value)
+                                                @if(!empty($value))
+                                                 @php
+                                                    $exp = explode('_', $value);
+                                                    
+                                                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type',  4)
+                                                        ->first();
+                
+                                                @endphp
+                                                
+                                                <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                    <label class="switch">
+                                                      <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','4')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                      <span class="slider round"></span>
+                                                    </label>
+                                                    @if(!empty($exp[1]))
+                                                     {{ $exp[1] }} 
+                                                    @endif
+                                                </li>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        
+                                    </ul>
+                                    <div class="ui-state-default save_button" >
+                                        <button class="btn btn-info" onclick="save()"> Save </button>     
+                                    </div>
+                                </div>
+                            </div>
+                  
+                        </div>
         	            <div class="card-body">
         	                <div class="card card-primary">
         	                  {{ csrf_field() }}
                               <!-- /.card-header -->
-                                <div class="card-content list_of_card_result" style="padding: 2px 13px;">
+                                <div class="card-content list_of_card_result table-responsive" style="padding: 2px 13px;">
                 		            <table class="table table-bordered"  id="listOfOrderDetails">
                 		                <thead>
                         		              <tr style="color:#000">
                         		                  <th style="display:none">SL.</th>
-                        		                  <th>PO No</th>
-                        		                  <th>Item</th>
-                        		                  <th>Description</th>
-                        		                  <th>Qty</th>
-                        		                  <th>Comments</th>
-                        		                  <th>EXP EXF DT</th>
-                        		                  <th>Confirmed EXF</th>
-                        		                  <th>ETD</th>
-                        		                  <th>ETA</th>
+                        		                    @foreach($columnSync as $key => $value)
+                                                        @if(!empty($value))
+                                                            @php
+                                                                $exp = explode('_', $value);
+                                                                
+                                                                $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                                    ->where('page_name', $exp[1])
+                                                                    ->where('type',  4)
+                                                                    ->first();
+                            
+                                                            @endphp
+                                                            @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                             <th scope="col">{{ $exp[1] }} </th>
+                                                             @endif
+                                                        @endif
+                                                     
+                                                     @endforeach
                         		                  <th>Action</th>
                         		              </tr>
                         		          </thead>
@@ -374,87 +425,124 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                 		                @foreach($poDetails as $key=>$data)
                 		                    <tr id="purchase_id_{{$data->ID}}">
                     		                   <td style="display:none">{{ $key + 1 }}</td>
-                    		                   <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $data->ID }}">
-                            						<span id="wip_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
-                            						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="wip_input_{{ $data->ID }}" style="display:none">
-                            				  </td>
-                            				  <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
-                            						<span id="ITEM_{{ $data->ID }}" class="text">{{ $data->ITEM }}</span>
-                            						<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
-                            				  </td>
-                            			
-                            				  <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
-                            						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
-                            						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
-                            				  </td>
-                            				  <td style="background-color:#E8ECF1;" class="editQty" id="{{ $data->ID }}">
-                            						<span id="QTY_{{ $data->ID }}" class="text">{{ $data->QTY }}</span>
-                            						<input type="text" value="{{ $data->QTY }}" class="editbox" id="QTY_input_{{ $data->ID }}" style="display:none">
-                            				  </td>
-                    		             
-                    		           
-                    		                  <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
-                            						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
-                            						<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
-                            				  </td>
-                            		            <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
-                            		                @if(!empty($data->EXP_EXF_DT))
-                                    				    @php 
-                                                            $EXP_EXF_DT = date("d M  Y", strtotime( $data->EXP_EXF_DT)); 
-                                                        @endphp
-                                                    @else
-                                                        @php 
-                                                            $EXP_EXF_DT =  $data->EXP_EXF_DT; 
-                                                        @endphp
+                    		                    @foreach($columnSync as $key => $value)
+                    		                         @php
+                                                        $exp = explode('_', $value);
+                                                        
+                                                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                            ->where('page_name', $exp[1])
+                                                            ->where('type',  4)
+                                                            ->first();
+                                
+                                                    @endphp
+                                                    @if($exp[1] == 'PO No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $data->ID }}">
+                                    						<span id="wip_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+                                    						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="wip_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
                                                     @endif
-                            						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
-                            						<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
-                            				    </td>
-                            				    <td style="background-color:#E8ECF1;" class="editEXP_CONFIRMED_EXF" id="{{ $data->ID }}">
-                            				        @if(!empty($data->CONFIRMED_EXF))
-                                    				    @php 
-                                                            $CONFIRMED_EXF = date("d M  Y", strtotime( $data->CONFIRMED_EXF)); 
-                                                        @endphp
-                                                    @else
-                                                        @php 
-                                                            $CONFIRMED_EXF =  $data->ETA; 
-                                                        @endphp
+                                                    
+                                                    @if($exp[1] == 'Item' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
+                                    						<span id="ITEM_{{ $data->ID }}" class="text">{{ $data->ITEM }}</span>
+                                    						<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
+                                    				  </td>
                                                     @endif
-                            						<span id="CONFIRMED_EXF_{{ $data->ID }}" class="text">{{ $CONFIRMED_EXF }}</span>
-                            						<input type="date" value="{{ $data->CONFIRMED_EXF }}" class="editbox" id="CONFIRMED_EXF_input_{{ $data->ID }}" style="display:none">
-                            				    </td>
-                            				    <td style="background-color:#E8ECF1;" class="editETD" id="{{ $data->ID }}">
-                            				       
-                                                    @if(!empty($data->ETA))
-                                    				    @php 
-                                                            $ETA = date("d M  Y", strtotime( $data->ETA)); 
-                                                        @endphp
-                                                    @else
-                                                        @php 
-                                                            $ETA =  $data->ETA; 
-                                                        @endphp
+                                                    
+                                                    @if($exp[1] == 'Description' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
+                                    						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
+                                    						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
                                                     @endif
-                            						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETA }}</span>
-                            						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
-                            				    </td>
-                            				    <td style="background-color:#E8ECF1;" class="editETA" id="{{ $data->ID }}">
-                            				         @if(!empty($data->ETD))
-                                    				    @php 
-                                                            $ETD = date("d M  Y", strtotime($data->ETD)); 
-                                                        @endphp
-                                                    @else
-                                                        @php 
-                                                            $ETD =  $data->ETD; 
-                                                        @endphp
+                                                    
+                                                    @if($exp[1] == 'Qty' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editQty" id="{{ $data->ID }}">
+                                    						<span id="QTY_{{ $data->ID }}" class="text">{{ $data->QTY }}</span>
+                                    						<input type="text" value="{{ $data->QTY }}" class="editbox" id="QTY_input_{{ $data->ID }}" style="display:none">
+                                    				  </td>
                                                     @endif
-                            						<span id="ETA_{{ $data->ID }}" class="text">{{ $ETD }}</span>
-                            						<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
-                            				    </td>
+                                                    
+                                                    @if($exp[1] == 'Comments' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
+                                    						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
+                                    						<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
+                                    				  </td>
+                                                    @endif
+                                                    
+                                                    @if($exp[1] == 'Confirmed EXF' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
+                                    		                @if(!empty($data->EXP_EXF_DT))
+                                            				    @php 
+                                                                    $EXP_EXF_DT = date("d M  Y", strtotime( $data->EXP_EXF_DT)); 
+                                                                @endphp
+                                                            @else
+                                                                @php 
+                                                                    $EXP_EXF_DT =  $data->EXP_EXF_DT; 
+                                                                @endphp
+                                                            @endif
+                                    						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
+                                    						<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
+                                                    @endif
+                                                    
+                                                    @if($exp[1] == 'EXP EXF DT' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
+                                    		                @if(!empty($data->EXP_EXF_DT))
+                                            				    @php 
+                                                                    $EXP_EXF_DT = date("d M  Y", strtotime( $data->EXP_EXF_DT)); 
+                                                                @endphp
+                                                            @else
+                                                                @php 
+                                                                    $EXP_EXF_DT =  $data->EXP_EXF_DT; 
+                                                                @endphp
+                                                            @endif
+                                    						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
+                                    						<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
+                                                    @endif
+                    		                        
+                    		                      
+                                                    @if($exp[1] == 'ETA' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editETD" id="{{ $data->ID }}">
+                                    				       
+                                                            @if(!empty($data->ETA))
+                                            				    @php 
+                                                                    $ETA = date("d M  Y", strtotime( $data->ETA)); 
+                                                                @endphp
+                                                            @else
+                                                                @php 
+                                                                    $ETA =  $data->ETA; 
+                                                                @endphp
+                                                            @endif
+                                    						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETA }}</span>
+                                    						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
+                                                    @endif
+                                                    
+                                                    @if($exp[1] == 'ETD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editETA" id="{{ $data->ID }}">
+                                    				         @if(!empty($data->ETD))
+                                            				    @php 
+                                                                    $ETD = date("d M  Y", strtotime($data->ETD)); 
+                                                                @endphp
+                                                            @else
+                                                                @php 
+                                                                    $ETD =  $data->ETD; 
+                                                                @endphp
+                                                            @endif
+                                    						<span id="ETA_{{ $data->ID }}" class="text">{{ $ETD }}</span>
+                                    						<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
+                                                    @endif
+                    		                    @endforeach
+                    		                  
                     		                  
                     		                  <td>
                     		                     <!--<a href="{{ URL::to( '/list/purchase/order/edit/' .$data->ID) }}"  class="btn btn-primary btn-circle btn-sm"><i class="fas fa-edit"></i></a> -->
                     		                     <!--<a href="javascript:void(0)" onClick="edit('{{ $data->ID }}')"  class="btn btn-primary btn-circle btn-sm">Edit</a> -->
                     		                     <!--<a href="{{ route('purchase_order.delete',$data->ID) }}" id="delete" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>-->
+                    		                     <button onclick="purchase_duplicate('{{ $data->ID }}')"  id="purchase_duplicate" type="button" class="btn  btn-info btn-sm">Duplicate </button>
                     		                     <button  onClick="deleteData('{{$data->ID}}')" id="purchase_delete" type="button" class="btn  btn-danger btn-sm">Delete</button>
                     		                  </td>
                 		                </tr>
@@ -482,19 +570,41 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
   </div>
 <!-- /.content-wrapper -->
   <!-- data table Jquery -->
+   <script>
+        
+  </script>
 <!-- /.content-wrapper -->
 <script type="text/javascript">
+    
 
+    
+    function purchase_duplicate(ID) {
+         $.ajax({
+            type: "POST",
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'ID': ID,
+              
+            },
+            url: baseUrl +'/purchase/details/duplicate', 
+            success: function(HTML) {
+                 $("#purchase_id_" + ID ).after(HTML);
+            }
+        
+        });
+       
+    }  
+    
     function deleteData(ID) {
-             Swal.fire({
-              title: 'Are you sure?',
-              text: "Be careful please !  All related details will be deleted with this.",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "Be careful please !  All related details will be deleted with this.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
                 
               if (result.isConfirmed) {
                 // window.location.href = link;
@@ -505,7 +615,7 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                         'ID': ID,
                       
                     },
-                    url: baseUrl +'/list/order/delete/'+ ID , 
+                    url: baseUrl +'/list/purchase/order/delete/'+ ID , 
                     success: function(HTML) {
                         $('#purchase_id_'+ID).hide();
                         Swal.fire(
@@ -692,7 +802,7 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
             },
             url: baseUrl +'/purchase_details_update' , 
             success: function(html) {
-                $("#EXP_DELIVERY_"+ID).html(first);
+                $("#EXP_DELIVERY_"+ID).html(html);
                 }
             });
     
@@ -718,8 +828,8 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                 'type':7
             },
             url: baseUrl +'/purchase_details_update' , 
-            success: function(html) {
-                $("#CONFIRMED_EXF_"+ID).html(first);
+            success: function(data1) {
+                $("#CONFIRMED_EXF_"+ID).html(data1);
                 }
             });
     

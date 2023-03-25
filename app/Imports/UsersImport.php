@@ -58,11 +58,8 @@ class UsersImport implements ToModel, WithHeadingRow,WithStartRow,WithPreCalcula
     {   
             
             $keyNumber =  $this->sl++;
-            // echo"<pre>";
-            // print_r($row);
-            
-            //  echo"</pre>";
-           
+         
+ 
             if(isset($row['code'])) {
                 
                 $indexNumber =  'C'. $keyNumber;
@@ -231,11 +228,13 @@ class UsersImport implements ToModel, WithHeadingRow,WithStartRow,WithPreCalcula
                 }
                 
             } else {
-                
+              
                 $indexNumber =  'B'. $keyNumber;
+                // echo "<pre>";
+                // print_r($row);
                 
                 if( !empty($row['slno']) && is_numeric($row['qty']) && $row['qty'] > 0  ) {
-               
+
                     $tableData = DB::table('w2t_sales_image')
                         ->where('uniq_id',$this->wip['sesison_id'])
                         ->where('cell_number', $indexNumber)
@@ -249,11 +248,12 @@ class UsersImport implements ToModel, WithHeadingRow,WithStartRow,WithPreCalcula
                         
                         $checkExist = SalesOrderDetailstem::where('WIP', $this->wip['wip'])
                             ->where('ITEM', $slNO)
-                            ->where('QTY',$row['qty'] )
+                            ->where('QTY', $row['qty'] )
                             ->where('temp_time', $this->wip['sesison_id'] )
                             ->first();
                             
                         if(empty($checkExist)){
+                            
                             $newOrder = new SalesOrderDetailstem;
                             $newOrder->WIP               = $this->wip['wip'];
                             $newOrder->ITEM              = $slNO;
@@ -274,6 +274,61 @@ class UsersImport implements ToModel, WithHeadingRow,WithStartRow,WithPreCalcula
                         }
                     }
                     
+                    
+                } else if( !empty($row['slno']) && !is_numeric($row['qty']) && !empty($row['description']) ) {
+
+                    $tableData = DB::table('w2t_sales_image')
+                        ->where('uniq_id',$this->wip['sesison_id'])
+                        ->where('cell_number', $indexNumber)
+                        ->first();
+         
+                    $salesOrderHeader = SalesOrderHeader::where('WIP', $this->wip['wip'])->first();
+                    
+                    if(!empty($salesOrderHeader)) {
+        
+                        $slNO = !empty($row['slno']) ? $row['slno'] : '';
+                        
+                        $checkExist = SalesOrderDetailstem::where('WIP', $this->wip['wip'])
+                            ->where('ITEM', $slNO)
+                            ->where('QTY', $row['qty'] )
+                            ->where('temp_time', $this->wip['sesison_id'] )
+                            ->first();
+                            
+                        if(empty($checkExist)){
+                            
+                            $newOrder = new SalesOrderDetailstem;
+                            $newOrder->WIP               = $this->wip['wip'];
+                            $newOrder->ITEM              = $slNO;
+                            $newOrder->QTY               = 0;
+                            $newOrder->DESCRIPTION       =  str_replace('/', ' ', $row['description']);
+                            $newOrder->temp_time         = $this->wip['sesison_id'];
+                            $newOrder->EXP_HANDOVER_DT   = $salesOrderHeader->TGT_HANDOVER_DT;
+                            $newOrder->EXP_DELIVERY      = $salesOrderHeader->TGT_HANDOVER_DT;
+                            $newOrder->comments          = '';
+                            
+                            if(!empty($tableData)) {
+                                $newOrder->THUMBNAIL_IMAGE = $tableData->image;
+                                $newOrder->IMAGE_ID       = $tableData->ID;
+                            }
+                            
+                            $newOrder->EX_COMMENTS     = 'PROCESSING';
+                            $newOrder->save();
+                        }
+                    }
+                    
+                    
+                } else if( empty($row['slno']) && is_numeric($row['qty']) && $row['qty'] > 0  ) {
+
+                    $newOrderList =  SalesOrderDetailstem::where('WIP',  $this->wip)->orderBY('ID','desc')->first();
+
+                   
+                        SalesOrderDetailstem::where('WIP',  $this->wip)
+                            ->orderBY('ID','desc')
+                            ->take(1)
+                            ->update([
+                                'QTY' => $row['qty'],
+                            ]); 
+                            
                     
                 } else if(!empty($row['description']) || !empty($row['slno']) ) {
                     

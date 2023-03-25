@@ -160,8 +160,51 @@
                             </div>
                         </div>
                     </div>
-              <!-- /.card-header -->
-                <div class="card-body">
+                    
+                    <div class="card-body">
+                        <div class="dropdown column_list_dropdown" >
+                            <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                Customize column
+                            </button>
+                            <div class="dropdown-menu dropdown_menu_list">
+                                <ul id="ShipmentDetailssortable" class="sortable">
+                                    @if(!empty($columnSync))
+                                        @foreach($columnSync as $key => $value)
+                                            @if(!empty($value))
+                                             @php
+                                                $exp = explode('_', $value);
+                                                
+                                                $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                    ->where('page_name', $exp[1])
+                                                    ->where('type',  6)
+                                                    ->first();
+            
+                                            @endphp
+                                            
+                                            <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                <label class="switch">
+                                                  <input type="checkbox" name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','6')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                  <span class="slider round"></span>
+                                                </label>
+                                                @if(!empty($exp[1]))
+                                                 {{ $exp[1] }} 
+                                                @endif
+                                            </li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    
+                                </ul>
+                                <div class="ui-state-default save_button" >
+                                    <button class="btn btn-info" onclick="save()"> Save </button>     
+                                </div>
+                            </div>
+                        </div>
+              
+                    </div>
+                        
+                    <!-- /.card-header -->
+                    <div class="card-body">
                     <div class="card"  style="padding:10px;">
                         
                         
@@ -176,25 +219,23 @@
         		                <thead>
             		              <tr style="color:#000">
                                         <th style="display:none">SL.</th>
-                                        <th>Shipment ID</th>
-                                        <th>Container NO</th>
-                                        <th>Vessel </th>
-                                        <th>Qty</th>
-                                        <th>ETD</th>
-                                        <th>ETA</th>
-                                        <th>Supplier</th>
-                                        <th>PO No</th>
-                                        <!--<th>WIP</th>-->
-                                        <!--<th>Warehouse Date</th>-->
-                                        <th>Receive Date</th>
-                                        <th>Item</th>
-                                        <th>Description  </th>
-                                        <th>Comments </th>
-                                        <th>Act Exf Date </th>
-                                        <th>MBL MAWB </th>
-                                        <th>Vessel Sailing Date </th> 
-                                        <th>Confirmed ETA </th> 
-                                        <th>Shipment Status</th>
+                                        @foreach($columnSync as $key => $value)
+                                            @if(!empty($value))
+                                                @php
+                                                    $exp = explode('_', $value);
+                                                    
+                                                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type', 6)
+                                                        ->first();
+                
+                                                @endphp
+                                                @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                 <th scope="col">{{ $exp[1] }} </th>
+                                                 @endif
+                                            @endif
+                                         
+                                         @endforeach
             		                    <th>Action</th>
             		              </tr>
             		            </thead>
@@ -202,134 +243,197 @@
             		             @foreach($newShipmentView as $key=>$data)
             		               <tr id="{{ $data->SHIPMENT_ID }}">
             		                  <td style="display:none">{{ $key+1 }}</td>
-            		                  <td>{{ $data->SHIPMENT_ID }}</td>
-            		                  <td style="background-color:#E8ECF1;" id="{{ $data->ID }}" class="editCONTAINER_NO">
-                    						<span id="CONTAINER_NO_{{ $data->ID }}" class="text">{{ $data->CONTAINER_NO }}</span>
-                    						<input type="text" value="{{ $data->CONTAINER_NO }}" class="editbox" id="CONTAINER_NO_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editVESSEL" id="{{ $data->ID }}">
-                    						<span id="VESSEL_{{ $data->ID }}" class="text">{{ $data->VESSEL }}</span>
-                    						<input type="text" value="{{ $data->VESSEL }}" class="editbox" id="VESSEL_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    			
-                    				  <td style="background-color:#E8ECF1;" class="editQty" id="{{ $data->ID }}">
-                    						<span id="Qty_{{ $data->ID }}" class="text">{{ $data->Qty }}</span>
-                    						<input type="text" value="{{ $data->Qty }}" class="editbox" id="Qty_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editETD" id="{{ $data->ID }}">
-                    				        @if(!empty($data->ETD))
-                            				    @php 
-                                                    $ETD = date("d M  Y", strtotime($data->ETD)); 
-                                                @endphp
-                                            @else
-                                                @php 
-                                                    $ETD =  $data->ETD; 
-                                                @endphp
+            		                    @foreach($columnSync as $key => $value)
+            		                        @php
+                                                $exp = explode('_', $value);
+                                                
+                                                $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                    ->where('page_name', $exp[1])
+                                                    ->where('type',  6)
+                                                    ->first();
+                        
+                                            @endphp
+                                            @if($exp[1] == 'Shipment ID' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td>{{ $data->SHIPMENT_ID }}</td>
                                             @endif
-                    						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETD }}</span>
-                    						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editETA" id="{{ $data->ID }}">
-                    				        @if(!empty($data->ETA))
-                            				    @php 
-                                                    $ETA = date("d M  Y", strtotime( $data->ETA)); 
-                                                @endphp
-                                            @else
-                                                @php 
-                                                    $ETA =  $data->ETA; 
-                                                @endphp
+                                            
+                                            @if($exp[1] == 'Container NO' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" id="{{ $data->ID }}" class="editCONTAINER_NO">
+                            						<span id="CONTAINER_NO_{{ $data->ID }}" class="text">{{ $data->CONTAINER_NO }}</span>
+                            						<input type="text" value="{{ $data->CONTAINER_NO }}" class="editbox" id="CONTAINER_NO_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
                                             @endif
-                    						<span id="ETA_{{ $data->ID }}" class="text">{{ $ETA}}</span>
-                    						<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editSUPPLIER" id="{{ $data->ID }}">
-                    						<span id="SUPPLIER_{{ $data->ID }}" class="text">{{ $data->SUPPLIER }}</span>
-                    						<input type="text" value="{{ $data->SUPPLIER }}" class="editbox" id="SUPPLIER_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editPO_NO" id="{{ $data->ID }}">
-                    						<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
-                    						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    			
-                    				    <td style="background-color:#E8ECF1;" class="editSHIPMENTRECDDATE" id="{{ $data->ID }}">
-                    				       @if(!empty($data->SHIPMENT_RECD_DATE))
-                            				    @php 
-                                                    $SHIPMENT_RECD_DATE = date("d M  Y", strtotime( $data->SHIPMENT_RECD_DATE)); 
-                                                @endphp
-                                            @else
-                                                @php 
-                                                    $SHIPMENT_RECD_DATE =  $data->SHIPMENT_RECD_DATE; 
-                                                @endphp
+                                            @if($exp[1] == 'Vessel' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editVESSEL" id="{{ $data->ID }}">
+                            						<span id="VESSEL_{{ $data->ID }}" class="text">{{ $data->VESSEL }}</span>
+                            						<input type="text" value="{{ $data->VESSEL }}" class="editbox" id="VESSEL_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
                                             @endif
-                    						<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
-                    						<input type="date" value="{{ $SHIPMENT_RECD_DATE}}" class="editbox" id="SHIPMENT_RECD_DATE_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
+                                            @if($exp[1] == 'Qty' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editQty" id="{{ $data->ID }}">
+                            						<span id="Qty_{{ $data->ID }}" class="text">{{ $data->Qty }}</span>
+                            						<input type="text" value="{{ $data->Qty }}" class="editbox" id="Qty_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
+                                            @endif
+                                            @if($exp[1] == 'ETD' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editETD" id="{{ $data->ID }}">
+                            				        @if(!empty($data->ETD))
+                                    				    @php 
+                                                            $ETD = date("d M  Y", strtotime($data->ETD)); 
+                                                        @endphp
+                                                    @else
+                                                        @php 
+                                                            $ETD =  $data->ETD; 
+                                                        @endphp
+                                                    @endif
+                            						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETD }}</span>
+                            						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
+                            				    </td>
+                                            @endif
+                                            @if($exp[1] == 'ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editETA" id="{{ $data->ID }}">
+                            				        @if(!empty($data->ETA))
+                                    				    @php 
+                                                            $ETA = date("d M  Y", strtotime( $data->ETA)); 
+                                                        @endphp
+                                                    @else
+                                                        @php 
+                                                            $ETA =  $data->ETA; 
+                                                        @endphp
+                                                    @endif
+                            						<span id="ETA_{{ $data->ID }}" class="text">{{ $ETA}}</span>
+                            						<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
+                                            @endif
+                                            
+                                            
+                                            @if($exp[1] == 'Supplier' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editSUPPLIER" id="{{ $data->ID }}">
+                            						<span id="SUPPLIER_{{ $data->ID }}" class="text">{{ $data->SUPPLIER }}</span>
+                            						<input type="text" value="{{ $data->SUPPLIER }}" class="editbox" id="SUPPLIER_input_{{ $data->ID }}" style="display:none">
+                            				    </td>
+                            				    
+                                            @endif
+                                            
+                                            
+                                            @if($exp[1] == 'PO No' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editPO_NO" id="{{ $data->ID }}">
+                            						<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+                            						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
+                            				    </td>
+                                            @endif
+                                            
+                                            
+                                            @if($exp[1] == 'Receive Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editSHIPMENTRECDDATE" id="{{ $data->ID }}">
+                            				       @if(!empty($data->SHIPMENT_RECD_DATE))
+                                    				    @php 
+                                                            $SHIPMENT_RECD_DATE = date("d M  Y", strtotime( $data->SHIPMENT_RECD_DATE)); 
+                                                        @endphp
+                                                    @else
+                                                        @php 
+                                                            $SHIPMENT_RECD_DATE =  $data->SHIPMENT_RECD_DATE; 
+                                                        @endphp
+                                                    @endif
+                            						<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
+                            						<input type="date" value="{{ $SHIPMENT_RECD_DATE}}" class="editbox" id="SHIPMENT_RECD_DATE_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
+                                            @endif
+                                            
+                                            @if($exp[1] == 'Item' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                               <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
+                            						<span id="ITEM_{{ $data->ID }}" class="text">{{ $data->ITEM }}</span>
+                            						<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
+                            				   </td>
+                                            @endif
+                                            
+                                            
+                                            @if($exp[1] == 'Description' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
+                            						<span style="width:300px; display:block">
+                                						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
+                                						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
+                            						</span>
+                            				    </td>
+                    				  
+                                            @endif
+                                            
+                                            @if($exp[1] == 'Comments' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                               <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
+                            						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
+                            						<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
+                                            @endif
+                                            
+                                            @if($exp[1] == 'Act Exf Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editACT_EXF_DATE" id="{{ $data->ID }}">
+                            				       @if(!empty($data->ACT_EXF_DATE))
+                                    				    @php 
+                                                            $ACT_EXF_DATE = date("d M  Y", strtotime( $data->ACT_EXF_DATE)); 
+                                                        @endphp
+                                                    @else
+                                                        @php 
+                                                            $ACT_EXF_DATE =  $data->ACT_EXF_DATE; 
+                                                        @endphp
+                                                    @endif
+                            						<span id="ACT_EXF_DATE_{{ $data->ID }}" class="text">{{ $ACT_EXF_DATE }}</span>
+                            						<input type="date" value="{{ $ACT_EXF_DATE}}" class="editbox" id="ACT_EXF_DATE_input_{{ $data->ID }}" style="display:none">
+                            				    </td>
+                                            @endif
+                                            
+                                            @if($exp[1] == 'MBL MAWB' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                               <td style="background-color:#E8ECF1;" class="editMBL_MAWB" id="{{ $data->ID }}">
+                            						<span id="MBL_MAWB_{{ $data->ID }}" class="text">{{ $data->MBL_MAWB }}</span>
+                            						<input type="text" value="{{ $data->MBL_MAWB }}" class="editbox" id="MBL_MAWB_input_{{ $data->ID }}" style="display:none">
+                            				  </td>
+                                            @endif
+                                            
+                                            @if($exp[1] == 'Vessel Sailing Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editVESSEL_SAILING_DATE" id="{{ $data->ID }}">
+                            				       @if(!empty($data->VESSEL_SAILING_DATE))
+                                    				    @php 
+                                                            $VESSEL_SAILING_DATE = date("d M  Y", strtotime( $data->VESSEL_SAILING_DATE)); 
+                                                        @endphp
+                                                    @else
+                                                        @php 
+                                                            $VESSEL_SAILING_DATE =  $data->VESSEL_SAILING_DATE; 
+                                                        @endphp
+                                                    @endif
+                            						<span id="VESSEL_SAILING_DATE_{{ $data->ID }}" class="text">{{ $VESSEL_SAILING_DATE}}</span>
+                            						<input type="date" value="{{ $data->VESSEL_SAILING_DATE }}" class="editbox" id="VESSEL_SAILING_DATE_input_{{ $data->ID }}" style="display:none">
+                            				   </td>
+                                            @endif
+                                            
+                                            @if($exp[1] == 'Confirmed ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editCONFIRMED_ETA" id="{{ $data->ID }}">
+                            				         @if(!empty($data->CONFIRMED_ETA))
+                                    				    @php 
+                                                            $CONFIRMED_ETA = date("d M  Y", strtotime( $data->CONFIRMED_ETA)); 
+                                                        @endphp
+                                                    @else
+                                                        @php 
+                                                            $CONFIRMED_ETA =  $data->CONFIRMED_ETA; 
+                                                        @endphp
+                                                    @endif
+                            						<span id="CONFIRMED_ETA_{{ $data->ID }}" class="text">{{ $CONFIRMED_ETA }}</span>
+                            						<input type="date" value="{{ $data->CONFIRMED_ETA }}" class="editbox" id="CONFIRMED_ETA_input_{{ $data->ID }}" style="display:none">
+                            				   </td>
+                                            @endif
+                                            
+                                            @if($exp[1] == 'Shipment Status' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                <td style="background-color:#E8ECF1;" class="editSHIPMENT_STATUS" id="{{ $data->ID }}">
+                            						<span id="SHIPMENT_STATUS_{{ $data->ID }}" class="text">{{ $data->SHIPMENT_STATUS }}</span>
+                            						<input type="text" value="{{ $data->SHIPMENT_STATUS }}" class="editbox" id="SHIPMENT_STATUS_input_{{ $data->ID }}" style="display:none">
+                            				    </td>
+                                            @endif
+                                            
+                                        @endforeach
+            		                  
                     				  <!--<td style="background-color:#E8ECF1;" class="editWIP" id="{{ $data->ID }}">-->
                     						<!--<span id="WIP_{{ $data->ID }}" class="text">{{ $data->WIP }}</span>-->
                     						<!--<input type="text" value="{{ $data->WIP }}" class="editbox" id="WIP_input_{{ $data->ID }}" style="display:none">-->
                     				  <!--</td>-->
             		                 
-            		                  <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
-                    						<span id="ITEM_{{ $data->ID }}" class="text">{{ $data->ITEM }}</span>
-                    						<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-            		                   <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
-                    						<span style="width:300px; display:block">
-                        						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
-                        						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
-                    						</span>
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
-                    						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
-                    						<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editACT_EXF_DATE" id="{{ $data->ID }}">
-                    				       @if(!empty($data->ACT_EXF_DATE))
-                            				    @php 
-                                                    $ACT_EXF_DATE = date("d M  Y", strtotime( $data->ACT_EXF_DATE)); 
-                                                @endphp
-                                            @else
-                                                @php 
-                                                    $ACT_EXF_DATE =  $data->ACT_EXF_DATE; 
-                                                @endphp
-                                            @endif
-                    						<span id="ACT_EXF_DATE_{{ $data->ID }}" class="text">{{ $ACT_EXF_DATE }}</span>
-                    						<input type="date" value="{{ $ACT_EXF_DATE}}" class="editbox" id="ACT_EXF_DATE_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editMBL_MAWB" id="{{ $data->ID }}">
-                    						<span id="MBL_MAWB_{{ $data->ID }}" class="text">{{ $data->MBL_MAWB }}</span>
-                    						<input type="text" value="{{ $data->MBL_MAWB }}" class="editbox" id="MBL_MAWB_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editVESSEL_SAILING_DATE" id="{{ $data->ID }}">
-                    				       @if(!empty($data->VESSEL_SAILING_DATE))
-                            				    @php 
-                                                    $VESSEL_SAILING_DATE = date("d M  Y", strtotime( $data->VESSEL_SAILING_DATE)); 
-                                                @endphp
-                                            @else
-                                                @php 
-                                                    $VESSEL_SAILING_DATE =  $data->VESSEL_SAILING_DATE; 
-                                                @endphp
-                                            @endif
-                    						<span id="VESSEL_SAILING_DATE_{{ $data->ID }}" class="text">{{ $VESSEL_SAILING_DATE}}</span>
-                    						<input type="date" value="{{ $data->VESSEL_SAILING_DATE }}" class="editbox" id="VESSEL_SAILING_DATE_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-                    				  <td style="background-color:#E8ECF1;" class="editCONFIRMED_ETA" id="{{ $data->ID }}">
-                    				         @if(!empty($data->CONFIRMED_ETA))
-                            				    @php 
-                                                    $CONFIRMED_ETA = date("d M  Y", strtotime( $data->CONFIRMED_ETA)); 
-                                                @endphp
-                                            @else
-                                                @php 
-                                                    $CONFIRMED_ETA =  $data->CONFIRMED_ETA; 
-                                                @endphp
-                                            @endif
-                    						<span id="CONFIRMED_ETA_{{ $data->ID }}" class="text">{{ $CONFIRMED_ETA }}</span>
-                    						<input type="date" value="{{ $data->CONFIRMED_ETA }}" class="editbox" id="CONFIRMED_ETA_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
-            		                   <td style="background-color:#E8ECF1;" class="editSHIPMENT_STATUS" id="{{ $data->ID }}">
-                    						<span id="SHIPMENT_STATUS_{{ $data->ID }}" class="text">{{ $data->SHIPMENT_STATUS }}</span>
-                    						<input type="text" value="{{ $data->SHIPMENT_STATUS }}" class="editbox" id="SHIPMENT_STATUS_input_{{ $data->ID }}" style="display:none">
-                    				  </td>
             		             
             		                  <td>
                                             <!--<a href="javascript:void(0)" onClick="edit('{{ $data->ID }}')"  class="btn btn-primary btn-circle btn-sm"><i class="fas fa-edit"></i></a> -->
@@ -344,7 +448,8 @@
 	                    </div>
                     </div>
                 </div>
-              <!-- /.card-body -->
+                    <!-- /.card-body -->
+                    
             </div>
             <!-- /.card -->
 

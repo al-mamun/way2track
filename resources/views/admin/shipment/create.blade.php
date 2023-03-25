@@ -56,6 +56,14 @@
                                         <label for="CURRENCY"> Currency <span style="color:red">*</span></label>
                                         <select id="CURRENCY" name="CURRENCY" class="form-control">
                                             <option>select currency</option>
+                                           
+                                            <option value="AUD">Australian Dollar</option>
+                                            <option value="GBP">British Pound Sterling</option>
+                                            <option value="CAD">Canadian Dollar</option>
+                                            <option value="EUR">Euro</option>
+                                            <option value="SGD">Singapore Dollar</option>
+                                            <option value="AED">United Arab Emirates Dirham</option>
+                                            <option value="USD">US Dollar</option>
                                             <option value="AFN">Afghan Afghani</option>
                                             <option value="ALL">Albanian Lek</option>
                                             <option value="DZD">Algerian Dinar</option>
@@ -63,7 +71,7 @@
                                             <option value="ARS">Argentine Peso</option>
                                             <option value="AMD">Armenian Dram</option>
                                             <option value="AWG">Aruban Florin</option>
-                                            <option value="AUD">Australian Dollar</option>
+                                            
                                             <option value="AZN">Azerbaijani Manat</option>
                                             <option value="BSD">Bahamian Dollar</option>
                                             <option value="BHD">Bahraini Dinar</option>
@@ -79,12 +87,12 @@
                                             <option value="BAM">Bosnia-Herzegovina Convertible Mark</option>
                                             <option value="BWP">Botswanan Pula</option>
                                             <option value="BRL">Brazilian Real</option>
-                                            <option value="GBP">British Pound Sterling</option>
+                                            
                                             <option value="BND">Brunei Dollar</option>
                                             <option value="BGN">Bulgarian Lev</option>
                                             <option value="BIF">Burundian Franc</option>
                                             <option value="KHR">Cambodian Riel</option>
-                                            <option value="CAD">Canadian Dollar</option>
+                                            
                                             <option value="CVE">Cape Verdean Escudo</option>
                                             <option value="KYD">Cayman Islands Dollar</option>
                                             <option value="XOF">CFA Franc BCEAO</option>
@@ -107,7 +115,7 @@
                                             <option value="ERN">Eritrean Nakfa</option>
                                             <option value="EEK">Estonian Kroon</option>
                                             <option value="ETB">Ethiopian Birr</option>
-                                            <option value="EUR">Euro</option>
+                                           
                                             <option value="FKP">Falkland Islands Pound</option>
                                             <option value="FJD">Fijian Dollar</option>
                                             <option value="GMD">Gambian Dalasi</option>
@@ -185,7 +193,7 @@
                                             <option value="RSD">Serbian Dinar</option>
                                             <option value="SCR">Seychellois Rupee</option>
                                             <option value="SLL">Sierra Leonean Leone</option>
-                                            <option value="SGD">Singapore Dollar</option>
+                                            
                                             <option value="SKK">Slovak Koruna</option>
                                             <option value="SBD">Solomon Islands Dollar</option>
                                             <option value="SOS">Somali Shilling</option>
@@ -211,9 +219,9 @@
                                             <option value="TMT">Turkmenistani Manat</option>
                                             <option value="UGX">Ugandan Shilling</option>
                                             <option value="UAH">Ukrainian Hryvnia</option>
-                                            <option value="AED">United Arab Emirates Dirham</option>
+                                            
                                             <option value="UYU">Uruguayan Peso</option>
-                                            <option value="USD">US Dollar</option>
+                                           
                                             <option value="UZS">Uzbekistan Som</option>
                                             <option value="VUV">Vanuatu Vatu</option>
                                             <option value="VEF">Venezuelan BolÃ­var</option>

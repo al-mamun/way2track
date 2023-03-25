@@ -30,6 +30,7 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ URL::asset( 'admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{{ URL::asset( 'style.css') }}">
     <style>
         tr.selected {
             background: #c6e0b4  !important;
@@ -336,6 +337,12 @@
                 <i class="fas fa-file mr-2"></i> Export Shipment Details
               </a>
             @endcan
+            @can('export shipment details')
+              <div class="dropdown-divider"></div>
+              <a href="{{ URL::to( 'create/grn/report') }}" class="dropdown-item">
+                <i class="fas fa-file mr-2"></i> Create GRN Report
+              </a>
+            @endcan
             </div>
 
           </li>
@@ -377,10 +384,17 @@
                 <i class="fas fa-file mr-2"></i> Export Delivery Details
               </a>
             @endcan
+             @can('export delivery details')
+              <div class="dropdown-divider"></div>
+              <a href="{{ URL::to( 'create/delivery/order/report') }}" class="dropdown-item">
+                <i class="fas fa-file mr-2"></i> Create Delivery Order Report
+              </a>
+            @endcan
             </div>
 
           </li>
                  
+
           <!-- permission and role menu -->
           <!-- Notifications Dropdown Menu -->
           @if(auth()->user()->hasRole('super admin'))
@@ -597,5 +611,10 @@ $(function () {
 //     });
 // });
 </script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://resources/demos/style.css">
+<!--<script src="https://code.jquery.com/jquery-3.6.0.js"></script>-->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="{{ URL::asset( 'js/customize.js') }}"></script>
 </body>
 </html>

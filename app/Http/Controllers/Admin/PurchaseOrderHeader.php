@@ -1039,9 +1039,13 @@ class PurchaseOrderHeader extends Controller
             $poOrderHeaders = PoHeader::orderBy('ID','desc')->get();
         }
         
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->PO_HEADER_PAGE);
         
         return view('admin.order-purchase.header.export',[
             'poOrderHeaders'    =>  $poOrderHeaders,
+            'columnSync'        =>  $columnSync,
             'WIP'               =>  $request->WIP,
             'status'            => 7,
             'menu_open'         => 3,
@@ -1065,14 +1069,17 @@ class PurchaseOrderHeader extends Controller
             $to     = $request->to;
             $PO_NO  = $request->PO_NO;
             $checkobx = $request->checkbox;
-            
+            $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->PO_HEADER_PAGE);
             if(empty($from) && empty($to) &&  empty($PO_NO) &&  empty($checkobx)) {
                 
                 $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
                     ->get(); 
                 
                 return view('admin.order-purchase.header.export-search',[
-                    'saledOrderHeaders' =>  $purchaseOrderHeaders,
+                    'poOrderHeaders' =>  $purchaseOrderHeaders,
+                    'columnSync'        =>  $columnSync,  
                     'status'            => 7,
                     'menu_open'         => 3,
                 ]);
@@ -1131,7 +1138,8 @@ class PurchaseOrderHeader extends Controller
        
 
         return view('admin.order-purchase.header.export-search',[
-            'saledOrderHeaders' =>  $purchaseOrderHeaders,
+            'columnSync'        =>  $columnSync,
+            'poOrderHeaders'    =>  $purchaseOrderHeaders,
             'status'            => 7,
             'menu_open'         => 3,
         ]);

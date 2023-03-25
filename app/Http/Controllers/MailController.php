@@ -18,13 +18,6 @@ class MailController extends Controller
         $email = "";
         
        
-        //  Mail::send('mail', $data, function($message)
-        // {
-        //      $message->to('ratonkumarcse@gmail.com', 'way2track')->subject
-        //         ('Sale Person Email');
-        //      $message->from('info@devpt.way2track.com','way2track');
-        // });
-       
         // echo "HTML Email Sent. Check your inbox.";   
         
     

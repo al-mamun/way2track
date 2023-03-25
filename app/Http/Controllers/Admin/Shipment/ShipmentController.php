@@ -218,9 +218,12 @@ class ShipmentController extends Controller
         
         $shipmentDetailsTemp =  ShipmentDetailTemp::where('TOKEN',$request->token)->get();
         
+
         foreach($shipmentDetailsTemp as $tempInfo ) {
             
-            
+        //             echo "<pre>";
+        // print_r($tempInfo->SHIPMENT_ID);
+        // die();
             $shipmentDetails = new ShipmentDetail();
             $shipmentDetails->SHIPMENT_ID      = $tempInfo->SHIPMENT_ID;
             $shipmentDetails->PO_DETAILS_ID    = $tempInfo->PO_DETAILS_ID;

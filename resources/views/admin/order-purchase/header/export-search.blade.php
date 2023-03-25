@@ -1,91 +1,142 @@
 <table id="tableResponsive2" class="table table-bordered table-hover table-responsive">
     <thead>
         <tr>
-                <!--<th scope="col"  style="display:none !important">SL</th>-->
-                <th scope="col">WIP</th>
-                <th scope="col">PO No</th>
-                <th scope="col"><span style="width:100px; display:block">PO Date</span></th>
-                <th scope="col">PO status</th>
-                <th scope="col"><span style="width:100px; display:block">Supplier Name</span></th>
-                <th scope="col">Supplier Site</th>
-                <th scope="col"><span style="width:100px; display:block">REQD EXF Date</span></th>
-                <th scope="col">ACK No</th>
-                <th scope="col"><span style="width:100px; display:block">ACK Date</span></th>
-                <th scope="col">Action</th>
-            </tr>
+            <!--<th scope="col"  style="display:none !important">SL</th>-->
+             @foreach($columnSync as $key => $value)
+                @if(!empty($value))
+                    @php
+                        $exp = explode('_', $value);
+                        
+                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                            ->where('page_name', $exp[1])
+                            ->where('type',  3)
+                            ->first();
+
+                    @endphp
+                    @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                     <th scope="col">{{ $exp[1] }} </th>
+                     @endif
+                @endif
+             
+             @endforeach
+            <th scope="col">Action</th>
+        </tr>
     </thead>
     <tbody>
-    @php $sl = 1; @endphp
-        @foreach($saledOrderHeaders as $poOrderHeadersInfo)
-            <tr id="{{ $poOrderHeadersInfo->PO_NO }}" @if(isset($id)) class="selected table_row_{{$poOrderHeadersInfo->ID }}" @else class="table_row_{{$poOrderHeadersInfo->ID }}" @endif >
-                    <!--<td  style="display:none !important"> {{ $sl++ }}</td>-->
-                     <td style="background-color:#E8ECF1;" class="editWIPno" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="WIP_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->WIP }}</span>
-    						<input type="text" value="{{ $poOrderHeadersInfo->WIP }}" class="editbox" id="WIP_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				  </td>
-                     <td style="background-color:#E8ECF1;" class="editPONo" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="PO_NO_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->PO_NO }}</span>
-    						<input type="text" value="{{ $poOrderHeadersInfo->PO_NO }}" class="editbox" id="PO_NO_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				  </td>
-    				    <td style="background-color:#E8ECF1;" class="editPO_DATE" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="PO_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
-    						     @if(!empty($poOrderHeadersInfo->PO_DATE))
-        				            @php $PO_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->PO_DATE))  @endphp
-        				        @else
-        				            @php $PO_DATE =$poOrderHeadersInfo->PO_DATE; @endphp
-        				        @endif
-        		                    {{ $PO_DATE }}
-    						</span>
-    						<input type="date" value="{{ $poOrderHeadersInfo->PO_DATE }}" class="editbox" id="PO_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-                        <td style="background-color:#E8ECF1;" class="editPO_STATUS" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="PO_STATUS_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->PO_STATUS }}</span>
-    						<input type="text" value="{{ $poOrderHeadersInfo->PO_STATUS }}" class="editbox" id="PO_STATUS_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-    				    <td style="background-color:#E8ECF1;" class="editSUPPLIER_NAME" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="SUPPLIER_NAME_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->SUPPLIER_NAME }}</span>
-    						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_NAME }}" class="editbox" id="SUPPLIER_NAME_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-                        <td style="background-color:#E8ECF1;" class="editSUPPLIER_SITE" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="SUPPLIER_SITE_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->SUPPLIER_SITE }}</span>
-    						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_SITE }}" class="editbox" id="SUPPLIER_SITE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-                        <td style="background-color:#E8ECF1;" class="editREQD_EXF_DATE" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="REQD_EXF_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
-    						     @if(!empty($poOrderHeadersInfo->REQD_EXF_DATE))
-        				            @php $REQD_EXF_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->REQD_EXF_DATE))  @endphp
-        				        @else
-        				            @php $REQD_EXF_DATE =$poOrderHeadersInfo->REQD_EXF_DATE; @endphp
-        				        @endif
-        		                    {{ $REQD_EXF_DATE }}
-    						</span>
-    						<input type="date" value="{{ $poOrderHeadersInfo->REQD_EXF_DATE }}" class="editbox" id="REQD_EXF_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-    				    <td style="background-color:#E8ECF1;" class="editACK_NO" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="ACK_NO_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->ACK_NO }}</span>
-    						<input type="text" value="{{ $poOrderHeadersInfo->ACK_NO }}" class="editbox" id="ACK_NO_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-                        <td style="background-color:#E8ECF1;" class="editACK_DATE" id="{{ $poOrderHeadersInfo->ID }}">
-    						<span id="ACK_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
-    						    @if(!empty($poOrderHeadersInfo->ACK_DATE))
-        				            @php $ACK_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->ACK_DATE))  @endphp
-        				        @else
-        				            @php $ACK_DATE =$poOrderHeadersInfo->ACK_DATE; @endphp
-        				        @endif
-        				        {{ $ACK_DATE }}
-    						 </span>
-    						<input type="date" value="{{ $poOrderHeadersInfo->ACK_DATE }}" class="editbox" id="ACK_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
-    				    </td>
-                    <td>
-                        <a href="javascript:void(0)" type="button" class="btn btn-block btn-success btn-sm" onclick="edit('{{ $poOrderHeadersInfo->ID }}')">Details</a>
-                        <!--<a href="{{ URL::to( '/purchase/order/list/edit/' . $poOrderHeadersInfo->ID) }}" type="button" class="btn btn-block btn-success btn-sm">Edit</a>-->
-                        <button  onClick="deleteData('{{$poOrderHeadersInfo->ID}}')" id="po_header_delete" type="button" class="btn btn-block btn-danger btn-sm">Delete</button>
-                    </td>
-            </tr>
+        @php $sl = 1; @endphp
+        @foreach($poOrderHeaders as $poOrderHeadersInfo)
+        <tr id="{{ $poOrderHeadersInfo->PO_NO }}" @if(isset($id)) class="selected table_row_{{$poOrderHeadersInfo->ID }}" @else class="table_row_{{$poOrderHeadersInfo->ID }}" @endif >
+                <!--<td  style="display:none !important"> {{ $sl++ }}</td>-->
+                @foreach($columnSync as $key => $value)
+                    @if(!empty($value))
+                        @php
+                            $exp = explode('_', $value);
+                            
+                            $settingTableInfo = DB::table('w2t_setting_column_table')
+                                ->where('page_name', $exp[1])
+                                ->where('type',  3)
+                                ->first();
+    
+                        @endphp
+                        @if($exp[1] == 'WIP' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editWIPno" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="WIP_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->WIP }}</span>
+        						<input type="text" value="{{ $poOrderHeadersInfo->WIP }}" class="editbox" id="WIP_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                        @if($exp[1] == 'PO No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editPONo" id="{{ $poOrderHeadersInfo->ID }}">
+                        		<span id="PO_NO_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->PO_NO }}</span>
+                        		<input type="text" value="{{ $poOrderHeadersInfo->PO_NO }}" class="editbox" id="PO_NO_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+                          </td>
+                           
+                            
+                           
+                        @endif
+                        @if($exp[1] == 'PO Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editPO_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="PO_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+        						     @if(!empty($poOrderHeadersInfo->PO_DATE))
+            				            @php $PO_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->PO_DATE))  @endphp
+            				        @else
+            				            @php $PO_DATE =$poOrderHeadersInfo->PO_DATE; @endphp
+            				        @endif
+            		                    {{ $PO_DATE }}
+    
+        						   </span>
+        						<input type="date" value="{{ $poOrderHeadersInfo->PO_DATE }}" class="editbox" id="PO_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                        @if($exp[1] == 'PO status' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editPO_STATUS" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="PO_STATUS_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->PO_STATUS }}</span>
+        						<input type="text" value="{{ $poOrderHeadersInfo->PO_STATUS }}" class="editbox" id="PO_STATUS_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+        				    
+                        @endif
+                        @if($exp[1] == 'Supplier Name' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editSUPPLIER_NAME" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="SUPPLIER_NAME_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->SUPPLIER_NAME }}</span>
+        						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_NAME }}" class="editbox" id="SUPPLIER_NAME_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                        @if($exp[1] == 'Supplier Site' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editSUPPLIER_SITE" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="SUPPLIER_SITE_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->SUPPLIER_SITE }}</span>
+        						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_SITE }}" class="editbox" id="SUPPLIER_SITE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                         @if($exp[1] == 'REQD EXF Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editREQD_EXF_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="REQD_EXF_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+        						     @if(!empty($poOrderHeadersInfo->REQD_EXF_DATE))
+            				            @php $REQD_EXF_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->REQD_EXF_DATE))  @endphp
+            				        @else
+            				            @php $REQD_EXF_DATE =$poOrderHeadersInfo->REQD_EXF_DATE; @endphp
+            				        @endif
+            		                    {{ $REQD_EXF_DATE }}
+        						   </span>
+        						<input type="date" value="{{ $poOrderHeadersInfo->REQD_EXF_DATE }}" class="editbox" id="REQD_EXF_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                        @if($exp[1] == 'ACK No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editACK_NO" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="ACK_NO_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->ACK_NO }}</span>
+        						<input type="text" value="{{ $poOrderHeadersInfo->ACK_NO }}" class="editbox" id="ACK_NO_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                        @if($exp[1] == 'ACK Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editACK_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="ACK_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+        						    @if(!empty($poOrderHeadersInfo->ACK_DATE))
+            				            @php $ACK_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->ACK_DATE))  @endphp
+            				        @else
+            				            @php $ACK_DATE =$poOrderHeadersInfo->ACK_DATE; @endphp
+            				        @endif
+            				        {{ $ACK_DATE }}
+        						</span>
+        						<input type="date" value="{{ $poOrderHeadersInfo->ACK_DATE }}" class="editbox" id="ACK_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
+        				    </td>
+                        @endif
+                    @endif
+                        
+                @endforeach
+                    
+    
+                
+                <td>
+                     @can('check po and details')
+                    <a href="{{ URL::to( 'purchase/order/detail/view/' . $poOrderHeadersInfo->PO_NO) }}" type="button" class="btn btn-block btn-info btn-sm">Details</a>
+                    @endcan
+                    <!--<a href="{{ URL::to( '/purchase/order/list/edit/' . $poOrderHeadersInfo->ID) }}" type="button" class="btn btn-block btn-success btn-sm">Edit</a>-->
+                    <!--<a href="javascript:void(0)" type="button" class="btn btn-block btn-success btn-sm" onclick="edit('{{ $poOrderHeadersInfo->ID }}')">Edit</a>-->
+                    <button  onClick="deleteData('{{$poOrderHeadersInfo->ID}}')" id="po_header_delete" type="button" class="btn btn-block btn-danger btn-sm">Delete</button>
+                    <!--<a href="{{ route('purchase.delete',$poOrderHeadersInfo->ID) }}" type="button" class="btn btn-block btn-danger btn-sm">Delete</a>-->
+                </td>
+        </tr>
         @endforeach
     </tbody>
 </table>
-
 <script type="text/javascript">
         function deleteData(ID) {
              Swal.fire({

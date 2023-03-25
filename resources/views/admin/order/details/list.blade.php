@@ -362,6 +362,7 @@ table#joblist {
               {!!Form::close()!!}
               @else
                 <div class="">
+                       
                     <div class="card">
                         <div class="card-body">
                         <div class="card-content">
@@ -469,6 +470,48 @@ table#joblist {
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="card-body">
+                            <div class="dropdown column_list_dropdown" >
+                                <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                    Customize column
+                                </button>
+                                <div class="dropdown-menu dropdown_menu_list">
+                                    <ul id="sortableOrderDetails" class="sortable">
+                                        @if(!empty($columnSync))
+                                            @foreach($columnSync as $key => $value)
+                                                @if(!empty($value))
+                                                 @php
+                                                    $exp = explode('_', $value);
+                                                    
+                                                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type',  2)
+                                                        ->first();
+                
+                                                @endphp
+                                                
+                                                <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                    <label class="switch">
+                                                      <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','2')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                      <span class="slider round"></span>
+                                                    </label>
+                                                    @if(!empty($exp[1]))
+                                                     {{ $exp[1] }} 
+                                                    @endif
+                                                </li>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        
+                                      
+                                    </ul>
+                                    <div class="ui-state-default save_button" >
+                                        <button class="btn btn-info" onclick="save()"> Save </button>     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                      <!-- /.card-header -->
                     <div class="card-body">
                         <div class="card card-primary">
@@ -482,16 +525,23 @@ table#joblist {
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
-                                            <th>WIP</th>
-                                            <th>Item</th>
-                                            <th>Description</th>
-                                            <th>Qty</th>
-                                            <th>EXP Delivery</th>
-                                            <th>Exp Handover</th>
-                                            <th>Ex Comments</th>
-                                            <th>Comments </th>
-                                            <th>Supplier</th>
-                                            <th>Image</th>
+                                            @foreach($columnSync as $key => $value)
+                                                @if(!empty($value))
+                                                    @php
+                                                        $exp = explode('_', $value);
+                                                        
+                                                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                            ->where('page_name', $exp[1])
+                                                            ->where('type',  2)
+                                                            ->first();
+                    
+                                                    @endphp
+                                                    @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                     <th scope="col">{{ $exp[1] }} </th>
+                                                     @endif
+                                                @endif
+                                             
+                                             @endforeach
                                             <th width="100px">Action</th>
                                         </tr>
                                     </thead>
@@ -525,16 +575,6 @@ table#joblist {
 <!-- /.content-wrapper -->
 <script type="text/javascript">
     
-    
-//  var loadFile = function(event) {
-//     var reader = new FileReader();
-//     reader.onload = function(){
-//       var output = document.getElementById('output');
-//       output.src = reader.result;
-//     };
-//     alert(reader.readAsDataURL(event.target.files[0]));
-//     reader.readAsDataURL(event.target.files[0]);
-//  };
 
        function deleteData(ID) {
              Swal.fire({
@@ -1233,19 +1273,59 @@ table#joblist {
             
             processing: true,
             serverSide: true,
-            ajax: baseUrl +'/list/order/details/ajax',
+            ajax: baseUrl +'/list/order/details/ajax?wip=@if(!empty( $wip)){{ $wip }} @endif',
             columns: [
-                {data: 'WIP', name: 'WIP',className: "edit_wip_no globalcss"},
-                {data: 'ITEM', name: 'ITEM',className: "editITEM globalcss"},
-                {data: 'DESCRIPTION', name: 'DESCRIPTION',className: "globalcss"},
-                {data: 'QTY', name: 'QTY',className: "editQty globalcss"},
-                 {data: 'EXP_DELIVERY', name: 'EXP_DELIVERY',className: "editEXP_DELIVERY globalcss"},
-                {data: 'EXP_HANDOVER_DT', name: 'EXP_HANDOVER_DT',className: "editEXP_HANDOVER_DT globalcss"},
-                {data: 'EX_COMMENTS', name: 'EX_COMMENTS',className: "editEX_COMMENTS globalcss"},
-                {data: 'COMMENTS', name: 'COMMENTS',className: "editCOMMENTS globalcss"},
-                {data: 'SUPPLIER', name: 'SUPPLIER',className: "editSUPPLIER globalcss"},
-          
-                {data: 'THUMBNAIL_IMAGE', name: 'THUMBNAIL_IMAGE' ,className: "editThumbnailImage globalcss"},
+                @foreach($columnSync as $key => $value)
+                    @if(!empty($value))
+                        @php
+                            $exp = explode('_', $value);
+                            
+                            $settingTableInfo = DB::table('w2t_setting_column_table')
+                                ->where('page_name', $exp[1])
+                                ->where('type',  2)
+                                ->first();
+    
+                        @endphp
+                        @if($exp[1] == 'WIP' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                {data: 'WIP', name: 'WIP',className: "edit_wip_no globalcss"},
+                        @endif
+                        @if($exp[1] == 'Item' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            {data: 'ITEM', name: 'ITEM',className: "editITEM globalcss"},
+                        @endif
+                        @if($exp[1] == 'Description' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                             {data: 'DESCRIPTION', name: 'DESCRIPTION',className: "globalcss"},
+                        @endif
+                        @if($exp[1] == 'Qty' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            {data: 'QTY', name: 'QTY',className: "editQty globalcss"},
+                        @endif
+                        @if($exp[1] == 'EXP Delivery' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            {data: 'EXP_DELIVERY', name: 'EXP_DELIVERY',className: "editEXP_DELIVERY globalcss"},
+                        @endif
+                        
+                        @if($exp[1] == 'Exp Handover' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                             {data: 'EXP_HANDOVER_DT', name: 'EXP_HANDOVER_DT',className: "editEXP_HANDOVER_DT globalcss"},
+                        @endif
+                        
+                        @if($exp[1] == 'Ex Comments' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            {data: 'EX_COMMENTS', name: 'EX_COMMENTS',className: "editEX_COMMENTS globalcss"},
+                        @endif
+                        
+                        @if($exp[1] == 'Comments' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            {data: 'COMMENTS', name: 'COMMENTS',className: "editCOMMENTS globalcss"},
+                        @endif
+                        
+                        @if($exp[1] == 'Supplier' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                             {data: 'SUPPLIER', name: 'SUPPLIER',className: "editSUPPLIER globalcss"},
+                        @endif
+                        @if($exp[1] == 'Image' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                             {data: 'THUMBNAIL_IMAGE', name: 'THUMBNAIL_IMAGE' ,className: "editThumbnailImage globalcss"},
+                        @endif
+                    @endif
+                   
+                 
+                 @endforeach
+                
+               
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
               createdRow: function( row, data, dataIndex ) {

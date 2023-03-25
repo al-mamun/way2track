@@ -72,11 +72,15 @@
                         <div class="card-body">
                            <div class="form-group">
                                 <label for="WIP" style="width:100%; clear:both">WIP<span style="color:red">*</span></label>
-                                <div class="col-md-12 wip_number" style="padding-left:0px;">
-                                    <div class="col-md-6 left_wip" style="padding-left:0px;">
-                                        <input type="text" class="form-control" id="WIP1" name="WIP1" placeholder="Enter WIP Prefix">
+                                <div class="row wip_number" style="padding-left:0px;">
+                                    <div class="col-md-2 left_wip" style="padding-left:0px;">
+                                        <input type="text" class="form-control" id="WIP1" name="WIP1" placeholder="Enter WIP Prefix" maxlength="3">
                                     </div>
-                                    <div class="col-md-6 left_wip">
+                                     <div class=" left_wip" style="padding-left:0px; padding-top: 8px; ">
+                                      
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-md-9 left_wip">
                                         <input type="text" class="form-control" id="WIP" name="WIP" placeholder="Enter WIP">
                                     </div>
                                 </div>

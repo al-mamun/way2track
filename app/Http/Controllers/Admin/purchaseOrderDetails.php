@@ -197,16 +197,21 @@ class purchaseOrderDetails extends Controller
             ->where('PO_NO', $PONO)
             ->get();
         $sodCommentValue   = SodCommentValue::get();
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->PO_DETAILS_PAGE);
         
         return view('admin.order-purchase.details.list',[
-            'poDetails'      =>  $poDetails,
-            'sodCommentValue'      =>  $sodCommentValue,
-            'poDetailsToken' =>  $poDetailsToken,
-             'token' =>  $token,
-            'status'         => 9,
-            'menu_open'      => 3,
+            'poDetails'       =>  $poDetails,
+            'sodCommentValue' =>  $sodCommentValue,
+            'poDetailsToken'  =>  $poDetailsToken,
+            'token'           =>  $token,
+            'columnSync'      =>  $columnSync,
+            'status'          => 9,
+            'menu_open'       => 3,
         ]);
     }
+    
     public function list(Request $request) {
         
         $token = $request->token;
@@ -218,14 +223,19 @@ class purchaseOrderDetails extends Controller
         $saledOrderHeaders = PoHeader::get();
         $poDetails         = PoDetails::orderBy('id','desc')->get();
         $sodCommentValue   = SodCommentValue::get();
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->PO_DETAILS_PAGE);
+        
         
         return view('admin.order-purchase.details.list',[
-            'poDetails'      =>  $poDetails,
-            'sodCommentValue'      =>  $sodCommentValue,
-            'poDetailsToken' =>  $poDetailsToken,
-             'token' =>  $token,
-            'status'         => 9,
-            'menu_open'      => 3,
+            'poDetails'        =>  $poDetails,
+            'sodCommentValue'  =>  $sodCommentValue,
+            'poDetailsToken'   =>  $poDetailsToken,
+            'token'            =>  $token,
+            'columnSync'       =>  $columnSync,
+            'status'           => 9,
+            'menu_open'        => 3,
         ]);
     }
     
@@ -233,6 +243,10 @@ class purchaseOrderDetails extends Controller
         
         $type       = $request->type;
         $checkobx   = $request->checkbox;
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->PO_DETAILS_PAGE);
         
         if($type == 2  ) {
             if($checkobx =='Yes') {
@@ -266,9 +280,10 @@ class purchaseOrderDetails extends Controller
                     ->get(); 
                 
                 return view('admin.order-purchase.details.list_filter',[
-                    'poDetails' =>  $poDetails,
-                    'status'            => 3,
-                    'menu_open'         => 2,
+                    'poDetails'     =>  $poDetails,
+                    'columnSync'    =>  $columnSync,
+                    'status'        => 3,
+                    'menu_open'     => 2,
                 ]);
             }
             # hand over date
@@ -366,6 +381,7 @@ class purchaseOrderDetails extends Controller
 
         return view('admin.order-purchase.details.list_filter',[
             'poDetails' =>  $poDetails,
+            'columnSync'    =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -767,10 +783,127 @@ class purchaseOrderDetails extends Controller
         // $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
         //     ->whereIn('ID', $detailsID)
         //     ->get(); 
+        $columnSync        = DB::table('w2t_setting_table')->first();
         
+        $columnSync        =  json_decode($columnSync->PO_DETAILS_PAGE);
         return view('admin.order-purchase.details.list_filter',[
-            'poDetails' =>  $poDetails,
+            'poDetails'  =>  $poDetails,
+            'columnSync' =>  $columnSync,
         ]);
 
     }
-}
+    
+    
+    public function purchaseDetailsDuplicate(Request $request){
+        
+        $ID = $request->ID;
+        
+        $poDetailsID = PoDetails::OrderBy('id','desc')->first();
+        
+        $poDetails = PoDetails::find($ID); 
+        $new = $poDetails->replicate();
+        $new->ID = $poDetailsID->ID +1;
+        $new->save();
+        
+        $latestID = $new->ID;
+        // $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+        //     ->whereIn('ID', $detailsID)
+        //     ->get(); 
+        
+        $poDetailsInfo= PoDetails::find($latestID);
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->PO_DETAILS_PAGE);
+        
+        return view('admin.order-purchase.details.duplicateRow',[
+            'data'       =>  $poDetailsInfo,
+            'columnSync' =>  $columnSync,
+        ]);
+    }
+    
+    
+    public function sortableDataSync(Request $request) {
+        
+        $i = 0;
+        
+       if($request->type == 1) {
+            
+            $result = json_encode($request->sortable_name);
+        
+            DB::table('w2t_setting_table')->update(
+                ['SALES_ORDER_HEADER' => $result]
+            );
+        
+        } elseif($request->type == 2) {
+            
+            $result = json_encode($request->sortable_name);
+        
+            DB::table('w2t_setting_table')->update(
+                ['SALES_ORDER_DETAILS' => $result]
+            );
+        
+        } else if($request->type == 3) {
+            
+            $result = json_encode($request->sortable_name);
+        
+            DB::table('w2t_setting_table')->update(
+                ['PO_HEADER_PAGE' => $result]
+            );
+            
+        } else if($request->type == 4) {
+            
+            $result = json_encode($request->sortable_name);
+        
+            DB::table('w2t_setting_table')->update(
+                ['PO_DETAILS_PAGE' => $result]
+            );
+            
+        }  else if($request->type == 6) {
+            
+            $result = json_encode($request->sortable_name);
+        
+            DB::table('w2t_setting_table')->update(
+                ['SHIPMENT_DETAILS_PAGE' => $result]
+            );
+            
+        } 
+        return 200;
+    }
+    
+    public function purchaseDetailsColumnSwitch(Request $request) {
+        
+        $i = 0;
+        
+        $settingTableInfo = DB::table('w2t_setting_column_table')
+            ->where('page_name',  $request->page_name)
+            ->where('type',  $request->type)
+            ->first();
+        
+        if(!empty($settingTableInfo)) {
+            
+            DB::table('w2t_setting_column_table')
+                ->where('page_name',  $request->page_name)
+                ->where('type',  $request->type)
+                ->update(
+                    [
+                        'page_name' => $request->page_name,
+                        'status'    => $request->status,
+                        'type'     => $request->type,
+                    ]
+                );
+        } else {
+            DB::table('w2t_setting_column_table')
+                ->insert(
+                    [
+                        'page_name' => $request->page_name,
+                        'status'    => $request->status,
+                        'type'     => $request->type,
+                    ]
+                );
+        }
+        
+            
+       
+        return 401;
+    }
+ }

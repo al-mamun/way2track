@@ -64,7 +64,7 @@
 							Login
 						</button>
 						<div class=""><div class=''>
-					        <a class="login_btn" href="{{route('socialite.redirect')}}" > <img  class='fa'  style='padding-top:0px !important; padding-right:10px margin-top: 0; :hover {color: yellow} !important' src='https://dev.way2track.com/wp-content/plugins/miniorange-login-openid/includes/images/icons/g.png'>Login with Google</a></div> <br>
+					        <a class="login_btn" href="{{route('socialite.redirect')}}" > <img  class='fa'  style='padding-top:0px !important; width:50px; padding-right:10px margin-top: 0; :hover {color: yellow} !important' src="{{ URL::asset( 'images/google.png') }}">Login with Google</a></div> <br>
                         </div>
 					</div>
 					

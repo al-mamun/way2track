@@ -159,6 +159,55 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                         </div>
                     </div>
                     
+                    <div class="card-body">
+                            <div class="dropdown column_list_dropdown" >
+                                    <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                        Customize column
+                                    </button>
+                                    <div class="dropdown-menu dropdown_menu_list">
+                                        <ul id="sortableOrderDHeader" class="sortable">
+                                            @if(!empty($columnSync))
+                                                @foreach($columnSync as $key => $value)
+                                                    @if(!empty($value))
+                                                     @php
+                                                        $exp = explode('_', $value);
+                                                        
+                                                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                            ->where('page_name', $exp[1])
+                                                            ->where('type',  1)
+                                                            ->first();
+                    
+                                                    @endphp
+                                                    
+                                                    <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                        <label class="switch">
+                                                          <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','1')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                          <span class="slider round"></span>
+                                                        </label>
+                                                        @if(!empty($exp[1]))
+                                                         {{ $exp[1] }} 
+                                                        @endif
+                                                    </li>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            
+                                            <!--<li class="ui-state-default" id="col_PO No"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> PO No </li>-->
+                                            <!--<li class="ui-state-default" id="col_Item" index="1"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Item </li>-->
+                                            <!--<li class="ui-state-default" id="col_Description"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Description </li>-->
+                                            <!--<li class="ui-state-default" id="col_Qty"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Qty </li>-->
+                                            <!--<li class="ui-state-default" id="col_Comments"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Comments </li>-->
+                                            <!--<li class="ui-state-default" id="col_EXP EXF DT"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> EXP EXF DT </li>-->
+                                            <!--<li class="ui-state-default" id="col_Confirmed EXF"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Confirmed EXF </li>-->
+                                            <!--<li class="ui-state-default" id="col_ETD"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> ETD  </li>-->
+                                            <!--<li class="ui-state-default" id="col_ETA"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> ETA  </li>-->
+                                        </ul>
+                                        <div class="ui-state-default save_button" >
+                                            <button class="btn btn-info" onclick="save()"> Save </button>     
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
                      <!-- /.card-header -->
                     <div class="card-body" style="position:relative">
                         @if ($errors->any())
@@ -188,17 +237,24 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                                 <thead>
                                     <tr>
                                         <th scope="col" style="display:none">Sl</th>
-                                         <th scope="col">WIP</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Customer Po No</th>
-                                        <th scope="col"><span style="width:100px; display:block">Status</span></th>
-                                        <th scope="col">Project Name</th>
-                                        <th scope="col">Expected Handover Date</th>
-                                        <th scope="col">Salesperson Name </th>
-                                        <th scope="col">Project Manager Name</th>
-                                        <th scope="col">Salesperson Email</th>
-                                        <th scope="col">Project Manager Email</th>
-                                        <th scope="col">Comments</th>
+                                        @foreach($columnSync as $key => $value)
+                                            @if(!empty($value))
+                                            @php
+                                                $exp = explode('_', $value);
+                                                
+                                                $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                    ->where('page_name', $exp[1])
+                                                    ->where('type',  1)
+                                                    ->first();
+            
+                                            @endphp
+                                                @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                 <th scope="col">{{ $exp[1] }} </th>
+                                                 @endif
+                                            @endif
+                                         
+                                         @endforeach
+                                   
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -207,69 +263,102 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                                     @foreach($saledOrderHeaders as $salesOrderInfo)
                                     <tr id="{{ $salesOrderInfo->WIP }}">
                                         <td  style="display:none">{{ $sl++ }}</td>
-                                         <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="wip_{{ $salesOrderInfo->ID }}" class="text">{{ $salesOrderInfo->WIP }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->WIP }}" class="editbox" id="wip_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                                        <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_NAME" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="CUSTOMER_NAME_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_NAME }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_NAME }}" class="editboxStatus" id="CUSTOMER_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-          
-                                       <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_PO_NO" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="CUSTOMER_PO_NO_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_PO_NO }}  </span>
-                    						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_PO_NO }}" class="editboxStatus" id="CUSTOMER_PO_NO_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                    				 	
-                                        <td style="background-color:#E8ECF1;" class="edit_status" id="{{ $salesOrderInfo->ID }}">
-                    						 <span id="status_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SO_STATUS }}</span>
-    					
-            						        <select name="status"  class="form-control editboxStatus" aria-label="Default select example" required id="status_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                                                <option value="" selected>Select Status</option>
-                                                <option value="LIVE" @if($salesOrderInfo->SO_STATUS=='LIVE')  selected @endif>Live</option>
-                                                <option value="CLOSED" @if($salesOrderInfo->SO_STATUS=='CLOSED')  selected @endif>Closed</option>
-                                                <option value="CANCELLED"  @if($salesOrderInfo->SO_STATUS=='CANCELLED')  selected @endif>Cancelled</option>
-                                            </select>
-                    				 	</td>
-                    				 	<td style="background-color:#E8ECF1;" class="PROJECT_NAME_click" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="PROJECT_NAME_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECT_NAME }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->PROJECT_NAME }}" class="editboxStatus" id="PROJECT_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                                            <!--<td>{{ $salesOrderInfo->SO_STATUS }}</td>-->
-                                        @php 
-                                            $date = date("d M  Y", strtotime( $salesOrderInfo->TGT_HANDOVER_DT)); 
-                                        @endphp
-                                            
-                                        <td style="background-color:#E8ECF1;" class="edit_hand_over_date" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="hand_over_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $date }}</span>
-                    						<input type="date" value="{{ $date }}" class="editboxStatus" id="hand_over_input_{{ $salesOrderInfo->ID }}" name="TGT_HANDOVER_DT" style="display:none">
-                    				 	</td>
-                    				 	<td style="background-color:#E8ECF1;" class="SALESPERSON_click" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="SALESPERSON_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->SALESPERSON }}" class="editboxStatus" id="SALESPERSON_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                    				 	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_click" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="PROJECTMANAGER_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER }}" class="editboxStatus" id="PROJECTMANAGER_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                    				 	
-                    				 	<td style="background-color:#E8ECF1;" class="SALESPERSON_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="SALESPERSON_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON_EMAIL }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->SALESPERSON_EMAIL }}" class="editboxStatus" id="SALESPERSON_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                    				 	
-                                        <td style="background-color:#E8ECF1;" class="PROJECTMANAGER_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="PROJECTMANAGER_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}" class="editboxStatus" id="PROJECTMANAGER_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                    				 	
-                                    <!--    <td>{{ $salesOrderInfo->TGT_HANDOVER_DT }}</td> -->
-                                       
-                                        <td style="background-color:#E8ECF1;" class="COMMENTS_click" id="{{ $salesOrderInfo->ID }}">
-                    						<span id="COMMENTS_{{ $salesOrderInfo->ID }}" class="textStatus"> {{$salesOrderInfo->COMMENTS }}</span>
-                    						<input type="text" value="{{ $salesOrderInfo->COMMENTS }}" class="editboxStatus" id="COMMENTS_input_{{ $salesOrderInfo->ID }}" style="display:none">
-                    				 	</td>
-                                     
+                                            @foreach($columnSync as $key => $value)
+                    		                        @php
+                                                        $exp = explode('_', $value);
+                                                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type',  1)
+                                                        ->first();
+                                                    @endphp
+                                                    @if($exp[1] == 'WIP' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                         <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="wip_{{ $salesOrderInfo->ID }}" class="text">{{ $salesOrderInfo->WIP }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->WIP }}" class="editbox" id="wip_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                                    				@endif
+                                    				@if($exp[1] == 'Customer' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_NAME" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="CUSTOMER_NAME_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_NAME }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_NAME }}" class="editboxStatus" id="CUSTOMER_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                                                    
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Customer Po No' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_PO_NO" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="CUSTOMER_PO_NO_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_PO_NO }}  </span>
+                                    						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_PO_NO }}" class="editboxStatus" id="CUSTOMER_PO_NO_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Status' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="edit_status" id="{{ $salesOrderInfo->ID }}">
+                                    						 <span id="status_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SO_STATUS }}</span>
+                    					
+                            						        <select name="status"  class="form-control editboxStatus" aria-label="Default select example" required id="status_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                                                <option value="" selected>Select Status</option>
+                                                                <option value="LIVE" @if($salesOrderInfo->SO_STATUS=='LIVE')  selected @endif>Live</option>
+                                                                <option value="CLOSED" @if($salesOrderInfo->SO_STATUS=='CLOSED')  selected @endif>Closed</option>
+                                                                <option value="CANCELLED"  @if($salesOrderInfo->SO_STATUS=='CANCELLED')  selected @endif>Cancelled</option>
+                                                            </select>
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Project Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                    	<td style="background-color:#E8ECF1;" class="PROJECT_NAME_click" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="PROJECT_NAME_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECT_NAME }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->PROJECT_NAME }}" class="editboxStatus" id="PROJECT_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Expected Handover Date' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                    	 @php 
+                                                            $date = date("d M  Y", strtotime( $salesOrderInfo->TGT_HANDOVER_DT)); 
+                                                        @endphp
+                                                            
+                                                        <td style="background-color:#E8ECF1;" class="edit_hand_over_date" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="hand_over_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $date }}</span>
+                                    						<input type="date" value="{{ $date }}" class="editboxStatus" id="hand_over_input_{{ $salesOrderInfo->ID }}" name="TGT_HANDOVER_DT" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Salesperson Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                		<td style="background-color:#E8ECF1;" class="SALESPERSON_click" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="SALESPERSON_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->SALESPERSON }}" class="editboxStatus" id="SALESPERSON_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Project Manager Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                    	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_click" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="PROJECTMANAGER_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER }}" class="editboxStatus" id="PROJECTMANAGER_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Salesperson Email' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                    	<td style="background-color:#E8ECF1;" class="SALESPERSON_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="SALESPERSON_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON_EMAIL }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->SALESPERSON_EMAIL }}" class="editboxStatus" id="SALESPERSON_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	         @if($exp[1] == 'Project Manager Email' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                    	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="PROJECTMANAGER_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}" class="editboxStatus" id="PROJECTMANAGER_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                        				 	        
+                        				 	        @if($exp[1] == 'Comments'  && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                                                    	<td style="background-color:#E8ECF1;" class="COMMENTS_click" id="{{ $salesOrderInfo->ID }}">
+                                    						<span id="COMMENTS_{{ $salesOrderInfo->ID }}" class="textStatus"> {{$salesOrderInfo->COMMENTS }}</span>
+                                    						<input type="text" value="{{ $salesOrderInfo->COMMENTS }}" class="editboxStatus" id="COMMENTS_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                    				 	</td>
+                        				 	        @endif
+                    				        @endforeach
+                                        
                                         <td>
                                             <a href="{{ URL::to( 'sales/send/email/' . $salesOrderInfo->ID) }}" type="button" class="btn btn-block btn-info btn-sm">Send Url</a>
                                             @can('check po and details')
@@ -285,17 +374,15 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                                 <tfoot>
                                     <tr>
                                         <th  style="display:none">SL.</th>
-                                        <th scope="col">WIP</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Customer Po No</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Project Name</th>
-                                        <th scope="col">Expected Handover Date</th>
-                                        <th scope="col">Salesperson Name </th>
-                                        <th scope="col">Project Manager Name</th>
-                                        <th scope="col">Salesperson Email</th>
-                                        <th scope="col">Project Manager Email</th>
-                                        <th scope="col">Comments</th>
+                                        @foreach($columnSync as $key => $value)
+                                            @if(!empty($value))
+                                            @php
+                                                $exp = explode('_', $value);
+                                            @endphp
+                                                 <th scope="col">{{ $exp[1] }} </th>
+                                            @endif
+                                         
+                                         @endforeach
                                         <th scope="col">Action</th>
                                     </tr>
                                 </tfoot>
@@ -317,6 +404,7 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
     </section>
     <!-- /.content -->
   </div>
+ 
   <!-- /.content-wrapper -->
 <script type="text/javascript">
     

@@ -69,13 +69,13 @@ class LoginController extends Controller
      
     public function newUserStore(Request $request)
     {
-    	$request->validate([
-    		'name'      =>'required', 
-    		'email'     =>'required|email|unique:users',
-    		'mobile' => 'required|digits:11|numeric',
-            'password' => 'min:6',
+    // 	$request->validate([
+    // 		'name'      =>'required', 
+    // 		'email'     =>'required|email|unique:users',
+    // 		'mobile' => 'required|digits:11|numeric',
+    //         'password' => 'min:6',
 
-    	]);
+    // 	]);
     	$data = new User();
     	$data ->name = $request->get('name');
     	$data ->notes = $request->get('notes');
@@ -98,10 +98,10 @@ class LoginController extends Controller
     public function userListUpdate(Request $request, $id)
     {
         
-    	$request->validate([
-    	    'name'      =>'required',
-    	    'email' => 'required|email'
-        ]);
+    // 	$request->validate([
+    // 	    'name'      =>'required',
+    // 	    'email' => 'required|email'
+    //     ]);
     	$dataUpdate = User::find($id);
     	$dataUpdate ->name = $request->get('name');
     	$dataUpdate ->notes = $request->get('notes');

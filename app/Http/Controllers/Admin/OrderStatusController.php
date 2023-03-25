@@ -100,7 +100,7 @@ class OrderStatusController extends Controller
                     }
         
                     $wpNoGenerate = new Wips();
-                    $wpNoGenerate->WIP         = $request->get('WIP');
+                    $wpNoGenerate->WIP         = $request->get('WIP1').'-'.$request->get('WIP');
                     $wpNoGenerate->RAND_NO       = $random_number;
                     $wpNoGenerate->save();
                     
@@ -301,9 +301,14 @@ class OrderStatusController extends Controller
     public function ListOrderStatus() {
      
         $saledOrderHeaders = SalesOrderHeader::get();
-
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_HEADER);
+        
         return view('admin.order.header.list-order-status',[
             'saledOrderHeaders' =>  $saledOrderHeaders,
+            'columnSync'       =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -314,9 +319,13 @@ class OrderStatusController extends Controller
     public function ListOrderStatusExport() {
      
         $saledOrderHeaders = SalesOrderHeader::get();
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_HEADER);
         
         return view('admin.order.header.list-export',[
             'saledOrderHeaders' =>  $saledOrderHeaders,
+            'columnSync'       =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -332,6 +341,10 @@ class OrderStatusController extends Controller
         $from = $request->from;
         $to   = $request->to;
         
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_HEADER);
+        
         if(empty($checkobx) && empty($from) && empty($to)) {
         
             $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
@@ -339,6 +352,7 @@ class OrderStatusController extends Controller
                 
             return view('admin.order.header.list-export-search',[
                 'saledOrderHeaders' =>  $salesOrderHeaders,
+                'columnSync'        =>  $columnSync,
                 'status'            => 3,
                 'menu_open'         => 2,
             ]);
@@ -375,6 +389,7 @@ class OrderStatusController extends Controller
 
        return view('admin.order.header.list-export-search',[
             'saledOrderHeaders' =>  $salesOrderHeaders,
+            'columnSync'        =>  $columnSync,
             'status'            => 3,
             'menu_open'         => 2,
         ]);
@@ -571,7 +586,7 @@ class OrderStatusController extends Controller
             
             
             Session::flash('success','File uploaded. PLEASE REVIEW AND CLICK SAVE BELOW.');
-     
+           
             return redirect('list/order/details?token='.$session_id);
         } else {
             Session::flash('error','Please select a file to import first.');

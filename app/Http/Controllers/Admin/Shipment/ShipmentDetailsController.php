@@ -128,17 +128,22 @@ class ShipmentDetailsController extends Controller
     public function exportShipmentOrder() {
         
         $newShipmentView = ShipmentDetail::latest()->get();
+        $columnSync        = DB::table('w2t_setting_table')->first();
         
-        return view('admin.shipment-details.index',compact('newShipmentView'));
+        $columnSync        =  json_decode($columnSync->SHIPMENT_DETAILS_PAGE);
+        return view('admin.shipment-details.index',compact('newShipmentView','columnSync'));
     }
     
     
     // Export Shipment
     public function exportShipmentOrderView($shipmentID) {
         
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SHIPMENT_DETAILS_PAGE);
         $newShipmentView = ShipmentDetail::latest()->where('SHIPMENT_ID', $shipmentID)->get();
         
-        return view('admin.shipment-details.index',compact('newShipmentView'));
+        return view('admin.shipment-details.index',compact('newShipmentView','columnSync'));
     }
     
     // Export Shipment
@@ -150,6 +155,9 @@ class ShipmentDetailsController extends Controller
         $WIP             =  $request->WIP;
         $shapment_status =  $request->shapment_status;
         
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SHIPMENT_DETAILS_PAGE);
         if(empty($shipment_id) && empty($container_id) && empty($PO_NO) && empty($WIP) && empty($shapment_status) ) {
             
             $newShipmentView = ShipmentDetail::latest()->get();  
@@ -221,9 +229,7 @@ class ShipmentDetailsController extends Controller
             $newShipmentView = ShipmentDetail::where('SHIPMENT_STATUS', $shapment_status)->latest()->get();    
         }
         
-        
-        
-        return view('admin.shipment-details.filter',compact('newShipmentView'));
+        return view('admin.shipment-details.filter',compact('newShipmentView','columnSync'));
     }
     
     public function exportShipmentdelete($id){
@@ -378,7 +384,7 @@ class ShipmentDetailsController extends Controller
         }  else if($type == 18) {
            
            if(empty($request->SHIPMENT_RECD_DATE)) {
-               return 0;
+               return NULL;
            }
             DB::table('w2t_shipment_details')
                 ->where('ID', $request->id)
@@ -518,8 +524,10 @@ class ShipmentDetailsController extends Controller
         $newShipmentView = ShipmentDetail::whereIn('ID', $request->detailsID)
             ->latest()
             ->get();   
+        $columnSync        = DB::table('w2t_setting_table')->first();
         
-        return view('admin.shipment-details.filter',compact('newShipmentView'));
+        $columnSync        =  json_decode($columnSync->SHIPMENT_DETAILS_PAGE);
+        return view('admin.shipment-details.filter',compact('newShipmentView','columnSync'));
     }
     
      public function shipmentDetailsCopyUPdate(Request $request) {

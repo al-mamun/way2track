@@ -198,8 +198,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-         Yajra\DataTables\ButtonsServiceProvider::class
-
+         Yajra\DataTables\ButtonsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -218,6 +218,7 @@ return [
         'FastExcel' => Rap2hpoutre\FastExcel\Facades\FastExcel::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class
     ])->toArray(),
 
 ];
