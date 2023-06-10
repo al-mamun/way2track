@@ -82,6 +82,7 @@
                             </div>
                        
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label>Exp GRD Date  </label>
                                 <input type="text"  placeholder="dd-mm-yyyy"  min="1997-01-01" max="2030-12-31"  class="form-control" id="EXP_EXF_DT" name="EXP_EXF_DT" placeholder="EXP GRD DT" >
                             </div>
@@ -96,6 +97,22 @@
                             <div class="form-group">
                                 <label >ETA  </label>
                                 <input type="text"  placeholder="dd-mm-yyyy"  class="form-control" id="ETA" name="ETA" placeholder="ETA">
+=======
+                                <label>EXP GRD DT  </label>
+                                <input type="text"  placeholder="dd-mm-yyyy"  min="1997-01-01" max="2030-12-31"  data-date-format="DD-MMMM-YYYY"  class="form-control" id="EXP_EXF_DT" name="EXP_EXF_DT" placeholder="EXP GRD DT" >
+                            </div>
+                            <div class="form-group">
+                                <label >Confirmed GRD </label>
+                                <input type="text"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY"  class="form-control" id="CONFIRMED_EXF" name="CONFIRMED_EXF" placeholder="CONFIRMED GRD">
+                            </div>
+                            <div class="form-group">
+                                <label >ETD  </label>
+                                <input type="text"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY"  class="form-control" id="ETD" name="ETD" placeholder="ETD">
+                            </div>
+                            <div class="form-group">
+                                <label >ETA  </label>
+                                <input type="text"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY"  class="form-control" id="ETA" name="ETA" placeholder="ETA">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             </div>
                             <div class="form-group">
                                 <label > Comments </label>
@@ -139,7 +156,11 @@
                 }
             });
             $('input[name="EXP_EXF_DT"]').on('apply.daterangepicker', function (ev, picker) {
+<<<<<<< HEAD
                 $(this).val(picker.startDate.format('DD/MMM/YYYY'));
+=======
+                $(this).val(picker.startDate.format('L'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             });
 
             $('input[name="EXP_EXF_DT"]').on('cancel.daterangepicker', function (ev, picker) {
@@ -156,7 +177,11 @@
                 }
             });
             $('input[name="CONFIRMED_EXF"]').on('apply.daterangepicker', function (ev, picker) {
+<<<<<<< HEAD
                 $(this).val(picker.startDate.format('DD/MMM/YYYY'));
+=======
+                $(this).val(picker.startDate.format('L'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             });
 
             $('input[name="CONFIRMED_EXF"]').on('cancel.daterangepicker', function (ev, picker) {
@@ -175,7 +200,11 @@
                 }
             });
             $('input[name="ETD"]').on('apply.daterangepicker', function (ev, picker) {
+<<<<<<< HEAD
                 $(this).val(picker.startDate.format('DD/MMM/YYYY'));
+=======
+                $(this).val(picker.startDate.format('L'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             });
 
             $('input[name="ETD"]').on('cancel.daterangepicker', function (ev, picker) {
@@ -187,13 +216,21 @@
                 timePicker: false,
                 singleDatePicker: true,
                 showDropdowns: true,
+<<<<<<< HEAD
                 autoUpdateInput: false,     
+=======
+                  autoUpdateInput: false,     
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 locale: {
                 //   format: 'DD/MMM/YYYY'
                 }
             });
             $('input[name="ETA"]').on('apply.daterangepicker', function (ev, picker) {
+<<<<<<< HEAD
                 $(this).val(picker.startDate.format('DD/MMM/YYYY'));
+=======
+                $(this).val(picker.startDate.format('L'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             });
 
             $('input[name="ETA"]').on('cancel.daterangepicker', function (ev, picker) {

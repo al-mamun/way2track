@@ -40,7 +40,11 @@
 	  </td>
     @endif
     
+<<<<<<< HEAD
     @if($exp[1] == 'Confirmed GRD')
+=======
+    @if($exp[1] == 'Confirmed EXF')
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
             @if(!empty($data->EXP_EXF_DT))
 			    @php 
@@ -56,7 +60,11 @@
 	    </td>
     @endif
     
+<<<<<<< HEAD
     @if($exp[1] == 'Exp GRD')
+=======
+    @if($exp[1] == 'EXP EXF DT')
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
             @if(!empty($data->EXP_EXF_DT))
 			    @php 

@@ -36,10 +36,14 @@ table#deliveryDetailsSearch {
                 <th>Delivery Date <br><span class="delivery_date_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
                 <th>Action</th>	              
             </tr>
+<<<<<<< HEAD
            
         </thead>
         <thead>
            <tr class="showCommentsDetails" style="display:none">
+=======
+            <tr class="showCommentsDetails" style="display:none">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 <td style="display:none"></td>
                 
                 <td>
@@ -90,7 +94,11 @@ table#deliveryDetailsSearch {
              
             </tr>
         </thead>
+<<<<<<< HEAD
         <tbody>
+=======
+      <tbody>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
          @foreach($deliveryExportDetails as $key=>$data)
            <tr id="{{ $data->DELIVERY_ID }}" class="delivery_id_{{ $data->ID }}">
               <td style="display:none">{{ $key+1 }}</td>
@@ -102,8 +110,13 @@ table#deliveryDetailsSearch {
               <!--<td>{{ $data->DESCRIPTION }}</td>-->
               
                <td style="background-color:#E8ECF1;" id="{{ $data->ID }}" class="editPO_NO">
+<<<<<<< HEAD
                     <span style="width: 140px; display: block;">
     					<span id="PO_NO_{{ $data->ID }}" class="text" >{{ $data->PO_NO }}</span>
+=======
+                    <span style="width: 126px; display: block;">
+    					<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     					<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
 					</span>
 			  </td>
@@ -127,7 +140,11 @@ table#deliveryDetailsSearch {
 		            @php $DELIVERY_DATE =$data->DELIVERY_DATE; @endphp
 		        @endif
                     <span style="width: 126px; display: block;">
+<<<<<<< HEAD
     					<span id="DELIVERYDATE_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $DELIVERY_DATE }}</span>
+=======
+    					<span id="DELIVERYDATE_{{ $data->ID }}" class="text">{{ $DELIVERY_DATE }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     					<input type="date" value="{{ $DELIVERY_DATE }}" class="editbox" id="DELIVERYDATE_input_{{ $data->ID }}" style="display:none">
 					</span>
 			  </td>
@@ -138,6 +155,7 @@ table#deliveryDetailsSearch {
               </td>
             </tr>
           @endforeach
+<<<<<<< HEAD
         </tbody>
         <tfoot>
             <tr style="color:#000">
@@ -152,6 +170,9 @@ table#deliveryDetailsSearch {
                 <th>Action</th>	              
             </tr>
         </tfoot>
+=======
+      </tbody>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
   </table>
 
 </div>
@@ -159,6 +180,7 @@ table#deliveryDetailsSearch {
  <script src="{{ URL::asset( 'js/delivery_details.js') }}"></script>
  <script type="text/javascript">
     $('#deliveryDetailsSearch').DataTable( {
+<<<<<<< HEAD
         buttons: [
             @if(isset($status) && $status == 0)
             {
@@ -173,18 +195,38 @@ table#deliveryDetailsSearch {
             }
             @endif
         ],
+=======
+         buttons: [
+          {
+                extend: 'excelHtml5',
+                text:'Export',
+                title:'Export Shipment Details',
+                // exportOptions: {
+                //     columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17]
+                // }
+            }
+        ],
+    
+    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         retrieve: true,
         language: {
           "emptyTable": "No result found"
         },
         pageLength: 10,
+<<<<<<< HEAD
         "ordering": false,
         bSortable: false,
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         paging: true,
         // sDom: "Rlfrtip",
         dom: 'Bfrtip',
     } );
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
  </script
  

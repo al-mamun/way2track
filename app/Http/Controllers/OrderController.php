@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SalesOrderDetails;
 use App\Models\SalesOrderHeader;
+<<<<<<< HEAD
 use App\Models\Settings;
 use App\Models\Wips;
 use Jenssegers\Agent\Agent;
+=======
+use App\Models\Wips;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use DB;
 
 class OrderController extends Controller
@@ -19,7 +23,11 @@ class OrderController extends Controller
         
         foreach($salesOrderHeader as $headerInfo) {
             $digits_needed = 8;
+<<<<<<< HEAD
             $random_number=''; // set up a blank stringcf
+=======
+            $random_number=''; // set up a blank string
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $count = 0;
             
             while ( $count < $digits_needed ) {
@@ -30,12 +38,20 @@ class OrderController extends Controller
             }
 
             $wpNoGenerate = new Wips();
+<<<<<<< HEAD
             $wpNoGenerate->WIP          = $headerInfo->WIP;
             $wpNoGenerate->RAND_NO      = $random_number;
             $wpNoGenerate->save();
         }
     }
     
+=======
+            $wpNoGenerate->WIP                     = $headerInfo->WIP;
+            $wpNoGenerate->RAND_NO                  = $random_number;
+            $wpNoGenerate->save();
+        }
+    }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     public function orderDetails($orderID) {
         
         // $orderIDFirst   = substr($orderID, 0, +8);
@@ -54,20 +70,29 @@ class OrderController extends Controller
         if(!empty($wpInfo)) {
             
             $saledOrderHeaders = SalesOrderHeader::where('WIP', $orderIDFirst )->first();
+<<<<<<< HEAD
             $salesOrderDetails = SalesOrderDetails::where('WIP', $orderIDFirst )
                 ->leftjoin('w2t_sod_comment_values','w2t_sales_order_detail.EX_COMMENTS','=','w2t_sod_comment_values.VALID_EX_COMMENT')
                 ->select('w2t_sod_comment_values.COLOR_CODE','w2t_sales_order_detail.*')
                 ->get();
+=======
+            $salesOrderDetails = SalesOrderDetails::where('WIP', $orderIDFirst )->get();
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             // $comments = DB::select( DB::raw("SELECT distinct `EX_COMMENTS`, `EXP_DELIVERY` , count(1) as NO_OF_ITEMS,SOD.wip as wipNumber FROM `w2t_sales_order_detail` where `WIP`='$orderIDFirst' group by `EX_COMMENTS`, `EXP_DELIVERY` order by EXP_DELIVERY desc"));
             
             $comments = DB::select( DB::raw("SELECT DISTINCT SOD.`EX_COMMENTS` AS  `Fullfilment_Status`, SOD.`EXP_DELIVERY` as `Expected_Delivery`, SOD.`wip` as wipNumber , count(1) AS 
 
+<<<<<<< HEAD
                 `No_Of_Items`, SOD.`ITEM` as `Item_list`
+=======
+                `No_Of_Items` 
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 FROM `w2t_sales_order_detail` SOD , `w2t_sod_comment_values` ECV WHERE SOD.`EX_COMMENTS`= 
                 
                 ECV.`VALID_EX_COMMENT` and SOD.`wip` = '$orderIDFirst'
                 
+<<<<<<< HEAD
                 GROUP by SOD.`EX_COMMENTS`, SOD.`EXP_DELIVERY` , SOD.`ITEM`
                 ORDER BY ECV.FLOW ASC , `Expected_Delivery` DESC"));
             
@@ -113,14 +138,24 @@ class OrderController extends Controller
             $agent           = new Agent();
 			$isMobileVersion = $agent->isMobile();
 	
+=======
+                GROUP by SOD.`EX_COMMENTS`, SOD.`EXP_DELIVERY` 
+                ORDER BY ECV.FLOW ASC , `Expected_Delivery` DESC"));
+            
+            // print_r($dalyComments);
+            // die();
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             return view('order.details',[
                 'saledOrderHeaders' =>  $saledOrderHeaders,
                 'salesOrderDetails' =>  $salesOrderDetails,
                 'comments'          =>  $comments,
                 'orderID'           =>  $orderIDFirst,
+<<<<<<< HEAD
                 'isMobileVersion'   =>  $isMobileVersion,
                 'StatusWiseList'    =>  $StatusWiseList,
                 'global_path'       =>  Settings::UPLOAD_PATH,
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             ]); 
         } else{
            
@@ -137,6 +172,7 @@ class OrderController extends Controller
         $delivery = $request->delivery;
         
         if(empty($delivery)) {
+<<<<<<< HEAD
             
              $comments = SalesOrderDetails::where('w2t_sales_order_detail.WIP', $orderID )
                 ->leftjoin('w2t_sod_comment_values','w2t_sales_order_detail.EX_COMMENTS','=','w2t_sod_comment_values.VALID_EX_COMMENT')
@@ -217,5 +253,19 @@ class OrderController extends Controller
        
     }
     
+=======
+             $comments = DB::select( DB::raw("SELECT *  FROM `w2t_sales_order_detail`  where  `WIP`=$orderID and  `EX_COMMENTS`= '$comments' "));
+        } else {
+            $comments = DB::select( DB::raw("SELECT *  FROM `w2t_sales_order_detail`  where  `WIP`=$orderID and  `EX_COMMENTS`= '$comments' and  `EXP_DELIVERY` = '$delivery'"));
+        }
+        
+        
+   
+        return view('order.details-coments',[
+            'commentsInfo' =>  $comments,
+        ]);
+    }
+    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     
 }

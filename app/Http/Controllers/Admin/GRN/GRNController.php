@@ -9,7 +9,10 @@ use App\Models\ShipmentDetail;
 use App\Models\GrnHeader;
 use App\Models\GrnDetail;
 use App\Models\ShipmentDetailTemp;
+<<<<<<< HEAD
 use App\Models\Settings;
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use Rap2hpoutre\FastExcel\FastExcel;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -174,17 +177,27 @@ class GRNController extends Controller
             'grHeaderInfo'     => $grHeaderInfo,
         ]);
         
+<<<<<<< HEAD
         // file_put_contents("grn_reports/grn_".$SHD_GRN_NUMBER .".pdf", $pdf->output());
         
         file_put_contents( base_path().Settings::UPLOAD_PATH."grn_reports/grn_".$SHD_GRN_NUMBER .".pdf", $pdf->output());
         $attachmentName = Settings::UPLOAD_PATH."grn_reports/grn_".$SHD_GRN_NUMBER .".pdf";
+=======
+        file_put_contents("grn_reports/grn_".$SHD_GRN_NUMBER .".pdf", $pdf->output());
+
+        $attachmentName = "grn_reports/grn_".$SHD_GRN_NUMBER .".pdf";
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
        
          DB::table('w2t_grn_header')
             ->where('ID', $grnHeader->id)
             ->update(
             [
+<<<<<<< HEAD
                 'FILE_NAME' => Settings::UPLOAD_PATH."grn_reports/grn_".$SHD_GRN_NUMBER .".pdf", 
+=======
+                'FILE_NAME' => "grn_reports/grn_".$SHD_GRN_NUMBER .".pdf", 
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             ]
         );
         

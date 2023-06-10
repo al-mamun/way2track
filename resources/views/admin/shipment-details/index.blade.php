@@ -32,6 +32,7 @@
         margin-top: 32px;
     }
     
+<<<<<<< HEAD
     .sticky {
       position: fixed;
       top: 0;
@@ -40,6 +41,9 @@
     .sticky + .content {
       padding-top: 500px;
     }
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
 </style>
 <!-- Main content -->
@@ -51,6 +55,7 @@
             <div class="col-sm-6">
                 <h1>Export Shipment Details</h1>
             </div>
+<<<<<<< HEAD
             <div class="col-sm-4">
             </div>
             <div class="col-sm-2">
@@ -96,6 +101,13 @@
                         </div>
                     </div>
                 </div>
+=======
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Export Shipment Details</li>
+                </ol>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -208,10 +220,54 @@
                         </div>
                     </div>
                     
+<<<<<<< HEAD
                     <!--<div class="card-body">-->
                         
               
                     <!--</div>-->
+=======
+                    <div class="card-body">
+                        <div class="dropdown column_list_dropdown" >
+                            <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                Customize column
+                            </button>
+                            <div class="dropdown-menu dropdown_menu_list">
+                                <ul id="ShipmentDetailssortable" class="sortable">
+                                    @if(!empty($columnSync))
+                                        @foreach($columnSync as $key => $value)
+                                            @if(!empty($value))
+                                             @php
+                                                $exp = explode('_', $value);
+                                                
+                                                $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                    ->where('page_name', $exp[1])
+                                                    ->where('type',  6)
+                                                    ->first();
+            
+                                            @endphp
+                                            
+                                            <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                <label class="switch">
+                                                  <input type="checkbox" name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','6')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                  <span class="slider round"></span>
+                                                </label>
+                                                @if(!empty($exp[1]))
+                                                 {{ $exp[1] }} 
+                                                @endif
+                                            </li>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    
+                                </ul>
+                                <div class="ui-state-default save_button" >
+                                    <button class="btn btn-info" onclick="save()"> Save </button>     
+                                </div>
+                            </div>
+                        </div>
+              
+                    </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -219,6 +275,7 @@
                         
                         
                         <!--<div class="large-table-container-3">-->
+<<<<<<< HEAD
                         <div class="card-content table-reponsive list_of_card_result " style="width: 100%;display: block;">
                             <!-- /.card-header -->
                             <div class="large-table-fake-top-scroll-container-3" id="myHeader">
@@ -270,6 +327,39 @@
                 		              </tr>
                 		            </thead>
         		                    <tbody>
+=======
+                        <div class="card-content table-reponsive list_of_card_result " style="width: 100%;display: block;overflow-x: scroll;">
+                            <!-- /.card-header -->
+                            <div class="large-table-fake-top-scroll-container-3">
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="top_scroll">
+        		                <table class="table table-bordered " id="listShipment" border="1">
+        		                <thead>
+            		              <tr style="color:#000">
+                                        <th style="display:none">SL.</th>
+                                        @foreach($columnSync as $key => $value)
+                                            @if(!empty($value))
+                                                @php
+                                                    $exp = explode('_', $value);
+                                                    
+                                                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type', 6)
+                                                        ->first();
+                
+                                                @endphp
+                                                @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                 <th scope="col">{{ $exp[1] }} </th>
+                                                 @endif
+                                            @endif
+                                         
+                                         @endforeach
+            		                    <th>Action</th>
+            		              </tr>
+            		            </thead>
+        		              <tbody>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             		             @foreach($newShipmentView as $key=>$data)
             		               <tr id="{{ $data->SHIPMENT_ID }}">
             		                  <td style="display:none">{{ $key+1 }}</td>
@@ -287,7 +377,11 @@
                                                 <td>{{ $data->SHIPMENT_ID }}</td>
                                             @endif
                                             
+<<<<<<< HEAD
                                             @if($exp[1] == 'Container No' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                                            @if($exp[1] == 'Container NO' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                 <td style="background-color:#E8ECF1;" id="{{ $data->ID }}" class="editCONTAINER_NO">
                             						<span id="CONTAINER_NO_{{ $data->ID }}" class="text">{{ $data->CONTAINER_NO }}</span>
                             						<input type="text" value="{{ $data->CONTAINER_NO }}" class="editbox" id="CONTAINER_NO_input_{{ $data->ID }}" style="display:none">
@@ -316,7 +410,11 @@
                                                             $ETD =  $data->ETD; 
                                                         @endphp
                                                     @endif
+<<<<<<< HEAD
                             						<span id="ETD_{{ $data->ID }}"  style="width:83px; display:block"  class="text">{{ $ETD }}</span>
+=======
+                            						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETD }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
                             				    </td>
                                             @endif
@@ -331,7 +429,11 @@
                                                             $ETA =  $data->ETA; 
                                                         @endphp
                                                     @endif
+<<<<<<< HEAD
                             						<span id="ETA_{{ $data->ID }}" class="text"   style="width:83px; display:block" >{{ $ETA}}</span>
+=======
+                            						<span id="ETA_{{ $data->ID }}" class="text">{{ $ETA}}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
                             				  </td>
                                             @endif
@@ -348,7 +450,11 @@
                                             
                                             @if($exp[1] == 'PO No' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                                 <td style="background-color:#E8ECF1;" class="editPO_NO" id="{{ $data->ID }}">
+<<<<<<< HEAD
                             						<span id="PO_NO_{{ $data->ID }}" class="text" style="width: 110px;display: block;">{{ $data->PO_NO }}</span>
+=======
+                            						<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
                             				    </td>
                                             @endif
@@ -365,7 +471,11 @@
                                                             $SHIPMENT_RECD_DATE =  $data->SHIPMENT_RECD_DATE; 
                                                         @endphp
                                                     @endif
+<<<<<<< HEAD
                             						<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" style="width:83px; display:block" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
+=======
+                            						<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="date" value="{{ $SHIPMENT_RECD_DATE}}" class="editbox" id="SHIPMENT_RECD_DATE_input_{{ $data->ID }}" style="display:none">
                             				  </td>
                                             @endif
@@ -406,7 +516,11 @@
                                                             $ACT_EXF_DATE =  $data->ACT_EXF_DATE; 
                                                         @endphp
                                                     @endif
+<<<<<<< HEAD
                             						<span id="ACT_EXF_DATE_{{ $data->ID }}"  style="width:83px; display:block"  class="text">{{ $ACT_EXF_DATE }}</span>
+=======
+                            						<span id="ACT_EXF_DATE_{{ $data->ID }}" class="text">{{ $ACT_EXF_DATE }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="date" value="{{ $ACT_EXF_DATE}}" class="editbox" id="ACT_EXF_DATE_input_{{ $data->ID }}" style="display:none">
                             				    </td>
                                             @endif
@@ -429,7 +543,11 @@
                                                             $VESSEL_SAILING_DATE =  $data->VESSEL_SAILING_DATE; 
                                                         @endphp
                                                     @endif
+<<<<<<< HEAD
                             						<span id="VESSEL_SAILING_DATE_{{ $data->ID }}"  style="width:83px; display:block"  class="text">{{ $VESSEL_SAILING_DATE}}</span>
+=======
+                            						<span id="VESSEL_SAILING_DATE_{{ $data->ID }}" class="text">{{ $VESSEL_SAILING_DATE}}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="date" value="{{ $data->VESSEL_SAILING_DATE }}" class="editbox" id="VESSEL_SAILING_DATE_input_{{ $data->ID }}" style="display:none">
                             				   </td>
                                             @endif
@@ -445,7 +563,11 @@
                                                             $CONFIRMED_ETA =  $data->CONFIRMED_ETA; 
                                                         @endphp
                                                     @endif
+<<<<<<< HEAD
                             						<span id="CONFIRMED_ETA_{{ $data->ID }}"  style="width:83px; display:block"  class="text">{{ $CONFIRMED_ETA }}</span>
+=======
+                            						<span id="CONFIRMED_ETA_{{ $data->ID }}" class="text">{{ $CONFIRMED_ETA }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             						<input type="date" value="{{ $data->CONFIRMED_ETA }}" class="editbox" id="CONFIRMED_ETA_input_{{ $data->ID }}" style="display:none">
                             				   </td>
                                             @endif
@@ -473,6 +595,7 @@
             		                </tr>
             		              @endforeach
         		              </tbody>
+<<<<<<< HEAD
         		                    <tfoot>
                 		                <tr style="color:#000">
                                             <th style="display:none">SL.</th>
@@ -497,6 +620,9 @@
                 		                </tr>
                 		            </tfoot>
         		                </table>
+=======
+        		          </table>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             </div>
 	                    </div>
                     </div>
@@ -1100,6 +1226,7 @@
     
     $('#listShipment').DataTable( {
          buttons: [
+<<<<<<< HEAD
         //   {
         //         extend: 'excelHtml5',
         //         text:'Export',
@@ -1108,6 +1235,16 @@
         //             columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17]
         //         }
         //     }
+=======
+          {
+                extend: 'excelHtml5',
+                text:'Export',
+                title:'Export Shipment Details',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17]
+                }
+            }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ],
     
     

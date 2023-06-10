@@ -109,7 +109,11 @@
                       
                              <div class="form-group">
                                 <label >Comments  </label>
+<<<<<<< HEAD
                                 <input type="text"  class="form-control" id="COMMENTS" name="COMMENTS" placeholder="Enter Comments" >
+=======
+                                <input type="text"  class="form-control" id="COMMENTS" name="COMMENTS" placeholder="Eter Comments" >
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             </div
                         </div>
                         <!-- /.card-body -->

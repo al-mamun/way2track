@@ -108,6 +108,7 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                    </div>
                 @endif
                 <!-- /.card-header -->
+<<<<<<< HEAD
                 <div class="large-table-fake-top-scroll-container-3" id="myHeader">
                     <div>&nbsp;</div>
                 </div>
@@ -263,6 +264,129 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
                             </tr>
                         </tfoot>
                     </table>
+=======
+                <div class="large-table-fake-top-scroll-container-3">
+                    <div>&nbsp;</div>
+                </div>
+                <div class="table_resposnive top_scroll">
+                    <table id="listOrder" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="display:none">Sl</th>
+                            
+                            <th scope="col">WIP</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Customer Po No</th>
+                            <th scope="col"><span style="width:100px; display:block">Status</span></th>
+                            <th scope="col">Project Name</th>
+                            <th scope="col">Expected Handover Date</th>
+                            <th scope="col">Salesperson Name </th>
+                            <th scope="col">Project Manager Name</th>
+                            <th scope="col">Salesperson Email</th>
+                            <th scope="col">Project Manager Email</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php $sl = 1; @endphp
+                        @foreach($saledOrderHeaders as $salesOrderInfo)
+                        <tr id="{{ $salesOrderInfo->WIP }}" class="@if(isset($request_id) && $request_id == $salesOrderInfo->ID) selected @endif">
+                            <td  style="display:none">{{ $sl++ }}</td>
+                            <!--<td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $salesOrderInfo->ID }}">-->
+                             <td id="{{ $salesOrderInfo->ID }}">
+        						<span id="wip_{{ $salesOrderInfo->ID }}" class="text">{{ $salesOrderInfo->WIP }}</span>
+        						<input type="text" value="{{ $salesOrderInfo->WIP }}" class="editbox" id="wip_input_{{ $salesOrderInfo->ID }}" style="display:none">
+        				 	</td>
+                            <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_NAME" id="{{ $salesOrderInfo->ID }}">
+        						<span id="CUSTOMER_NAME_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_NAME }}</span>
+        						<input type="text" value="{{ $salesOrderInfo->CUSTOMER_NAME }}" class="editboxStatus" id="CUSTOMER_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
+        				 	</td>
+                            <td style="background-color:#E8ECF1;" class="edit_CUSTOMER_PO_NO" id="{{ $salesOrderInfo->ID }}">
+                				<span id="CUSTOMER_PO_NO_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $salesOrderInfo->CUSTOMER_PO_NO }}  </span>
+                				<input type="text" value="{{ $salesOrderInfo->CUSTOMER_PO_NO }}" class="editboxStatus" id="CUSTOMER_PO_NO_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                		 	</td>
+                            <td style="background-color:#E8ECF1;" class="edit_status" id="{{ $salesOrderInfo->ID }}">
+    						        <span id="status_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SO_STATUS }}</span>
+    					
+            						<select name="status"  class="form-control editboxStatus" aria-label="Default select example" required id="status_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                                        <option value="" selected>Select Status</option>
+                                        <option value="LIVE" @if($salesOrderInfo->SO_STATUS=='LIVE')  selected @endif>Live</option>
+                                        <option value="CLOSED" @if($salesOrderInfo->SO_STATUS=='CLOSED')  selected @endif>Closed</option>
+                                        <option value="CANCELLED"  @if($salesOrderInfo->SO_STATUS=='CANCELLED')  selected @endif>Cancelled</option>
+                                    </select>
+                					
+        						<!--<input type="text" value="{{ $salesOrderInfo->SO_STATUS }}" class="editboxStatus" id="status_input_{{ $salesOrderInfo->ID }}" style="display:none">-->
+        				 	</td>
+        				 	<td style="background-color:#E8ECF1;" class="PROJECT_NAME_click" id="{{ $salesOrderInfo->ID }}">
+                				<span id="PROJECT_NAME_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECT_NAME }}</span>
+                				<input type="text" value="{{ $salesOrderInfo->PROJECT_NAME }}" class="editboxStatus" id="PROJECT_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                		 	</td>
+                                <!--<td>{{ $salesOrderInfo->SO_STATUS }}</td>-->
+                            @php 
+                                $date = date("d M  Y", strtotime( $salesOrderInfo->TGT_HANDOVER_DT)); 
+                            @endphp
+                                
+                            <td style="background-color:#E8ECF1;" class="edit_hand_over_date" id="{{ $salesOrderInfo->ID }}">
+        						<span id="hand_over_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $date }}</span>
+        						<input type="date" value="{{ $date }}" class="editboxStatus"  id="hand_over_input_{{ $salesOrderInfo->ID }}" style="display:none">
+        				 	</td>
+        				 	
+                           	<td style="background-color:#E8ECF1;" class="SALESPERSON_click" id="{{ $salesOrderInfo->ID }}">
+                				<span id="SALESPERSON_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON }}</span>
+                				<input type="text" value="{{ $salesOrderInfo->SALESPERSON }}" class="editboxStatus" id="SALESPERSON_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                		 	</td>
+                		 	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_click" id="{{ $salesOrderInfo->ID }}">
+                				<span id="PROJECTMANAGER_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER }}</span>
+                				<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER }}" class="editboxStatus" id="PROJECTMANAGER_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                		 	</td>
+                		 	
+                		 	<td style="background-color:#E8ECF1;" class="SALESPERSON_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
+                				<span id="SALESPERSON_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON_EMAIL }}</span>
+                				<input type="text" value="{{ $salesOrderInfo->SALESPERSON_EMAIL }}" class="editboxStatus" id="SALESPERSON_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                		 	</td>
+                		 	
+                            <td style="background-color:#E8ECF1;" class="PROJECTMANAGER_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
+                				<span id="PROJECTMANAGER_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}</span>
+                				<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}" class="editboxStatus" id="PROJECTMANAGER_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
+                		 	</td>
+                        <!--    <td>{{ $salesOrderInfo->TGT_HANDOVER_DT }}</td> -->
+                           
+                            <td style="background-color:#E8ECF1;" class="COMMENTS_click" id="{{ $salesOrderInfo->ID }}">
+        						<span id="COMMENTS_{{ $salesOrderInfo->ID }}" class="textStatus"> {{$salesOrderInfo->COMMENTS }}</span>
+        						<input type="text" value="{{ $salesOrderInfo->COMMENTS }}" class="editboxStatus" id="COMMENTS_input_{{ $salesOrderInfo->ID }}" style="display:none">
+        				 	</td>
+                         
+                            <td>
+                                @can('check po and details')
+                                 <a href="{{ URL::to( 'list/order/detail/list/' . $salesOrderInfo->WIP) }}" type="button" class="btn btn-block btn-info btn-sm">Details</a>
+                                @endcan
+                                <!--<a href="javascript:void(0)" type="button" class="btn btn-block btn-success btn-sm" onclick="edit('{{ $salesOrderInfo->ID }}')">View</a>-->
+                                <button  onClick="deleteData('{{$salesOrderInfo->WIP}}')" id="salesOrderDelete" type="button" class="btn btn-block btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                 
+                  </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="col" style="display:none">Sl</th>
+                            <th scope="col">WIP</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Customer Po No</th>
+                            <th scope="col"><span style="width:100px; display:block">Status</span></th>
+                            <th scope="col">Project Name</th>
+                            <th scope="col">Expected Handover Date</th>
+                            <th scope="col">Salesperson Name </th>
+                            <th scope="col">Project Manager Name</th>
+                            <th scope="col">Salesperson Email</th>
+                            <th scope="col">Project Manager Email</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 </div>
                 </div>
               <!-- /.card-body -->
@@ -359,7 +483,11 @@ button.btn.btn-secondary.buttons-excel.buttons-html5 {
   
 
  
+<<<<<<< HEAD
      $('#listOrder tbody').on('click', 'tr', function () {
+=======
+    $("tbody tr").click(function () {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $('.selected').removeClass('selected');
         $(this).addClass("selected");
         
@@ -377,10 +505,13 @@ function edit(ID) {
     $("#hand_over_input_"+ID).show();
     $("#PROJECTMANAGER_EMAIL_"+ID).hide();
     $("#PROJECTMANAGER_EMAIL_input_"+ID).show();
+<<<<<<< HEAD
     $("#INSTALLATION_TIME_"+ID).hide();
     $("#INSTALLATION_TIME_input_"+ID).show();
      $("#DESIGNER_EMAIL_ADDRESS_"+ID).hide();
     $("#DESIGNER_EMAIL_ADDRESS_input_"+ID).show();
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     $("#SALESPERSON_EMAIL_"+ID).hide();
     $("#SALESPERSON_EMAIL_input_"+ID).show();
     $("#COMMENTS_"+ID).hide();
@@ -471,7 +602,11 @@ function edit(ID) {
 });
 
 
+<<<<<<< HEAD
 $(document).on('keyup click change', '.PROJECTMANAGER_EMAIL_click', function() {
+=======
+ $(document).on('keyup click change', '.PROJECTMANAGER_EMAIL_click', function() {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
     var ID = $(this).attr('id');
     
@@ -495,6 +630,7 @@ $(document).on('keyup click change', '.PROJECTMANAGER_EMAIL_click', function() {
             }
         });
 
+<<<<<<< HEAD
 }).change(function() { });
 
 
@@ -549,6 +685,12 @@ $(document).on('keyup click change', '.DESIGNER_EMAIL_ADDRESS_click', function()
         });
 
 }).change(function() { });
+=======
+}).change(function() {
+
+});
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
  $(document).on('keyup click change', '.SALESPERSON_EMAIL_click', function() {
 
@@ -640,7 +782,11 @@ $(document).on('keyup click change', '.DESIGNER_EMAIL_ADDRESS_click', function()
         buttons: [
           
         ],
+<<<<<<< HEAD
         //  fixedHeader: true,
+=======
+    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         retrieve: true,
         language: {
           "emptyTable": "No result found"

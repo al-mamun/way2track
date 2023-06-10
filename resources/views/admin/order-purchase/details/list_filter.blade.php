@@ -53,11 +53,19 @@
                         @if($exp[1] == 'Comments' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <th>Comments <br><span class="comments_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span></th>
                         @endif
+<<<<<<< HEAD
                         @if($exp[1] == 'Exp GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <th>Exp GRD <br><span class="exp_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span></th>
                         @endif
                         @if($exp[1] == 'Confirmed GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <th>Confirmed GRD <br><span class="exp_confirm_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>    </th>
+=======
+                        @if($exp[1] == 'Confirmed EXF' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <th>EXP EXF DT <br><span class="exp_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span></th>
+                        @endif
+                        @if($exp[1] == 'EXP EXF DT' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <th>Confirmed EXF <br><span class="exp_confirm_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>    </th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         @endif
                         @if($exp[1] == 'ETA' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <th>ETA <br><span class="eta_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>    </th>
@@ -71,7 +79,11 @@
               <th>Action</th>
           </tr>
       </thead>
+<<<<<<< HEAD
     <thead>
+=======
+  <tbody>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
        <tr class="showCommentsDetails" style="display:none">
             <td style="display:none"></td>
             @foreach($columnSync as $key => $value)
@@ -130,7 +142,11 @@
                             </div>
                         </td>
                     @endif
+<<<<<<< HEAD
                     @if($exp[1] == 'Exp GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                    @if($exp[1] == 'Confirmed EXF' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         <td>
                             <div class="exp_td box_header" style="display:none; width:150px;">
                                 <input type="text"  class="exp_box" id="exp_box" name="exp_box" style="width: 65%;float: left;font-size: 15px;">
@@ -138,7 +154,11 @@
                             </div>
                         </td>
                     @endif
+<<<<<<< HEAD
                     @if($exp[1] == 'Confirmed GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                    @if($exp[1] == 'EXP EXF DT' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                          <td>
                             <div class="exp_confirm_td box_header" style="display:none; width:150px;">
                                 <input type="text"  class="exp_confirm" id="exp_confirm" name="exp_confirm"  style="width: 65%;float: left;font-size: 15px;">
@@ -170,10 +190,24 @@
                 @endif
             @endforeach
            
+<<<<<<< HEAD
             <td></td>
         </tr>
     </thead>
     <tbody>
+=======
+            
+            
+            
+            
+           
+            
+           
+            
+         
+            <td></td>
+        </tr>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     @foreach($poDetails as $key=>$data)
         <tr id="purchase_id_{{$data->ID}}">
             <td style="display:none">{{ $key + 1 }}</td>
@@ -191,7 +225,11 @@
                     @if($exp[1] == 'PO No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                         
                         <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $data->ID }}">
+<<<<<<< HEAD
             				<span id="wip_{{ $data->ID }}" class="text po_box_text"  style=" width: 138px;display: block;">{{ $data->PO_NO }}</span>
+=======
+            				<span id="wip_{{ $data->ID }}" class="text po_box_text">{{ $data->PO_NO }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             				<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="wip_input_{{ $data->ID }}" style="display:none">
             		    </td>
                     @endif
@@ -204,7 +242,11 @@
                     @endif
                     @if($exp[1] == 'Description' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                         <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
+<<<<<<< HEAD
             				<span id="DESCRIPTION_{{ $data->ID }}" class="text description_box_text"  style=" width: 250px;display: block;">{{ $data->DESCRIPTION }}</span>
+=======
+            				<span id="DESCRIPTION_{{ $data->ID }}" class="text description_box_text">{{ $data->DESCRIPTION }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             				<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
             		    </td>
                     @endif
@@ -220,7 +262,11 @@
             				<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
             		    </td>
                     @endif
+<<<<<<< HEAD
                     @if($exp[1] == 'Exp GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                    @if($exp[1] == 'Confirmed EXF' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                          <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
                             @if(!empty($data->EXP_EXF_DT))
             				    @php 
@@ -231,11 +277,19 @@
                                     $EXP_EXF_DT =  $data->EXP_EXF_DT; 
                                 @endphp
                             @endif
+<<<<<<< HEAD
             				<span id="EXP_DELIVERY_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $EXP_EXF_DT }}</span>
             				<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
             		    </td>
                     @endif
                     @if($exp[1] == 'Confirmed GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+            				<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
+            				<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
+            		    </td>
+                    @endif
+                    @if($exp[1] == 'EXP EXF DT' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         <td style="background-color:#E8ECF1;" class="editEXP_CONFIRMED_EXF" id="{{ $data->ID }}">
             		        @if(!empty($data->CONFIRMED_EXF))
             				    @php 
@@ -246,7 +300,11 @@
                                     $CONFIRMED_EXF =  $data->ETA; 
                                 @endphp
                             @endif
+<<<<<<< HEAD
             				<span id="CONFIRMED_EXF_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $CONFIRMED_EXF }}</span>
+=======
+            				<span id="CONFIRMED_EXF_{{ $data->ID }}" class="text">{{ $CONFIRMED_EXF }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             				<input type="date" value="{{ $data->CONFIRMED_EXF }}" class="editbox" id="CONFIRMED_EXF_input_{{ $data->ID }}" style="display:none">
             		    </td>
                     @endif
@@ -261,7 +319,11 @@
                                     $ETA =  $data->ETA; 
                                 @endphp
                             @endif
+<<<<<<< HEAD
             				<span id="ETA_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $ETA }}</span>
+=======
+            				<span id="ETA_{{ $data->ID }}" class="text">{{ $ETA }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             				<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
             		    </td>
                         
@@ -277,7 +339,11 @@
                                     $ETD =  $data->ETD; 
                                 @endphp
                             @endif
+<<<<<<< HEAD
             				<span id="ETD_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $ETD }}</span>
+=======
+            				<span id="ETD_{{ $data->ID }}" class="text">{{ $ETD }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             				<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
             		    </td>
                         
@@ -287,6 +353,19 @@
             @endforeach
            
 		    
+<<<<<<< HEAD
+=======
+	
+		    
+		    
+     
+   
+            
+           
+		    
+		   
+		    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
           
           <td>
               <!--<a href="javascript:void(0)" onclick="edit('{{ $data->ID }}')"  class="btn btn-primary btn-circle btn-sm"><i class="fas fa-edit"></i></a>-->
@@ -297,6 +376,7 @@
     </tr>
     @endforeach
   </tbody>
+<<<<<<< HEAD
     <tfoot>
       <tr style="color:#000">
           <th style="display:none">SL.</th>
@@ -320,6 +400,8 @@
           <th>Action</th>
         </tr>
     </tfoot>
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </table>
 <script type="text/javascript">
  function deleteData(ID) {

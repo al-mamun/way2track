@@ -34,7 +34,10 @@
                         </div>
                    </div>
                 @endif
+<<<<<<< HEAD
                 <div id="success"></div>
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
               <!-- /.card-header -->
                 <div class="card-body">
                     <div class="card card-primary">
@@ -43,8 +46,12 @@
                       </div>
                       <!-- /.card-header -->
                       <!-- form start -->
+<<<<<<< HEAD
                       <form id="addShimpmentDetails" method="post" action="javascript:void(0)" enctype="multipart/form-data">
                           {{ csrf_field()}}
+=======
+                      {!! Form::open(array('url'=>'shipment/details/submit','role'=>'form','method'=>'POST','class'=>'from-submit-status'))!!}
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -54,28 +61,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="SUPPLIER">Supplier <span style="color:red">*</span></label>
-                                        <input type="text" class="form-control"  name="SUPPLIER" placeholder="" required>
+<<<<<<< HEAD
+=======
+                                     <div class="form-group">
+                                        <label for="CONTAINER_NO"> Container No <span style="color:red">*</span></label>
+                                        <input type="text" required class="form-control" name="CONTAINER_NO" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="PO_NO">PO No <span style="color:red">*</span></label>
-                                        <input type="text" class="form-control"  name="PO_NO" placeholder="" required id='po_no_exist_check'>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="WIP">WIP <span style="color:red">*</span></label>
-                                        <input type="text" class="form-control"  name="WIP" placeholder="" required id='WIP' readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="ITEM">Item <span style="color:red">*</span></label>
-                                        <input type="text" class="form-control"  name="ITEM" placeholder="" required>
+                                   <div class="form-group">
+                                        <label for="VESSEL">Vessel<span style="color:red">*</span></label>
+                                        <input type="text" required class="form-control" name="VESSEL" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -84,12 +80,102 @@
                                         <input type="text" class="form-control"  name="Qty" placeholder="" required>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ETD">ETD <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control"  name="ETD" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ETA">ETA <span style="color:red">*</span></label>
+                                        <input type="ShipmentDetail" class="form-control"  name="ETA" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
+                                    <div class="form-group">
+                                        <label for="SUPPLIER">Supplier <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control"  name="SUPPLIER" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="PO_NO">PO No <span style="color:red">*</span></label>
+<<<<<<< HEAD
+                                        <input type="text" class="form-control"  name="PO_NO" placeholder="" required id='po_no_exist_check'>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="WIP">WIP <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control"  name="WIP" placeholder="" required id='WIP' readonly>
+=======
+                                        <input type="text" class="form-control"  name="PO_NO" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="WIP">WIP <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control"  name="WIP" placeholder="" required>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ITEM">Item <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control"  name="ITEM" placeholder="" required>
+                                    </div>
+                                </div>
+<<<<<<< HEAD
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Qty">Qty <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control"  name="Qty" placeholder="" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
+=======
+                             
+                                <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label > ACT GRD Date <span style="color:red">*</span> </label>
+                                         <input type="text" class="form-control"  name="ACT_EXF_DATE" placeholder="" required>
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label > MBLMAWB <span style="color:red">*</span> </label>
+                                         <input type="text" class="form-control"  name="MBL_MAWB" placeholder="" required>
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label > Vessel Sailing Date   <span style="color:red">*</span></label>
+                                         <input type="text" class="form-control"  name="VESSEL_SAILING_DATE" placeholder="" required>
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label > Confirmed ETA <span style="color:red">*</span> </label>
+                                         <input type="text" class="form-control"  name="CONFIRMED_ETA" placeholder="" required>
+                                      </div>
+                                </div>
+                                <div class="col-md-12">
+                                     <div class="form-group">
+                                        <label > Shipment Status <span style="color:red">*</span> </label>
+                                         <input type="text" class="form-control"  name="SHIPMENT_STATUS" placeholder="" required value="Shipped ">
+                                      </div>
+                                </div>
+                                   <div class="col-md-12">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     <div class="form-group">
                                         <label for="DESCRIPTION"> Description</label>
                                         <textarea  type="text" class="form-control" name="DESCRIPTION"> </textarea>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 <div class="col-md-6">
                                      <div class="form-group">
                                         <label for="CONTAINER_NO"> Container No</label>
@@ -149,6 +235,8 @@
                                       </div>
                                 </div>
                                 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 <div class="col-md-12">
                                      <div class="form-group">
                                         <label > Comments </label>
@@ -180,6 +268,7 @@
     <!-- /.content -->
   </div>
 <!-- /.content-wrapper -->
+<<<<<<< HEAD
 <script type="text/javascript"> 
 
     function printErrorMsg (msg) {
@@ -264,12 +353,24 @@
                 }
             }).on("apply.daterangepicker", function (e, picker) {
                 picker.element.val(picker.startDate.format(picker.locale.format));
+=======
+<script type="text/javascript">
+        $(function() {
+            $('input[name="ETD"]').daterangepicker({
+                timePicker: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             });
             
             $('input[name="ETA"]').daterangepicker({
                 timePicker: false,
                 singleDatePicker: true,
                 showDropdowns: true,
+<<<<<<< HEAD
                 autoUpdateInput: false,
                 locale: {
                   format: 'DD/MMM/YYYY'
@@ -278,10 +379,17 @@
                 picker.element.val(picker.startDate.format(picker.locale.format));
             });
             
+=======
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $('input[name="ACT_EXF_DATE"]').daterangepicker({
                 timePicker: false,
                 singleDatePicker: true,
                 showDropdowns: true,
+<<<<<<< HEAD
                 autoUpdateInput: false,
                 locale: {
                   format: 'DD/MMM/YYYY'
@@ -323,6 +431,30 @@
                 picker.element.val(picker.startDate.format(picker.locale.format));
             });
             
+=======
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+            
+            $('input[name="VESSEL_SAILING_DATE"]').daterangepicker({
+                timePicker: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+            
+            $('input[name="CONFIRMED_ETA"]').daterangepicker({
+                timePicker: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         });
 </script>
 </script>

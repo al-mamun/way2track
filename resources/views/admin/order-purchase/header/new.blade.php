@@ -92,7 +92,11 @@
                                 <input type="text" class="form-control" id="SUPPLIER_SITE" name="SUPPLIER_SITE" placeholder="Enter Supplier Site" >
                             </div>
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label for="date">Reqd GRD Date<span style="color:red">*</span></label>
+=======
+                                <label for="date">REQD GRD Date<span style="color:red">*</span></label>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 <input type="text"  class="form-control" id="date" name="REQD_EXF_DATE" placeholder="Enter Date" >
                             </div>
                             <div class="form-group">
@@ -104,7 +108,11 @@
                                 <input type="text" class="form-control" id="ACK_NO" name="ACK_NO" placeholder="Enter ACK NO" >
                             </div>
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label for="date">Ack Signed Date</label>
+=======
+                                <label for="date">ACK Signed Date</label>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 <input type="text" class="form-control" id="ACK_DATE" name="ACK_DATE" placeholder="Enter ACK Date">
                             </div>
                           
@@ -204,6 +212,7 @@
     
 
     $(function() {
+<<<<<<< HEAD
         $('input[name="PO_DATE"]').daterangepicker({
             timePicker: false,
             singleDatePicker: true,
@@ -234,5 +243,37 @@
             picker.element.val(picker.startDate.format(picker.locale.format));
         });;
     });
+=======
+            $('input[name="PO_DATE"]').daterangepicker({
+                timePicker: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+            
+            $('input[name="REQD_EXF_DATE"]').daterangepicker({
+                timePicker: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+            
+            $('input[name="ACK_DATE"]').daterangepicker({
+                timePicker: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                autoUpdateInput: false,
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            }).on("apply.daterangepicker", function (e, picker) {
+                picker.element.val(picker.startDate.format(picker.locale.format));
+            });;
+        });
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </script>
 @endsection

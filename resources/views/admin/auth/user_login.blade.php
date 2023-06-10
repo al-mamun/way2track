@@ -64,7 +64,11 @@
 							Login
 						</button>
 						<div class=""><div class=''>
+<<<<<<< HEAD
 					        <a class="login_btn" href="{{route('socialite.redirect')}}" > <img  class='fa'  style='padding-top:0px !important; width:34px; padding-right:10px; margin-top: 0; :hover {color: yellow} !important' src="{{ URL::asset( 'images/google.png') }}">Login with Google</a></div> <br>
+=======
+					        <a class="login_btn" href="{{route('socialite.redirect')}}" > <img  class='fa'  style='padding-top:0px !important; width:50px; padding-right:10px margin-top: 0; :hover {color: yellow} !important' src="{{ URL::asset( 'images/google.png') }}">Login with Google</a></div> <br>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         </div>
 					</div>
 					

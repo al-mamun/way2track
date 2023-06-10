@@ -14,7 +14,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
     
+<<<<<<< HEAD
     protected $table = 'w2t_user';
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     /**
      * The attributes that are mass assignable.
      *

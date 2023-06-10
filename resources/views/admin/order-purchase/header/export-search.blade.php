@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <table id="tableResponsive7" class="table table-bordered table-hover table-responsive"  style="width:100%;">
+=======
+<table id="tableResponsive2" class="table table-bordered table-hover table-responsive">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     <thead>
         <tr>
             <!--<th scope="col"  style="display:none !important">SL</th>-->
@@ -55,7 +59,11 @@
                         @endif
                         @if($exp[1] == 'PO Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <td style="background-color:#E8ECF1;" class="editPO_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+<<<<<<< HEAD
         						<span id="PO_DATE_{{ $poOrderHeadersInfo->ID }}" class="text"  style="width:86px; display:block; text-align:center">
+=======
+        						<span id="PO_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         						     @if(!empty($poOrderHeadersInfo->PO_DATE))
             				            @php $PO_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->PO_DATE))  @endphp
             				        @else
@@ -67,14 +75,22 @@
         						<input type="date" value="{{ $poOrderHeadersInfo->PO_DATE }}" class="editbox" id="PO_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
         				    </td>
                         @endif
+<<<<<<< HEAD
                         @if($exp[1] == 'PO Status' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                        @if($exp[1] == 'PO status' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <td style="background-color:#E8ECF1;" class="editPO_STATUS" id="{{ $poOrderHeadersInfo->ID }}">
         						<span id="PO_STATUS_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->PO_STATUS }}</span>
         						<input type="text" value="{{ $poOrderHeadersInfo->PO_STATUS }}" class="editbox" id="PO_STATUS_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
         				    </td>
         				    
                         @endif
+<<<<<<< HEAD
                         @if($exp[1] == 'Supplier' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                        @if($exp[1] == 'Supplier Name' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <td style="background-color:#E8ECF1;" class="editSUPPLIER_NAME" id="{{ $poOrderHeadersInfo->ID }}">
         						<span id="SUPPLIER_NAME_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->SUPPLIER_NAME }}</span>
         						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_NAME }}" class="editbox" id="SUPPLIER_NAME_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
@@ -86,9 +102,15 @@
         						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_SITE }}" class="editbox" id="SUPPLIER_SITE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
         				    </td>
                         @endif
+<<<<<<< HEAD
                          @if($exp[1] == 'Reqd GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <td style="background-color:#E8ECF1;" class="editREQD_EXF_DATE" id="{{ $poOrderHeadersInfo->ID }}">
         						<span id="REQD_EXF_DATE_{{ $poOrderHeadersInfo->ID }}" class="text"  style="width:86px; display:block; text-align:center">
+=======
+                         @if($exp[1] == 'REQD EXF Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editREQD_EXF_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="REQD_EXF_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         						     @if(!empty($poOrderHeadersInfo->REQD_EXF_DATE))
             				            @php $REQD_EXF_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->REQD_EXF_DATE))  @endphp
             				        @else
@@ -99,15 +121,25 @@
         						<input type="date" value="{{ $poOrderHeadersInfo->REQD_EXF_DATE }}" class="editbox" id="REQD_EXF_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
         				    </td>
                         @endif
+<<<<<<< HEAD
                         @if($exp[1] == 'Ack No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                        @if($exp[1] == 'ACK No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <td style="background-color:#E8ECF1;" class="editACK_NO" id="{{ $poOrderHeadersInfo->ID }}">
         						<span id="ACK_NO_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->ACK_NO }}</span>
         						<input type="text" value="{{ $poOrderHeadersInfo->ACK_NO }}" class="editbox" id="ACK_NO_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
         				    </td>
                         @endif
+<<<<<<< HEAD
                         @if($exp[1] == 'Ack Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             <td style="background-color:#E8ECF1;" class="editACK_DATE" id="{{ $poOrderHeadersInfo->ID }}">
         						<span id="ACK_DATE_{{ $poOrderHeadersInfo->ID }}" class="text"  style="width:86px; display:block; text-align:center">
+=======
+                        @if($exp[1] == 'ACK Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                            <td style="background-color:#E8ECF1;" class="editACK_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+        						<span id="ACK_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         						    @if(!empty($poOrderHeadersInfo->ACK_DATE))
             				            @php $ACK_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->ACK_DATE))  @endphp
             				        @else
@@ -492,9 +524,14 @@
     }).change(function() { });
     
     
+<<<<<<< HEAD
 $('#tableResponsive7').DataTable( {
     buttons: [
         @if(isset($status) && $status != 1)
+=======
+$('#tableResponsive2').DataTable( {
+    buttons: [
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
       {
             extend: 'excelHtml5',
             text:'Export',
@@ -503,6 +540,7 @@ $('#tableResponsive7').DataTable( {
                 columns: [ 0,1,2,3,4,5,6,7,8 ]
             }
         }
+<<<<<<< HEAD
         @endif
     ],
     // "columns": [
@@ -513,6 +551,11 @@ $('#tableResponsive7').DataTable( {
     
     retrieve: true,
 
+=======
+    ],
+
+    retrieve: true,
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     language: {
       "emptyTable": "No result found"
     },

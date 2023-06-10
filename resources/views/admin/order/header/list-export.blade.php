@@ -2,6 +2,7 @@
 
 @section('content')
 <style>
+<<<<<<< HEAD
     tr {
         cursor: pointer;
     }
@@ -104,6 +105,94 @@
       animation: spin 2s linear infinite;
     }
    
+=======
+tr {
+    cursor: pointer;
+}
+tr.selected {
+    background: #eee;
+}
+input#file {
+    float: left;
+    width: 176px;
+    border: 1px solid #218838;
+    padding: 3px;
+    background: #218838;
+}
+button.btn.btn-success {
+    border-radius: 0px;
+}
+.row.data-button {
+    margin-bottom: 15px;
+}
+
+.row.data-button {
+    padding: 14px 19px;
+}
+input#file {
+    width: 100px;
+    float: left;
+}
+svg.w-5.h-5 {
+    font-size: .875rem!important;
+    width: 21px;
+}
+.form-check {
+    position: relative;
+    display: block;
+    padding-left: 1.25rem;
+    float: left;
+    margin-right: 11px;
+}
+.date-form {
+    width: 22%;
+    float: left;
+    margin-top: 10px;
+    margin-right: 4%;
+}
+.card-foote.date-formr {
+    margin-top: 40px;
+}
+.date-formr {
+    width: 18%;
+    float: left;
+    margin-top: 10px;
+    margin-right: 0%;
+}
+h5.by_date_check.by_staus {
+    float: left;
+    margin-top: 0px;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 17px;
+}
+h5.by_date_check.by_date {
+    font-weight: bold;
+    font-size: 16px;
+    float: left;
+    margin-top: 43px;
+    margin-right: 20px;
+    width: 151px;
+}
+h5.by_date_check {
+    font-weight: normal;
+    margin-top: 21px;
+}
+button.btn.btn-secondary.buttons-excel.buttons-html5 {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </style>
 {{ csrf_field() }}
 <!-- Main content -->
@@ -115,6 +204,7 @@
             <div class="col-sm-6">
                 <h1> Export Sales Order </h1>
             </div>
+<<<<<<< HEAD
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
                 <!--<ol class="breadcrumb float-sm-right">-->
@@ -169,6 +259,13 @@
                         </div>
                     </div>
                 </div>
+=======
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Export Sales Order</li>
+                </ol>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -180,11 +277,18 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
+<<<<<<< HEAD
           
+=======
+              <div class="card-header">
+                <h3 class="card-title">Export Sales Order</h3>
+              </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
               <!-- /.card-header -->
                     <div class="card-body">
                         <div class="card-content">
                             <div class="col-md-12 pull-right">
+<<<<<<< HEAD
                                 <div class="col-sm-2"  style="float:left; margin-top:18px;">
                                     <!-- checkbox -->
                                     <div class="form-group">
@@ -199,6 +303,12 @@
                                     <!-- checkbox -->
                                     <div class="form-group group_list" >
                                         <h5 class="by_date_check by_staus" style="margin-bottom: 25px;">By status</h5>
+=======
+                                <div class="col-sm-4"  style="float:left; margin-top:50px;">
+                                    <!-- checkbox -->
+                                    <div class="form-group">
+                                        <h5 class="by_date_check by_staus">By status</h5>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                         <div class="form-check">
                                           <input class="form-check-input" type="checkbox" value="Live" name="checkobx" onclick="checkboxFilter()">
                                           <label class="form-check-label">Live </label>
@@ -207,12 +317,17 @@
                                           <input class="form-check-input" type="checkbox"  value="Closed" name="checkobx" onclick="checkboxFilter()">
                                           <label class="form-check-label">Closed</label>
                                         </div>
+<<<<<<< HEAD
                                         <div class="form-check" style="padding-right: 0px;margin-right: 0px;">
+=======
+                                        <div class="form-check">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                           <input class="form-check-input" type="checkbox" value="Cancelled" name="checkobx" onclick="checkboxFilter()">
                                           <label class="form-check-label">Cancelled</label>
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 <div class="col-sm-7" style="float:right">
                                     <h5 class="by_date_check by_date">Expected Handover Date</h5>
                 	                <div class="form-group date-form">
@@ -226,6 +341,17 @@
                                         <div class="form-control-panel">
                                             <input type="date"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="to" name="to" placeholder="to" required>
                                         </div>
+=======
+                                <div class="col-sm-8" style="float:right">
+                                    <h5 class="by_date_check by_date">Expected Handover Date</h5>
+                	                <div class="form-group date-form">
+                                        <label >From</label>
+                                        <input type="date"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="from" name="from" placeholder="from" required>
+                                    </div>
+                                    <div class="form-group date-form">
+                                        <label >To</label>
+                                        <input type="date"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="to" name="to" placeholder="to" required>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     </div>
                                 
                                     <div class="card-foote date-formr">
@@ -236,7 +362,59 @@
                         </div>
                     </div>
                     
+<<<<<<< HEAD
              
+=======
+                    <div class="card-body">
+                            <div class="dropdown column_list_dropdown" >
+                                    <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                        Customize column
+                                    </button>
+                                    <div class="dropdown-menu dropdown_menu_list">
+                                        <ul id="sortableOrderDHeader" class="sortable">
+                                            @if(!empty($columnSync))
+                                                @foreach($columnSync as $key => $value)
+                                                    @if(!empty($value))
+                                                     @php
+                                                        $exp = explode('_', $value);
+                                                        
+                                                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                            ->where('page_name', $exp[1])
+                                                            ->where('type',  1)
+                                                            ->first();
+                    
+                                                    @endphp
+                                                    
+                                                    <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                        <label class="switch">
+                                                          <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','1')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                          <span class="slider round"></span>
+                                                        </label>
+                                                        @if(!empty($exp[1]))
+                                                         {{ $exp[1] }} 
+                                                        @endif
+                                                    </li>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            
+                                            <!--<li class="ui-state-default" id="col_PO No"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> PO No </li>-->
+                                            <!--<li class="ui-state-default" id="col_Item" index="1"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Item </li>-->
+                                            <!--<li class="ui-state-default" id="col_Description"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Description </li>-->
+                                            <!--<li class="ui-state-default" id="col_Qty"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Qty </li>-->
+                                            <!--<li class="ui-state-default" id="col_Comments"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Comments </li>-->
+                                            <!--<li class="ui-state-default" id="col_EXP EXF DT"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> EXP EXF DT </li>-->
+                                            <!--<li class="ui-state-default" id="col_Confirmed EXF"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> Confirmed EXF </li>-->
+                                            <!--<li class="ui-state-default" id="col_ETD"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> ETD  </li>-->
+                                            <!--<li class="ui-state-default" id="col_ETA"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span> ETA  </li>-->
+                                        </ul>
+                                        <div class="ui-state-default save_button" >
+                                            <button class="btn btn-info" onclick="save()"> Save </button>     
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                      <!-- /.card-header -->
                     <div class="card-body" style="position:relative">
                         @if ($errors->any())
@@ -257,6 +435,7 @@
                            </div>
                         @endif
                         
+<<<<<<< HEAD
 
                         <!-- /.card-header -->
                         <div class="large-table-fake-top-scroll-container-3" >
@@ -282,6 +461,12 @@
                             //   }
                             // }
                         </script>
+=======
+                        <!-- /.card-header -->
+                        <div class="large-table-fake-top-scroll-container-3">
+                            <div>&nbsp;</div>
+                        </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         <div class="table_result table-responsive top_scroll" >
                             <table id="tableResponsive2" class="table table-bordered table-hover">
                                 <thead>
@@ -355,32 +540,52 @@
                                     				 	</td>
                         				 	        @endif
                         				 	        
+<<<<<<< HEAD
                         				 	        @if($exp[1] == 'Project' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+                        				 	        @if($exp[1] == 'Project Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                     	<td style="background-color:#E8ECF1;" class="PROJECT_NAME_click" id="{{ $salesOrderInfo->ID }}">
                                     						<span id="PROJECT_NAME_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECT_NAME }}</span>
                                     						<input type="text" value="{{ $salesOrderInfo->PROJECT_NAME }}" class="editboxStatus" id="PROJECT_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
                                     				 	</td>
                         				 	        @endif
                         				 	        
+<<<<<<< HEAD
                         				 	        @if($exp[1] == 'Expected Handover' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+                        				 	        @if($exp[1] == 'Expected Handover Date' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                     	 @php 
                                                             $date = date("d M  Y", strtotime( $salesOrderInfo->TGT_HANDOVER_DT)); 
                                                         @endphp
                                                             
                                                         <td style="background-color:#E8ECF1;" class="edit_hand_over_date" id="{{ $salesOrderInfo->ID }}">
+<<<<<<< HEAD
                                     						<span id="hand_over_{{ $salesOrderInfo->ID }}" class="textStatus"  style="width:86px; display:block; text-align:center"> {{ $date }}</span>
+=======
+                                    						<span id="hand_over_{{ $salesOrderInfo->ID }}" class="textStatus"> {{ $date }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="date" value="{{ $date }}" class="editboxStatus" id="hand_over_input_{{ $salesOrderInfo->ID }}" name="TGT_HANDOVER_DT" style="display:none">
                                     				 	</td>
                         				 	        @endif
                         				 	        
+<<<<<<< HEAD
                         				 	        @if($exp[1] == 'Salesperson' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+                        				 	        @if($exp[1] == 'Salesperson Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                 		<td style="background-color:#E8ECF1;" class="SALESPERSON_click" id="{{ $salesOrderInfo->ID }}">
                                     						<span id="SALESPERSON_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON }}</span>
                                     						<input type="text" value="{{ $salesOrderInfo->SALESPERSON }}" class="editboxStatus" id="SALESPERSON_input_{{ $salesOrderInfo->ID }}" style="display:none">
                                     				 	</td>
                         				 	        @endif
                         				 	        
+<<<<<<< HEAD
                         				 	        @if($exp[1] == 'Project Manager' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+                        				 	        @if($exp[1] == 'Project Manager Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                     	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_click" id="{{ $salesOrderInfo->ID }}">
                                     						<span id="PROJECTMANAGER_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER }}</span>
                                     						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER }}" class="editboxStatus" id="PROJECTMANAGER_input_{{ $salesOrderInfo->ID }}" style="display:none">
@@ -394,12 +599,17 @@
                                     				 	</td>
                         				 	        @endif
                         				 	        
+<<<<<<< HEAD
                         				 	         @if($exp[1] == 'Project Mgr Email' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+                        				 	         @if($exp[1] == 'Project Manager Email' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                     	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
                                     						<span id="PROJECTMANAGER_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}</span>
                                     						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}" class="editboxStatus" id="PROJECTMANAGER_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
                                     				 	</td>
                         				 	        @endif
+<<<<<<< HEAD
                         				 	        @if($exp[1] == 'Installation Time' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
                         				 	            <td style="background-color:#E8ECF1;" class="INSTALLATION_TIME_click" id="{{ $salesOrderInfo->ID }}">
                         				 	              
@@ -414,6 +624,8 @@
                                     						<input type="text" value="{{ $salesOrderInfo->DESIGNER_EMAIL_ADDRESS }}" class="editboxStatus" id="DESIGNER_EMAIL_ADDRESS_input_{{ $salesOrderInfo->ID }}" style="display:none">
                                     				 	</td>
                         				 	        @endif
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         				 	        
                         				 	        @if($exp[1] == 'Comments'  && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
                                                     	<td style="background-color:#E8ECF1;" class="COMMENTS_click" id="{{ $salesOrderInfo->ID }}">
@@ -442,6 +654,7 @@
                                             @if(!empty($value))
                                             @php
                                                 $exp = explode('_', $value);
+<<<<<<< HEAD
                                                 
                                                 $settingTableInfo = DB::table('w2t_setting_column_table')
                                                     ->where('page_name', $exp[1])
@@ -452,6 +665,10 @@
                                                 @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                                  <th scope="col">{{ $exp[1] }} </th>
                                                  @endif
+=======
+                                            @endphp
+                                                 <th scope="col">{{ $exp[1] }} </th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                             @endif
                                          
                                          @endforeach
@@ -522,7 +739,10 @@
  
         var from = $("#from").val();
         var to   = $("#to").val();
+<<<<<<< HEAD
         var wip  = $("#WIP_search").val();
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
         var checkbox = $.map($('input[name="checkobx"]:checked'), function(c){return c.value; })
         
@@ -536,7 +756,10 @@
                 'from': from,
                 'to': to,
                 'checkbox': checkbox,
+<<<<<<< HEAD
                 'wip': wip,
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 'type': 1,
             },
             success: function(result) { 
@@ -592,6 +815,7 @@
 
     $('#tableResponsive2').DataTable( {
         buttons: [
+<<<<<<< HEAD
         //   {
         //         extend: 'excelHtml5',
                 
@@ -608,6 +832,22 @@
     
         retrieve: true,
         // fixedHeader: true,
+=======
+          {
+                extend: 'excelHtml5',
+                text:'Export',
+                title:'Export Sales Order',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6,7,8,9,10 ]
+                }
+                // exportOptions: {
+                //     columns: ':visible',
+                // }
+            }
+        ],
+    
+        retrieve: true,
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         language: {
           "emptyTable": "No result found"
         },
@@ -616,7 +856,11 @@
         // sDom: "Rlfrtip",
         dom: 'Bfrtip',
     } );
+<<<<<<< HEAD
         $('#tableResponsive2 tbody').on('click', 'tr', function () {
+=======
+        $("tbody tr").click(function () {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $('.selected').removeClass('selected');
             $(this).addClass("selected");
             
@@ -941,6 +1185,7 @@ $(document).on('keyup click change', '.edit_CUSTOMER_PO_NO', function() {
         });
 
 }).change(function() {});
+<<<<<<< HEAD
 
  $(document).on('keyup click change', '.DESIGNER_EMAIL_ADDRESS_click', function() {
 
@@ -994,5 +1239,7 @@ $(document).on('keyup click change', '.INSTALLATION_TIME_click', function() {
 
 }).change(function() { });
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </script>
 @endsection

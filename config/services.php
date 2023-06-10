@@ -31,9 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+<<<<<<< HEAD
      'google' => [
         'client_id'     => '529852079232-ndidcfqs5gp2ogtucsquh417s0h78ogo.apps.googleusercontent.com',
         'client_secret' => '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',
+=======
+    'google' => [
+        'client_id'     => '464962316043-gm4a998dkvqusig0028bjdhaccc41o7k.apps.googleusercontent.com',
+        'client_secret' => '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',
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         'redirect'      => 'https://devpt.way2track.com/public/callback/'
     ],
 ];

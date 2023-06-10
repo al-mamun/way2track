@@ -13,7 +13,10 @@ use App\Models\PoHeader;
 use App\Models\PoDetails;
 use App\Models\SalesOrderDetails;
 use App\Models\SalesOrderHeader;
+<<<<<<< HEAD
 use App\Models\Settings;
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use Rap2hpoutre\FastExcel\FastExcel;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -40,6 +43,11 @@ class DeliverOrderController extends Controller
         
         $deliveryID = Delivery::where('EXPECTED_DELIVERY', $DELIVERY_RECD_DATEs)->pluck('DELIVERY_ID');
         
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $deliveryInfo = DeliveryDetail::select('DELIVERY_ID')
             ->whereIn('DELIVERY_ID', $deliveryID)
             ->orderBy('DELIVERY_ID','desc')
@@ -47,6 +55,11 @@ class DeliverOrderController extends Controller
             ->groupBy('DELIVERY_ID')
             ->get();
         
+<<<<<<< HEAD
+=======
+      
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         return view('admin.delivery.report.assign',compact('deliveryInfo','DELIVERY_RECD_DATE','DELIVERY_RECD_DATEs'));
     }
     
@@ -183,16 +196,26 @@ class DeliverOrderController extends Controller
             'salesOrderHeaderPoNO'   => $salesOrderHeaderPoNO,
         ]);
         
+<<<<<<< HEAD
         file_put_contents( base_path().Settings::UPLOAD_PATH."do_reports/do_".$DO_GRN_NUMBER .".pdf", $pdf->output());
 
         $attachmentName = Settings::UPLOAD_PATH."do_reports/do_".$DO_GRN_NUMBER .".pdf";
+=======
+        file_put_contents("do_reports/do_".$DO_GRN_NUMBER .".pdf", $pdf->output());
+
+        $attachmentName = "/do_reports/do_".$DO_GRN_NUMBER ."..pdf";
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
        
          DB::table('w2t_do_report_header')
             ->where('ID', $grnHeader->id)
             ->update(
             [
+<<<<<<< HEAD
                 'FILE_NAME' => Settings::UPLOAD_PATH."do_reports/do_".$DO_GRN_NUMBER .".pdf", 
+=======
+                'FILE_NAME' => "do_reports/do_".$DO_GRN_NUMBER .".pdf", 
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             ]
         );
         

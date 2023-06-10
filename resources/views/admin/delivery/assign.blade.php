@@ -26,10 +26,17 @@
 </style>
 <div class="assignResult"></div>
 <button class="btn btn-success  assign_button_result"  onclick='assign_item()'>Assign</button>
+<<<<<<< HEAD
 <table id="tableResponsive2" class="table table-bordered table-hover table-responsive" style="width:100%">
     <thead>
         <tr>
             <th scope="col"  style="display:none !important">SL</th>
+=======
+<table id="tableResponsive2" class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <!--<th scope="col"  style="display:none !important">SL</th>-->
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             <th scope="col">Shipment ID</th>
             <th scope="col">PO No</th>
          
@@ -40,7 +47,11 @@
         @foreach($deliveryInfo as $key => $deliveryHeadersInfo)
             
             <tr id="{{ $deliveryInfo[$key]['SHIPMENT_ID'] }}">
+<<<<<<< HEAD
                     <td  style="display:none !important"> {{ $sl++ }}</td>
+=======
+                    <!--<td  style="display:none !important"> {{ $sl++ }}</td>-->
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 @php
                     $shipmentInfo = DB::table('w2t_shipment_details')
                         ->where('SHIPMENT_ID', $deliveryInfo[$key]['SHIPMENT_ID'])

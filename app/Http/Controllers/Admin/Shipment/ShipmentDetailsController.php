@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Shipment;
 use App\Models\ShipmentHeader;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use Session;
 use Carbon\Carbon;
 use DB;
@@ -39,6 +42,7 @@ class ShipmentDetailsController extends Controller
     }
     
     public function store(Request $request) {
+<<<<<<< HEAD
         
         $customer   = $request->get('customer');
         $shipemntID =  $request->get('SHIPMENT_ID');
@@ -79,10 +83,19 @@ class ShipmentDetailsController extends Controller
         );
         
         if ($validator->passes()) {
+=======
+    
+  
+         $this->validate($request, [
+            'SHIPMENT_ID'   => 'required',
+          
+        ]);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
           
         
         // ETD date
         $ETDDATE = $request->get('ETD');
+<<<<<<< HEAD
         
         if(!empty($ETDDATE)) {
             $ETD = Carbon::createFromFormat('d/F/Y', $ETDDATE)->format('Y-m-d');
@@ -122,6 +135,28 @@ class ShipmentDetailsController extends Controller
         } else {
             $VESSEL_SAILING_DATE = $request->get('VESSEL_SAILING_DATE');
         }
+=======
+        $ETD = Carbon::createFromFormat('d/F/Y', $ETDDATE)->format('Y-m-d');
+        
+        // ETA date
+        $ETADATE = $request->get('ETA');
+        $ETA = Carbon::createFromFormat('d/F/Y', $ETADATE)->format('Y-m-d');
+        
+        // ACT EXF date
+        $EXP_EXF_DT_DATE = $request->get('ACT_EXF_DATE');
+        $ACT_EXF_DATE = Carbon::createFromFormat('d/F/Y', $EXP_EXF_DT_DATE)->format('Y-m-d');
+        
+        
+        // CONFIRMED EXF date
+        $CONFIRMEDEXF  = $request->get('CONFIRMED_ETA');
+        $CONFIRMED_ETA = Carbon::createFromFormat('d/F/Y', $CONFIRMEDEXF)->format('Y-m-d');
+        
+         // VESSEL SAILING  date
+        $VESSEL_SAILING = $request->get('VESSEL_SAILING_DATE');
+        $VESSEL_SAILING_DATE = Carbon::createFromFormat('d/F/Y', $VESSEL_SAILING)->format('Y-m-d');
+       
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
         $shipmentDetails = new ShipmentDetail();
         $shipmentDetails->SHIPMENT_ID           = $request->SHIPMENT_ID;
@@ -140,6 +175,7 @@ class ShipmentDetailsController extends Controller
         $shipmentDetails->DESCRIPTION           = $request->DESCRIPTION;
         $shipmentDetails->COMMENTS              = $request->COMMENTS;
         $shipmentDetails->MBL_MAWB              = $request->MBL_MAWB;
+<<<<<<< HEAD
         $shipmentDetails->SHIPMENT_STATUS       = NULL;
        
             if($shipmentDetails->save()){
@@ -153,6 +189,13 @@ class ShipmentDetailsController extends Controller
             }
         } else {
             return response()->json(['error'=>$validator->errors()->all()]);
+=======
+        $shipmentDetails->SHIPMENT_STATUS       = 'Cleared';
+       
+        if($shipmentDetails->save()){
+            Session::flash('success','Created Successfully.');
+            return redirect('/export/shipment/order');
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         }
        
      }
@@ -220,12 +263,20 @@ class ShipmentDetailsController extends Controller
         $columnSync        = DB::table('w2t_setting_table')->first();
         
         $columnSync        =  json_decode($columnSync->SHIPMENT_DETAILS_PAGE);
+<<<<<<< HEAD
         
         if(empty($shipment_id) && empty($container_id) && empty($PO_NO) && empty($WIP) && empty($shapment_status) ) {
             
             $newShipmentView = ShipmentDetail::latest()->get();  
             $status = 0;
             return view('admin.shipment-details.filter',compact('newShipmentView','columnSync','status'));
+=======
+        if(empty($shipment_id) && empty($container_id) && empty($PO_NO) && empty($WIP) && empty($shapment_status) ) {
+            
+            $newShipmentView = ShipmentDetail::latest()->get();  
+            
+            return view('admin.shipment-details.filter',compact('newShipmentView'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
         }
         if(!empty($shipment_id) && !empty($container_id) && !empty($PO_NO) && !empty($WIP) && !empty($shapment_status) ) {
@@ -267,7 +318,11 @@ class ShipmentDetailsController extends Controller
         }  else if(!empty($shipment_id) && !empty($container_id) && !empty($PO_NO)) {
             
             $newShipmentView = ShipmentDetail::where('SHIPMENT_ID', $shipment_id)
+<<<<<<< HEAD
                 ->where('CONTAINER_NO', $container_id)
+=======
+                ->where('container_id', $container_id)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 ->where('PO_NO', $PO_NO)
                 ->latest()
                 ->get();   
@@ -279,6 +334,7 @@ class ShipmentDetailsController extends Controller
                 ->latest()
                 ->get();   
             
+<<<<<<< HEAD
         }  else if(!empty($shipment_id) && !empty($PO_NO)) {
             
             $newShipmentView = ShipmentDetail::where('SHIPMENT_ID', $shipment_id)
@@ -342,6 +398,8 @@ class ShipmentDetailsController extends Controller
                 ->latest()
                 ->get();   
             
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         } else if(!empty($shipment_id)) {
             $newShipmentView = ShipmentDetail::where('SHIPMENT_ID', $shipment_id)->latest()->get();    
         } else if(!empty($container_id)) {
@@ -354,8 +412,13 @@ class ShipmentDetailsController extends Controller
             
             $newShipmentView = ShipmentDetail::where('SHIPMENT_STATUS', $shapment_status)->latest()->get();    
         }
+<<<<<<< HEAD
          $status = 1;
         return view('admin.shipment-details.filter',compact('newShipmentView','columnSync','status'));
+=======
+        
+        return view('admin.shipment-details.filter',compact('newShipmentView','columnSync'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     }
     
     public function exportShipmentdelete($id){
@@ -374,9 +437,13 @@ class ShipmentDetailsController extends Controller
             
             DB::table('w2t_shipment_details')
             ->where('ID', $request->id)
+<<<<<<< HEAD
             ->update(
                 ['CONTAINER_NO' => $request->CONTAINER_NO]
                 );
+=======
+            ->update(['CONTAINER_NO' => $request->CONTAINER_NO]);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
         } else if($type == 2) {
            
@@ -397,9 +464,12 @@ class ShipmentDetailsController extends Controller
             ->update(['ETD' => $request->ETD]);
             
             $ETD = $request->ETD;
+<<<<<<< HEAD
             if(empty($ETD)) {
                 return NULL;
             }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $date = Carbon::createFromFormat('Y-m-d', $ETD)->format('d M Y');
             
             return $date;
@@ -407,6 +477,7 @@ class ShipmentDetailsController extends Controller
         } else if($type == 5) {
            
             DB::table('w2t_shipment_details')
+<<<<<<< HEAD
                 ->where('ID', $request->id)
                 ->update([
                     'ETA' => $request->ETA,
@@ -419,6 +490,13 @@ class ShipmentDetailsController extends Controller
                 return NULL;
             }
             
+=======
+            ->where('ID', $request->id)
+            ->update(['ETA' => $request->ETA]);
+            
+            $ETA = $request->ETA;
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $date = Carbon::createFromFormat('Y-m-d', $ETA)->format('d M Y');
             
             return $date;
@@ -472,9 +550,13 @@ class ShipmentDetailsController extends Controller
             ->update(['ACT_EXF_DATE' => $request->ACT_EXF_DATE]);
             
             $ACT_EXF_DATE = $request->ACT_EXF_DATE;
+<<<<<<< HEAD
             if(empty($ACT_EXF_DATE)) {
                 return NULL;
             }
+=======
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $date = Carbon::createFromFormat('Y-m-d', $ACT_EXF_DATE)->format('d M Y');
             
             return $date;
@@ -492,10 +574,13 @@ class ShipmentDetailsController extends Controller
             ->update(['VESSEL_SAILING_DATE' => $request->VESSEL_SAILING_DATE]);
             
             $VESSEL_SAILING_DATE = $request->VESSEL_SAILING_DATE;
+<<<<<<< HEAD
 
             if(empty($VESSEL_SAILING_DATE)) {
                 return NULL;
             }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             $date = Carbon::createFromFormat('Y-m-d', $VESSEL_SAILING_DATE)->format('d M Y');
             
@@ -505,6 +590,7 @@ class ShipmentDetailsController extends Controller
            
             DB::table('w2t_shipment_details')
             ->where('ID', $request->id)
+<<<<<<< HEAD
             ->update([
                 'CONFIRMED_ETA' => $request->CONFIRMED_ETA,
                 'CONFIRMED_ETA_CHANGE_DATE' => date('Y-m-d'),
@@ -516,6 +602,12 @@ class ShipmentDetailsController extends Controller
                 return NULL;
             }
             
+=======
+            ->update(['CONFIRMED_ETA' => $request->CONFIRMED_ETA]);
+            
+            $CONFIRMED_ETA = $request->CONFIRMED_ETA;
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $date = Carbon::createFromFormat('Y-m-d', $CONFIRMED_ETA)->format('d M Y');
             
             return $date;
@@ -528,9 +620,12 @@ class ShipmentDetailsController extends Controller
             
             $WAREHOUSEDATE = $request->WAREHOUSE_DATE;
             
+<<<<<<< HEAD
             if(empty($WAREHOUSEDATE)) {
                 return NULL;
             }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $date = Carbon::createFromFormat('Y-m-d', $WAREHOUSEDATE)->format('d M Y');
             
             return $date;
@@ -540,12 +635,18 @@ class ShipmentDetailsController extends Controller
            if(empty($request->SHIPMENT_RECD_DATE)) {
                return NULL;
            }
+<<<<<<< HEAD
            
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             DB::table('w2t_shipment_details')
                 ->where('ID', $request->id)
                 ->update([
                     'SHIPMENT_RECD_DATE' => $request->SHIPMENT_RECD_DATE,
+<<<<<<< HEAD
                     'SHIPMENT_RECD_CHANGE_DATE' => Date('Y-m-d'),
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     'SHIPMENT_STATUS' => 'WAREHOUSE'
                 ]);
             
@@ -820,10 +921,14 @@ class ShipmentDetailsController extends Controller
             
             DB::table('w2t_shipment_details')
             ->whereIn('ID', $request->detailsID)
+<<<<<<< HEAD
             ->update([
                 'CONFIRMED_ETA'             => $date,
                 'CONFIRMED_ETA_CHANGE_DATE' => date('Y-m-d'),
             ]);
+=======
+            ->update(['CONFIRMED_ETA' =>$date]);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             
             
@@ -845,8 +950,12 @@ class ShipmentDetailsController extends Controller
                 ->whereIn('ID', $request->detailsID)
                 ->update([
                     'SHIPMENT_RECD_DATE' => $date,
+<<<<<<< HEAD
                     'SHIPMENT_STATUS' => 'WAREHOUSE',
                     'SHIPMENT_RECD_CHANGE_DATE' => Date('Y-m-d')
+=======
+                    'SHIPMENT_STATUS' => 'WAREHOUSE'
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                 ]);
             

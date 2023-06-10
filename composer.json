@@ -9,20 +9,32 @@
         "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^2.0",
         "dompdf/dompdf": "^2.0",
+<<<<<<< HEAD
         "guzzlehttp/guzzle": "^7.5",
         "jenssegers/agent": "^2.6",
+=======
+        "guzzlehttp/guzzle": "^7.2",
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "^6.3",
         "maatwebsite/excel": "^3.1",
+<<<<<<< HEAD
         "masterminds/html5": "^2.0",
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         "phpoffice/phpspreadsheet": "^1.26",
         "psr/simple-cache": "^2.0",
         "spatie/laravel-permission": "^5.8",
         "yajra/laravel-datatables-buttons": "^4.13",
+<<<<<<< HEAD
         "yajra/laravel-datatables-oracle": "~9.0"
+=======
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "masterminds/html5": "^2.0"
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

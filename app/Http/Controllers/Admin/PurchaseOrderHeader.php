@@ -20,7 +20,10 @@ use Storage;
 use Validator;
 use Carbon\Carbon;
 use DB;
+<<<<<<< HEAD
 use File;
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
 class PurchaseOrderHeader extends Controller
 {
@@ -280,7 +283,11 @@ class PurchaseOrderHeader extends Controller
        
         return redirect('/list/purchase/order/header')->with([
             'status' => 1,
+<<<<<<< HEAD
             'success' => "P.O Detail Imported.",
+=======
+            'success' => "Success fully order status update.",
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ]);
         
         
@@ -318,15 +325,24 @@ class PurchaseOrderHeader extends Controller
             $csvFile = request()->file('fileToUpload');
             
             $fileExtension = $request->file('fileToUpload')->getClientOriginalExtension();
+<<<<<<< HEAD
             PoDetailsTemp::truncate();
             
             Excel::import(new PurchaseImport($wipNo),request()->file('fileToUpload'), $fileExtension);
+=======
+            
+            Excel::import(new PurchaseImport($wipNo),request()->file('fileToUpload'),$fileExtension);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             Session::flash('success','File uploaded. PLEASE REVIEW AND CLICK SAVE BELOW.');
          
             $nameFormat = date('ymdh') . rand(0,99999);
             $pdf   =  $nameFormat . $csvFile->getClientOriginalName();
+<<<<<<< HEAD
             // $csvFile->move(public_path() . '/upload', $pdf);
+=======
+            $csvFile->move(public_path() . '/upload', $pdf);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             return redirect('list/purchase/order/details?token='.$session_id);
            // return 100;
@@ -341,9 +357,14 @@ class PurchaseOrderHeader extends Controller
     
     public function purchasesOrderImport(Request $request) {
          
+<<<<<<< HEAD
          
         if( $request->hasFile('fileToUpload')) {
             PoDetailsTemp::truncate();
+=======
+        if( $request->hasFile('fileToUpload')) {
+           
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $wip  =$request->get('wip_hidden');
              
              $this->validate($request, [
@@ -456,7 +477,11 @@ class PurchaseOrderHeader extends Controller
             curl_close($curl);
                 $token = date('Ymdhim');
                 Session::flash('success','File uploaded. PLEASE REVIEW AND CLICK SAVE BELOW.');
+<<<<<<< HEAD
                 File::delete('upload/'.$pdf);
+=======
+               
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 // die();
                 return redirect('list/purchase/order/details?token='.$token);
             // }
@@ -513,12 +538,18 @@ class PurchaseOrderHeader extends Controller
                         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
                         curl_setopt($ch, CURLOPT_TIMEOUT, 20); 
                         $responseData = curl_exec($ch);
+<<<<<<< HEAD
                         
+=======
+                
+                        curl_close($ch);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         $dataRes = json_decode($responseData)->document->page;
                         
                         $couttoalpage =    explode('"@pageCount": "', $responseData); 
                         $couttoalpage1 =    explode('",', $couttoalpage[1]); 
                         $totalPageas = $couttoalpage1[0];
+<<<<<<< HEAD
                         
                         $poHeader = PoHeader::where('PO_NO', $wip)->first();
                         
@@ -907,10 +938,147 @@ class PurchaseOrderHeader extends Controller
                                 $itemKey = 5;
                                 $dataList = [];
                                     
+=======
+                           
+                         for($i =0; $i <$totalPageas; $i++) {
+                            
+                          
+                            if(empty($dataRes->row)) {
+                                $data =  $dataRes[$i]->row;
+                                
+                                foreach($data as $key => $dataInfo) {
+                            
+                                // if($key> 22) {
+                                    $itemCode = '';
+                                    if(!empty($data[$key]->column[5]->text)) {
+                                    $itemText = $data[$key]->column[5]->text;
+                                    $inputFiled = json_encode($itemText);
+                                    $explodeInfo =    explode('text":"', $inputFiled); 
+                                    if(!empty($explodeInfo[1])) {
+                                        $code = $explodeInfo =    explode('"}', $explodeInfo[1]); 
+                                        $itemCode = $code[0]; 
+                                    }
+                                
+                                
+                                    $productDescText = $data[$key]->column[1]->text;
+                                    
+                                    $productDesc = json_encode($productDescText);
+                                    $descexplodeInfo =    explode('text":"', $productDesc); 
+                                    $descraption ='';
+                                    if(!empty($descexplodeInfo[1])) {
+                                        $code = $descexplodeInfo =    explode('"}', $descexplodeInfo[1]); 
+                                        $descraption = $code[0]; 
+                                    }
+                                    
+                                    $productDescText2 = $data[$key]->column[2]->text;
+                                    
+                                    $productDesc2 = json_encode($productDescText2);
+                                    $descexplodeInfo2 =    explode('text":"', $productDesc2); 
+                                    if(!empty($descexplodeInfo2[1])) {
+                                        $code = $descexplodeInfo2 =    explode('"}', $descexplodeInfo2[1]); 
+                                        $descraption2 = $code[0]; 
+                                    }
+                                    
+                                    $qtyInfo = 0;
+                                    $productQty = '';
+                                    if(!empty($data[$key]->column[6]->text)) {
+                                        $productQty= $data[$key]->column[6]->text;
+                                    }
+                                    
+                                    $productqty = json_encode($productQty);
+                                    $qtyexplodeInfo2 =    explode('text":"', $productqty); 
+                                    
+                                    if(!empty($qtyexplodeInfo2[1])) {
+                                        $codeqty = $qtyexplodeInfo2 =    explode('"}', $qtyexplodeInfo2[1]); 
+                                        $qtyInfo = $codeqty[0]; 
+                                    }
+                                    
+                                     $qtyInfo7 =0;
+                                    
+                                    if(!empty($data[$key]->column[7]->text)) {
+                                        
+                                        $productQty7 = $data[$key]->column[7]->text;
+                                        $productqty7 = json_encode($productQty7 );
+                                        $qtyexplodeInfo27 =    explode('text":"', $productqty7); 
+                                        
+                                        if(!empty($qtyexplodeInfo27[1])) {
+                                            $codeqty7 = $qtyexplodeInfo27 =    explode('"}', $qtyexplodeInfo27[1]); 
+                                            $qtyInfo7 = $codeqty7[0]; 
+                                        }
+                                    }
+                                    
+                                    $qtyInfo8 =0;
+                                    
+                                    if(!empty($data[$key]->column[8]->text)){
+                                        $productQty8 = $data[$key]->column[8]->text;
+                                        $productqty8 = json_encode($productQty8);
+                                        $qtyexplodeInfo28 =    explode('text":"', $productqty8); 
+                                        
+                                        if(!empty($qtyexplodeInfo28[1])) {
+                                            $codeqty8 = $qtyexplodeInfo28 =    explode('"}', $qtyexplodeInfo28[1]); 
+                                            $qtyInfo8 = $codeqty8[0]; 
+                                        }
+                                    }
+                                    
+                                    $array =[
+                                        'qty6' =>   $qtyInfo,  
+                                        'qty7' =>   $qtyInfo7,
+                                        'qty8' =>   $qtyInfo8,
+                                    ];
+                                    
+                                    $descraption = $descraption;
+                                    // $wip  =$request->get('wip_hidden');
+                                    if(!empty($descraption2) ) {
+                                        $descraption = $descraption.' '.$descraption2;
+                                    }
+                                    
+                                    if(is_numeric($qtyInfo) && $qtyInfo > 0) {
+                                        $poDetails = new PoDetailsTemp(); 
+                                        $poDetails->PO_NO         = $wip;
+                                        $poDetails->ITEM          = $itemCode;
+                                        $poDetails->DESCRIPTION   = preg_replace("/[^a-zA-Z0-9]+/", " ", $descraption);
+                                        $poDetails->QTY           = $qtyInfo;
+                                        $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                                        $poDetails->ETD           = date('Y-m-d');
+                                        $poDetails->ETA           = date('Y-m-d');
+                                        $poDetails->CONFIRMED_EXF = date('Y-m-d');
+                                        $poDetails->token = $token;
+                                        $poDetails->COMMENTS = 'ORDERED';
+                                        
+                                        $poDetails->save();
+                                    
+                                    } else {
+                                        if(is_numeric($qtyInfo7) && $qtyInfo7 > 0) {
+                                            $poDetails = new PoDetailsTemp(); 
+                                            $poDetails->PO_NO         = $wip;
+                                            $poDetails->ITEM          = $itemCode;
+                                            $poDetails->DESCRIPTION   = preg_replace("/[^a-zA-Z0-9]+/", " ", $descraption);
+                                            $poDetails->QTY           = $qtyInfo7;
+                                            $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                                            $poDetails->ETD           = date('Y-m-d');
+                                            $poDetails->ETA           = date('Y-m-d');
+                                            $poDetails->CONFIRMED_EXF = date('Y-m-d');
+                                            $poDetails->token =$token;
+                                            $poDetails->COMMENTS = 'ORDERED';
+                                            $poDetails->save();
+                                        }
+                                        
+                                    }
+                                   
+                                }
+                           
+                                  
+                            }
+                            } else {
+                                  $data =  $dataRes->row;
+                //                       echo "<pre>";
+                // print_r($data);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                   foreach($data as $key=>$dataInfo) {
                                     
                                     
                                 // if($key> 22) {
+<<<<<<< HEAD
                                     
                                     $descraption ='';
                                     $productDescText2 ='';
@@ -1142,13 +1310,174 @@ class PurchaseOrderHeader extends Controller
                                            
                                         }
                                     }
+=======
+                                    $itemCode = '';
+                                    if(!empty($data[$key]->column[5]->text)) {
+                                    $itemText = $data[$key]->column[5]->text;
+                                    $inputFiled  = json_encode($itemText);
+                                    $explodeInfo = explode('text":"', $inputFiled); 
+                                    if(!empty($explodeInfo[1])) {
+                                        $code = $explodeInfo =    explode('"}', $explodeInfo[1]); 
+                                        $itemCode = $code[0]; 
+                                    }
+                                
+                                
+                                    $productDescText = $data[$key]->column[1]->text;
+                                    
+                                    $productDesc = json_encode($productDescText);
+                                    $descexplodeInfo =    explode('text":"', $productDesc); 
+                                    $descraption ='';
+                                    if(!empty($descexplodeInfo[1])) {
+                                        $code = $descexplodeInfo =    explode('"}', $descexplodeInfo[1]); 
+                                        $descraption = $code[0]; 
+                                    }
+                                    
+                                    $productDescText2 = $data[$key]->column[2]->text;
+                                    
+                                    $productDesc2 = json_encode($productDescText2);
+                                    $descexplodeInfo2 =    explode('text":"', $productDesc2); 
+                                    if(!empty($descexplodeInfo2[1])) {
+                                        $code = $descexplodeInfo2 =    explode('"}', $descexplodeInfo2[1]); 
+                                        $descraption2 = $code[0]; 
+                                    }
+                                    
+                                     
+                                    
+                                    $qtyInfo = 0;
+                                    $productQty = '';
+                                    
+                                    
+                                     
+                                    if(!empty($data[$key]->column[6]->text)) {
+                                        $productQty= $data[$key]->column[6]->text;
+                                    }
+                                    
+                                
+                                    
+                                    $productqty = json_encode($productQty);
+                                    
+                                    $qtyexplodeInfo2 =    explode('text":"', $productqty); 
+                                    
+                                    if(!empty($qtyexplodeInfo2[1])) {
+                                        $codeqty = $qtyexplodeInfo2 =    explode('"}', $qtyexplodeInfo2[1]); 
+                                        $qtyInfo = $codeqty[0]; 
+                                    }
+                                    
+                                     $qtyInfo7 =0;
+                                    
+                                    if(!empty($data[$key]->column[7]->text)) {
+                                        
+                                        $productQty7 = $data[$key]->column[7]->text;
+                                        $productqty7 = json_encode($productQty7 );
+                                        $qtyexplodeInfo27 =    explode('text":"', $productqty7); 
+                                        
+                                        if(!empty($qtyexplodeInfo27[1])) {
+                                            $codeqty7 = $qtyexplodeInfo27 =    explode('"}', $qtyexplodeInfo27[1]); 
+                                            $qtyInfo7 = $codeqty7[0]; 
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    $qtyInfo8 =0;
+                                    
+                                    if(!empty($data[$key]->column[8]->text)){
+                                        $productQty8 = $data[$key]->column[8]->text;
+                                        $productqty8 = json_encode($productQty8);
+                                        $qtyexplodeInfo28 =    explode('text":"', $productqty8); 
+                                        
+                                        if(!empty($qtyexplodeInfo28[1])) {
+                                            $codeqty8 = $qtyexplodeInfo28 =    explode('"}', $qtyexplodeInfo28[1]); 
+                                            $qtyInfo8 = $codeqty8[0]; 
+                                        }
+                                    }
+                                    
+                                    $qtyInfo4 =0;
+                                    
+                                    if(!empty($data[$key]->column[4]->text)){
+                                        $qtyInfo4 = $data[$key]->column[4]->text;
+                                        $productqty4 = json_encode($qtyInfo4);
+                                        $qtyexplodeInfo42 =    explode('text":"', $productqty4); 
+                                        
+                                        if(!empty($qtyexplodeInfo42[1])) {
+                                            $codeqtyInfo4 = $qtyexplodeInfo42 =    explode('"}', $qtyexplodeInfo42[1]); 
+                                            $qtyInfo4 = $codeqtyInfo4[0]; 
+                                        }
+                                    }
+                                    
+                                    $array =[
+                                        'qty6' =>   $qtyInfo,  
+                                        'qty7' =>   $qtyInfo7,
+                                        'qty8' =>   $qtyInfo8,
+                                        'qty4' =>   $qtyInfo4,
+                                    ];
+                                    
+                                    $descraption = $descraption;
+                                    // $wip  =$request->get('wip_hidden');
+                                    if(!empty($descraption2) ) {
+                                        $descraption = $descraption.' '.$descraption2;
+                                    }
+                                    
+                                    if(is_numeric($qtyInfo) && $qtyInfo > 0) {
+                                        $poDetails = new PoDetailsTemp(); 
+                            		    $poDetails->PO_NO         = $wip;
+                            		    $poDetails->ITEM          = $itemCode;
+                            		    $poDetails->DESCRIPTION   = preg_replace("/[^a-zA-Z0-9]+/", " ", $descraption);
+                            		    $poDetails->QTY           = $qtyInfo;
+                            		    $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                            		    $poDetails->ETD           = date('Y-m-d');
+                            		    $poDetails->ETA           = date('Y-m-d');
+                            		    $poDetails->CONFIRMED_EXF = date('Y-m-d');
+                            		     $poDetails->COMMENTS = 'ORDERED';
+                            		    $poDetails->token =$token;
+                            		    $poDetails->save();
+                                    
+                                    } else {
+                                        if(is_numeric($qtyInfo7) && $qtyInfo7 > 0) {
+                                            $poDetails = new PoDetailsTemp(); 
+                                            $poDetails->PO_NO         = $wip;
+                                            $poDetails->ITEM          = $itemCode;
+                                            $poDetails->DESCRIPTION   = preg_replace("/[^a-zA-Z0-9]+/", " ", $descraption);
+                                            $poDetails->QTY           = $qtyInfo7;
+                                            $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                                            $poDetails->ETD           = date('Y-m-d');
+                                            $poDetails->ETA           = date('Y-m-d');
+                                            $poDetails->CONFIRMED_EXF = date('Y-m-d');
+                                             $poDetails->COMMENTS = 'ORDERED';
+                                             $poDetails->token = $token;
+                                            $poDetails->save();
+                                        }
+                                        
+                                         if(is_numeric($qtyInfo4) && $qtyInfo4 > 0) {
+                                            $poDetails = new PoDetailsTemp(); 
+                                            $poDetails->PO_NO         = $wip;
+                                            $poDetails->ITEM          = $itemCode;
+                                            $poDetails->DESCRIPTION   = preg_replace("/[^a-zA-Z0-9]+/", " ", $descraption);
+                                            $poDetails->QTY           = $qtyInfo4;
+                                            $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                                            $poDetails->ETD           = date('Y-m-d');
+                                            $poDetails->ETA           = date('Y-m-d');
+                                            $poDetails->CONFIRMED_EXF = date('Y-m-d');
+                                             $poDetails->COMMENTS     = 'ORDERED';
+                                             $poDetails->token        = $token;
+                                            $poDetails->save();
+                                        }
+                                        
+                                        
+                                    }
+                                   
+                                 }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                   
                             }
                             }
                             
                             
                         }
+<<<<<<< HEAD
                         
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     } else  {
                         // Display service reported error
                         echo "<p>Error: " . $json["message"] . "</p>"; 
@@ -1397,17 +1726,26 @@ class PurchaseOrderHeader extends Controller
                 
         // } else {
             
+<<<<<<< HEAD
             $from1   = $request->from;
             $to1     = $request->to;
             
             $from   = $request->from;
             $to     = $request->to;
           
+=======
+            $from   = $request->from;
+            $to     = $request->to;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $PO_NO  = $request->PO_NO;
             $checkobx = $request->checkbox;
             $columnSync        = DB::table('w2t_setting_table')->first();
         
+<<<<<<< HEAD
             $columnSync        =  json_decode($columnSync->PO_HEADER_PAGE);
+=======
+        $columnSync        =  json_decode($columnSync->PO_HEADER_PAGE);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             if(empty($from) && empty($to) &&  empty($PO_NO) &&  empty($checkobx)) {
                 
                 $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
@@ -1416,8 +1754,13 @@ class PurchaseOrderHeader extends Controller
                 return view('admin.order-purchase.header.export-search',[
                     'poOrderHeaders' =>  $purchaseOrderHeaders,
                     'columnSync'        =>  $columnSync,  
+<<<<<<< HEAD
                     'status'            => 1,
                     
+=======
+                    'status'            => 7,
+                    'menu_open'         => 3,
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 ]);
             }
             
@@ -1428,7 +1771,10 @@ class PurchaseOrderHeader extends Controller
                 $to = Carbon::createFromFormat('d/F/Y', $to)->format('Y-m-d');
             }
             
+<<<<<<< HEAD
           
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             if(!empty($from) && !empty($to) &&  !empty($PO_NO) &&  !empty($checkobx)) {
                 
                 
@@ -1450,6 +1796,7 @@ class PurchaseOrderHeader extends Controller
                     ->whereBetween('po_date', [$from, $to])
                     ->where('PO_NO', $PO_NO)
                     ->get(); 
+<<<<<<< HEAD
                    
 
             } else if( !empty($PO_NO) && !empty($from)  &&  !empty($checkobx)) {
@@ -1483,11 +1830,17 @@ class PurchaseOrderHeader extends Controller
                     ->get(); 
                    
             } else if(!empty($from) && !empty($to) ) {
+=======
+                    
+
+            }  else if(!empty($from) && !empty($to) ) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                  $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
                     ->whereBetween('po_date', [$from, $to])
                     ->get(); 
                     
+<<<<<<< HEAD
             }   else if(!empty($PO_NO) && !empty($checkobx)) {
                 
                  $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
@@ -1496,11 +1849,15 @@ class PurchaseOrderHeader extends Controller
                     ->get(); 
                     
             }  else if(!empty($PO_NO) ) {
+=======
+            }   else if(!empty($PO_NO) ) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                  $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
                     ->where('PO_NO', $PO_NO)
                     ->get(); 
                     
+<<<<<<< HEAD
             }    else if(!empty($from)  ) {
                 
                  $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
@@ -1514,6 +1871,9 @@ class PurchaseOrderHeader extends Controller
                     
                    
             }  else if(!empty($checkobx) ) {
+=======
+            }   else if(!empty($checkobx) ) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                  $purchaseOrderHeaders = PoHeader::orderBy('ID','desc')
                     ->whereIn('PO_STATUS', $checkobx)
@@ -1549,6 +1909,7 @@ class PurchaseOrderHeader extends Controller
         return redirect('list/order/details');
 
     }
+<<<<<<< HEAD
     
     public function purchaseOrderPoNoCheck(Request $request){
         
@@ -1559,4 +1920,6 @@ class PurchaseOrderHeader extends Controller
         return $purchaseOrderHeaders->WIP;
     
     }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 }

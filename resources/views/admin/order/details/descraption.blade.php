@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 
+=======
+<style>
+    #moreText_{{ $dataInfo->ID }} {
+      
+        /* Display nothing for the element */
+        display: none;
+    }
+</style>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 @php 
     $string = strip_tags($dataInfo->DESCRIPTION);
     
@@ -9,6 +19,7 @@
     }
 
 @endphp
+<<<<<<< HEAD
 <div class="editDESCRIPTION " id="{{$dataInfo->ID}}">
  
     @php 
@@ -27,6 +38,28 @@
  
     
 </div>
+=======
+<div class="editDESCRIPTION">
+    
+    
+</div>
+
+@php 
+    $stringLength = strip_tags($dataInfo->DESCRIPTION); 
+@endphp 
+<span id="DESCRIPTION_{{$dataInfo->ID}}" class="text" style="width: 200px;
+    display: block;">   
+<p>
+    <span id="first_{{ $dataInfo->ID }}">  {{ $string }}  @if (strlen($stringLength) > 50)  <span id="points"></span> @endif</span> 
+      
+    
+
+    <span id="moreText_{{ $dataInfo->ID }}">  {{ $dataInfo->DESCRIPTION }}  </span>
+</p>
+</span>
+<textarea type="text" value="" class="editbox" id="DESCRIPTION_input_{{$dataInfo->ID}}" style="display:none"> {{ $dataInfo->DESCRIPTION }}</textarea>
+ 
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
        
 @if (strlen($stringLength) > 50) 
     <button onclick="toggleText{{ $dataInfo->ID }}()" id="textButton_{{ $dataInfo->ID }}">

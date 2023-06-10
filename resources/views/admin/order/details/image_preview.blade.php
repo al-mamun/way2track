@@ -7,7 +7,10 @@
                     <input required type="file" class="custom-file-input"  id="THUMBNAIL_IMAGE_{{ $dataInfo->ID }}" name="THUMBNAIL_IMAGE"/>
                     <input required type="hidden" class="custom-file-input"  value="{{ $dataInfo->ID }}" name="SALES_ID" />
                     <label class="custom-file-label" for="customFile" id="customFiles_{{ $dataInfo->ID }}"  style="display:none" >Choose file</label>
+<<<<<<< HEAD
                     <input type="text" value="{{ $dataInfo->ID }}" name="details_id" id="detailsID_{{ $dataInfo->ID }}" style="display:none">
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     <small id="upload_msg_{{ $dataInfo->ID }}" class="form-text" style="display: none;"></small>
                 </div>
                 <div class="upload">
@@ -57,11 +60,19 @@
 @endphp
 @if($total > 1)
     <a  class="red_color_image example-image-link image_upload_view_{{ $dataInfo->ID }}" href="javacript:void(0)" data-lightbox="example-1">
+<<<<<<< HEAD
         <img style="max-width: 80px; display: block;" id="sales_image_{{ $dataInfo->ID }}" class="example-image-link" src="{{ $upload_path. $dataInfo->THUMBNAIL_IMAGE }}" >
     </a>
 @else
 	<a style=" display: block;" class="example-image-link image_upload_view_{{ $dataInfo->ID }}" href="javacript:void(0)" data-lightbox="example-1">
         <img style="max-width: 80px; display: block;" id="sales_image_{{ $dataInfo->ID }}" class="example-image-link" src="{{   $upload_path. $dataInfo->THUMBNAIL_IMAGE }}" >
+=======
+        <img style="max-width: 80px; display: block;" id="sales_image_{{ $dataInfo->ID }}" class="example-image-link" src="{{ URL::asset( 'images/'. $dataInfo->THUMBNAIL_IMAGE) }}" >
+    </a>
+@else
+	<a style=" display: block;" class="example-image-link image_upload_view_{{ $dataInfo->ID }}" href="javacript:void(0)" data-lightbox="example-1">
+        <img style="max-width: 80px; display: block;" id="sales_image_{{ $dataInfo->ID }}" class="example-image-link" src="{{ URL::asset( 'images/'. $dataInfo->THUMBNAIL_IMAGE) }}" >
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     </a>
     
 @endif

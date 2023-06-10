@@ -109,9 +109,15 @@
             success:function(data) {
             	if($.isEmptyObject(data.error)){
                     Swal.fire(
+<<<<<<< HEAD
                       'Success!',
                       'Your report has been created',
                       'Success'
+=======
+                      'success!',
+                      'Your record has been add',
+                      'success'
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     );
                     // window.location.href = window.baseUrl + '/grn/reports/pdf/' +data.SHD_GRN_NUMBER ;
                     $('#modal-lg').modal('hide');

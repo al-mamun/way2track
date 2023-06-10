@@ -8,7 +8,10 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use App\Models\PoDetails;
 use App\Models\PoDetailsTemp;
+<<<<<<< HEAD
 use App\Models\PoHeader;
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use Input;
 use Maatwebsite\Excel\Concerns\WithPreCalculateFormulas;
 
@@ -49,7 +52,11 @@ class PurchaseImport implements ToModel, WithHeadingRow,WithStartRow,WithPreCalc
     public function model(array $row)
     {
         
+<<<<<<< HEAD
              $poHeader = PoHeader::where('PO_NO', $this->wip['po_no'])->first();
+=======
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
        
             if(!empty($row['slno']) &&  is_numeric($row['qty']) && !empty($row['description']) && $row['qty'] > 0 ) {
                 
@@ -58,10 +65,17 @@ class PurchaseImport implements ToModel, WithHeadingRow,WithStartRow,WithPreCalc
                 $poDetails->ITEM          = $row['slno'];
                 $poDetails->DESCRIPTION   = $row['description'];
                 $poDetails->QTY           = $row['qty'];
+<<<<<<< HEAD
                 $poDetails->EXP_EXF_DT    = NULL;
                 $poDetails->ETD           = NULL;
                 $poDetails->ETA           = NULL;
                 $poDetails->CONFIRMED_EXF = NULL;
+=======
+                $poDetails->EXP_EXF_DT    = date('Y-m-d');
+                $poDetails->ETD           = date('Y-m-d');
+                $poDetails->ETA           = date('Y-m-d');
+                $poDetails->CONFIRMED_EXF = date('Y-m-d');
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 $poDetails->token         = $this->wip['session_id'];
                 $poDetails->COMMENTS      = 'PROCESSING';
                 $poDetails->save();

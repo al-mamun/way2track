@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <table id="salesOrderHeaderSearch" class="table table-bordered table-hover table-responsive">
+=======
+<table id="tableResponsive2" class="table table-bordered table-hover">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     <thead>
         <tr>
             <th scope="col" style="display:none">Sl</th>
@@ -70,14 +74,22 @@
         				 	</td>
 			 	        @endif
 			 	        
+<<<<<<< HEAD
 			 	        @if($exp[1] == 'Project' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+			 	        @if($exp[1] == 'Project Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         	<td style="background-color:#E8ECF1;" class="PROJECT_NAME_click" id="{{ $salesOrderInfo->ID }}">
         						<span id="PROJECT_NAME_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECT_NAME }}</span>
         						<input type="text" value="{{ $salesOrderInfo->PROJECT_NAME }}" class="editboxStatus" id="PROJECT_NAME_input_{{ $salesOrderInfo->ID }}" style="display:none">
         				 	</td>
 			 	        @endif
 			 	        
+<<<<<<< HEAD
 			 	        @if($exp[1] == 'Expected Handover' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+			 	        @if($exp[1] == 'Expected Handover Date' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         	 @php 
                                 $date = date("d M  Y", strtotime( $salesOrderInfo->TGT_HANDOVER_DT)); 
                             @endphp
@@ -88,14 +100,22 @@
         				 	</td>
 			 	        @endif
 			 	        
+<<<<<<< HEAD
 			 	        @if($exp[1] == 'Salesperson' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+			 	        @if($exp[1] == 'Salesperson Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     		<td style="background-color:#E8ECF1;" class="SALESPERSON_click" id="{{ $salesOrderInfo->ID }}">
         						<span id="SALESPERSON_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->SALESPERSON }}</span>
         						<input type="text" value="{{ $salesOrderInfo->SALESPERSON }}" class="editboxStatus" id="SALESPERSON_input_{{ $salesOrderInfo->ID }}" style="display:none">
         				 	</td>
 			 	        @endif
 			 	        
+<<<<<<< HEAD
 			 	        @if($exp[1] == 'Project Manager' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+=======
+			 	        @if($exp[1] == 'Project Manager Name' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_click" id="{{ $salesOrderInfo->ID }}">
         						<span id="PROJECTMANAGER_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER }}</span>
         						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER }}" class="editboxStatus" id="PROJECTMANAGER_input_{{ $salesOrderInfo->ID }}" style="display:none">
@@ -109,6 +129,7 @@
         				 	</td>
 			 	        @endif
 			 	        
+<<<<<<< HEAD
 			 	         @if($exp[1] == 'Project Mgr Email' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
                         	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
         						<span id="PROJECTMANAGER_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus"  style="text-align: center;display: block;">{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}</span>
@@ -130,6 +151,15 @@
                 		 	</td>
                         
 			 	        @endif
+=======
+			 	         @if($exp[1] == 'Project Manager Email' && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
+                        	<td style="background-color:#E8ECF1;" class="PROJECTMANAGER_EMAIL_click" id="{{ $salesOrderInfo->ID }}">
+        						<span id="PROJECTMANAGER_EMAIL_{{ $salesOrderInfo->ID }}" class="textStatus">{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}</span>
+        						<input type="text" value="{{ $salesOrderInfo->PROJECTMANAGER_EMAIL }}" class="editboxStatus" id="PROJECTMANAGER_EMAIL_input_{{ $salesOrderInfo->ID }}" style="display:none">
+        				 	</td>
+			 	        @endif
+			 	        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 			 	        @if($exp[1] == 'Comments'  && !empty( $settingTableInfo) && $settingTableInfo->status == 1)
                         	<td style="background-color:#E8ECF1;" class="COMMENTS_click" id="{{ $salesOrderInfo->ID }}">
         						<span id="COMMENTS_{{ $salesOrderInfo->ID }}" class="textStatus"> {{$salesOrderInfo->COMMENTS }}</span>
@@ -157,6 +187,7 @@
                 @if(!empty($value))
                 @php
                     $exp = explode('_', $value);
+<<<<<<< HEAD
                     
                     $settingTableInfo = DB::table('w2t_setting_column_table')
                         ->where('page_name', $exp[1])
@@ -167,6 +198,10 @@
                     @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                      <th scope="col">{{ $exp[1] }} </th>
                      @endif
+=======
+                @endphp
+                     <th scope="col">{{ $exp[1] }} </th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 @endif
              
              @endforeach
@@ -177,6 +212,7 @@
 <!-- jQuery -->
 
 <script type="text/javascript">
+<<<<<<< HEAD
     $('#salesOrderHeaderSearch tbody').on('click', 'tr', function () {
         $('.selected').removeClass('selected');
         $(this).addClass("selected");
@@ -187,6 +223,9 @@
     });
     
     function deleteData(ID) {
+=======
+function deleteData(ID) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
      Swal.fire({
       title: 'Are you sure?',
       text: "Be careful please !  All related details will be deleted with this.",
@@ -251,14 +290,22 @@ $(".textStatus").show();
 
 
 
+<<<<<<< HEAD
 $('#salesOrderHeaderSearch').DataTable( {
+=======
+$('#tableResponsive2').DataTable( {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     buttons: [
         {
             extend: 'excelHtml5',
             text:'Export',
             title:'Export Sales Order',
             exportOptions: {
+<<<<<<< HEAD
                 columns: [ @foreach($columnSync as $key=> $value) @if(!empty($value)) @php $exp=explode('_', $value); $settingTableInfo=DB::table('w2t_setting_column_table') ->where('page_name', $exp[1]) ->where('type', 1) ->first(); @endphp @if(!empty( $settingTableInfo) && $settingTableInfo->status==1) {{$key+1}} , @endif @endif @endforeach]
+=======
+                columns: [ 1,2,3,4,5,6,7,8,9,10 ]
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             }
         }
     ],

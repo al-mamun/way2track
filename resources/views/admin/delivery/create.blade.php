@@ -107,8 +107,12 @@
                                 <div class="col-md-12">
                                      <div class="form-group">
                                         <label > Delivery Address <span style="color:red">*</span></label>
+<<<<<<< HEAD
                                         <textarea id="summernote"  name="DELIVERY_ADDRESS"> </textarea>
                                         
+=======
+                                        <textarea  type="text" class="form-control" name="DELIVERY_ADDRESS"> </textarea>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                       </div>
                                 </div>
                             </div>  

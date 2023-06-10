@@ -27,7 +27,10 @@
     <link rel="stylesheet" href="{{ URL::asset( 'admin/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- jQuery -->
     <script src="{{ URL::asset( 'admin/plugins/jquery/jquery.min.js') }}"></script>
+<<<<<<< HEAD
      <link rel="stylesheet" href="{{ URL::asset( 'admin/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css') }}">
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ URL::asset( 'admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -176,7 +179,11 @@
     <script src="{{ URL::asset( 'admin/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ URL::asset( 'admin/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ URL::asset( 'admin/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<<<<<<< HEAD
     <script src="{{ URL::asset( 'admin/plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+=======
+    <script src="{{ URL::asset( 'admin/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     <script src="{{ URL::asset( 'admin/plugins/dropzone/min/dropzone.min.js') }}"></script>
     <!--<script src="{{ URL::asset( 'admin/plugins/datatables/dataTables.editor.min.js') }}"></script>-->
     <!--<script src="http://desa.antsgsm.com/ants/libs/Editor-2.0.4/js/dataTables.editor.js" ></script>-->
@@ -186,6 +193,7 @@
     <!--<script src="{{ URL::asset( 'admin/dist/js/demo.js') }}"></script>-->
     <!-- Page specific script -->
     <!-- Header Script -->
+<<<<<<< HEAD
     <script>
       $(function () {
         // Summernote
@@ -194,6 +202,9 @@
        
       })
     </script>
+=======
+    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     <script>
         window.baseUrl = `{{ url('/') }}`;
         window.csrf_token = '{{ csrf_token() }}';
@@ -345,7 +356,11 @@
                 <i class="fas fa-file mr-2"></i> Export Shipment Details
               </a>
             @endcan
+<<<<<<< HEAD
             @can('Create GRN Report')
+=======
+            @can('export shipment details')
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
               <div class="dropdown-divider"></div>
               <a href="{{ URL::to( 'create/grn/report') }}" class="dropdown-item">
                 <i class="fas fa-file mr-2"></i> Create GRN Report
@@ -392,7 +407,11 @@
                 <i class="fas fa-file mr-2"></i> Export Delivery Details
               </a>
             @endcan
+<<<<<<< HEAD
              @can('Create Delivery Order Report')
+=======
+             @can('export delivery details')
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
               <div class="dropdown-divider"></div>
               <a href="{{ URL::to( 'create/delivery/order/report') }}" class="dropdown-item">
                 <i class="fas fa-file mr-2"></i> Create Delivery Order Report
@@ -436,6 +455,7 @@
                 <i class="fas fa-envelope mr-2"></i> Add Permission
           
               </a>
+<<<<<<< HEAD
                 <div class="dropdown-divider"></div>
                     <a href="{{ route('admin.permission_list') }}" class="dropdown-item">
                         <i class="fas fa-users mr-2"></i> Permissions
@@ -448,6 +468,16 @@
                       
                      </a>
                 </div>
+=======
+              <div class="dropdown-divider"></div>
+              <a href="{{ route('admin.permission_list') }}" class="dropdown-item">
+                <i class="fas fa-users mr-2"></i> Permissions
+              
+              </a>
+              
+                 
+            </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             @endif
           </li>
           
@@ -508,25 +538,40 @@
 <!-- ./wrapper -->
 
 <script>
+<<<<<<< HEAD
 
 $(function () {
   var tableContainer = $(".top_scroll");
   var table = $("table");
+=======
+$(function () {
+  var tableContainer = $(".top_scroll");
+  var table = $(".top_scroll table");
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
   var fakeContainer = $(".large-table-fake-top-scroll-container-3");
   var fakeDiv = $(".large-table-fake-top-scroll-container-3 div");
 
   var tableWidth = table.width();
+<<<<<<< HEAD
  
   fakeDiv.width(tableWidth);
 
   fakeContainer.scroll(function () {
      
+=======
+  fakeDiv.width(tableWidth);
+
+  fakeContainer.scroll(function () {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     tableContainer.scrollLeft(fakeContainer.scrollLeft());
   });
   tableContainer.scroll(function () {
     fakeContainer.scrollLeft(tableContainer.scrollLeft());
   });
+<<<<<<< HEAD
   
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 });
   $(function () {
     $("#example1").DataTable({

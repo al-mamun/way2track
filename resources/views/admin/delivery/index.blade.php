@@ -169,7 +169,11 @@ div#listShipment_filter {
                                                     $EXPECTED_DELIVERY =  $data->EXPECTED_DELIVERY; 
                                                 @endphp
                                             @endif
+<<<<<<< HEAD
                     						<span id="EXPECTED_DELIVERY_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $EXPECTED_DELIVERY }}</span>
+=======
+                    						<span id="EXPECTED_DELIVERY_{{ $data->ID }}" class="text">{{ $EXPECTED_DELIVERY }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     						<input type="date" value="{{ $EXPECTED_DELIVERY }}" class="editbox" id="EXPECTED_DELIVERY_input_{{ $data->ID }}" style="display:none">
                     				    </td>
                     				  <td style="background-color:#E8ECF1;" class="editDELIVERY_STATUS" id="{{ $data->ID }}">
@@ -181,9 +185,14 @@ div#listShipment_filter {
                     						<input type="time" value="{{ $data->DELIVERY_TIME }}" class="editbox" id="DELIVERY_TIME_input_{{ $data->ID }}" style="display:none">
                     				  </td>
                     				  <td style="background-color:#E8ECF1;" class="editDELIVERY_ADDRESS" id="{{ $data->ID }}">
+<<<<<<< HEAD
                     						<span id="DELIVERY_ADDRESS_{{ $data->ID }}" class="text">{!! $data->DELIVERY_ADDRESS !!}</span>
                     						<textarea  name="DELIVERY_ADDRESS" class="editbox" id="DELIVERY_ADDRESS_input_{{ $data->ID }}" style="display:none">{!! $data->DELIVERY_ADDRESS !!} </textarea>
                     						<!--<input type="text" value="{!! $data->DELIVERY_ADDRESS !!}" class="editbox" id="DELIVERY_ADDRESS_input_{{ $data->ID }}" style="display:none">-->
+=======
+                    						<span id="DELIVERY_ADDRESS_{{ $data->ID }}" class="text">{{ $data->DELIVERY_ADDRESS }}</span>
+                    						<input type="text" value="{{ $data->DELIVERY_ADDRESS }}" class="editbox" id="DELIVERY_ADDRESS_input_{{ $data->ID }}" style="display:none">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     				  </td>
             		                
             		                  <td>

@@ -141,7 +141,11 @@ table#listShipment {
             		                    <th>Action</th>	              
             		                </tr>
             		            </thead>
+<<<<<<< HEAD
         		                <tbody>
+=======
+        		              <tbody>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             		             @foreach($deliveryExportDetails as $key=>$data)
             		               <tr id="{{ $data->DELIVERY_ID }}" class="delivery_id_{{ $data->ID }}">
             		                  <td style="display:none">{{ $key+1 }}</td>
@@ -153,7 +157,11 @@ table#listShipment {
             		                  <!--<td>{{ $data->DESCRIPTION }}</td>-->
             		                  
             		                   <td style="background-color:#E8ECF1;" id="{{ $data->ID }}" class="editPO_NO">
+<<<<<<< HEAD
                     						<span id="PO_NO_{{ $data->ID }}" class="text" style="width:138px; display:block; text-align:center">{{ $data->PO_NO }}</span>
+=======
+                    						<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
                     				  </td>
                     				  <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
@@ -176,7 +184,11 @@ table#listShipment {
                 				            @php $DELIVERY_DATE =$data->DELIVERY_DATE; @endphp
                 				        @endif
                 		                    
+<<<<<<< HEAD
                     						<span id="DELIVERYDATE_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $DELIVERY_DATE }}</span>
+=======
+                    						<span id="DELIVERYDATE_{{ $data->ID }}" class="text">{{ $DELIVERY_DATE }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     						<input type="date" value="{{ $DELIVERY_DATE }}" class="editbox" id="DELIVERYDATE_input_{{ $data->ID }}" style="display:none">
                     				  </td>
             		                  <td>
@@ -187,6 +199,7 @@ table#listShipment {
             		                </tr>
             		              @endforeach
         		              </tbody>
+<<<<<<< HEAD
         		              <tfoot>
         		                <tr style="color:#000">
                                     <th style="display:none">SL.</th>
@@ -200,6 +213,8 @@ table#listShipment {
         		                    <th>Action</th>	              
         		                </tr>
         		            </tfoot>
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         		          </table>
 
 	                    </div>
@@ -444,6 +459,7 @@ table#listShipment {
     
     $('#listShipment').DataTable( {
          buttons: [
+<<<<<<< HEAD
         //   {
         //         extend: 'excelHtml5',
         //         text:'Export',
@@ -452,6 +468,16 @@ table#listShipment {
         //             columns: [ 1,2,3,4,5,6]
         //         }
         //     }
+=======
+          {
+                extend: 'excelHtml5',
+                text:'Export',
+                title:'Export Delivery Details',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6]
+                }
+            }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ],
     
     
@@ -480,11 +506,15 @@ table#listShipment {
         var delivery_id            = $("#delivery_id").val();
         var PO_NO           = $("#PO_NO").val();
         var shapment_status = $("#shapment_status").val();
+<<<<<<< HEAD
         
         // if(shipment_id =='' && delivery_id =='' && PO_NO =='') {
         //      return true;
         // }
         
+=======
+      
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $('.list_of_card_result').html(' <div class="loader"></div>');
         
         $.ajax({

@@ -29,9 +29,12 @@ div#listShipment_filter {
     float: right;
     /*margin-top: -55px;*/
 }
+<<<<<<< HEAD
 div#listShipment_filter {
     margin-top: -60px;
 }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </style>
 <!-- Main content -->
   <div class="content-wrapper">

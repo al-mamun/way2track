@@ -21,9 +21,13 @@ class purchaseOrderDetails extends Controller
     
     public function create() {
         
+<<<<<<< HEAD
         $saledOrderHeaders = PoHeader::orderBy('PO_DATE','desc')
             
             ->get();
+=======
+        $saledOrderHeaders = PoHeader::get();
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
         return view('admin.order-purchase.details.new',[
             'saledOrderHeaders' =>  $saledOrderHeaders,
@@ -89,7 +93,11 @@ class purchaseOrderDetails extends Controller
         if( $purchaseOrder->save()) {
             return redirect('/list/purchase/order/details')->with([
                 'status' => 1,
+<<<<<<< HEAD
                 'success' => "Added PO Detail Line.",
+=======
+                'success' => "Success fully order status create.",
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             ]);
         }
         
@@ -107,10 +115,17 @@ class purchaseOrderDetails extends Controller
             $poDetails->ITEM          = $detailsInfo->ITEM;
             $poDetails->DESCRIPTION   = $detailsInfo->DESCRIPTION;
             $poDetails->QTY           = $detailsInfo->QTY;
+<<<<<<< HEAD
             $poDetails->EXP_EXF_DT    = NULL;
             $poDetails->ETD           = NULL;
             $poDetails->ETA           = NULL;
             $poDetails->CONFIRMED_EXF = NULL;
+=======
+            $poDetails->EXP_EXF_DT    = $detailsInfo->EXP_EXF_DT;
+            $poDetails->ETD           = $detailsInfo->ETD;
+            $poDetails->ETA           = $detailsInfo->ETA;
+            $poDetails->CONFIRMED_EXF = $detailsInfo->CONFIRMED_EXF;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $poDetails->COMMENTS      = $detailsInfo->COMMENTS;
             $poDetails->save();
         }
@@ -120,7 +135,11 @@ class purchaseOrderDetails extends Controller
         
          return redirect('/list/purchase/order/details')->with([
             'status' => 1,
+<<<<<<< HEAD
             'success' => "P.O. Detail Imported.",
+=======
+            'success' => "Success fully order status import.",
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ]);
         
     }
@@ -250,7 +269,28 @@ class purchaseOrderDetails extends Controller
         
         $columnSync        =  json_decode($columnSync->PO_DETAILS_PAGE);
         
+<<<<<<< HEAD
        if($type == 3 ) {
+=======
+        if($type == 2  ) {
+            if($checkobx =='Yes') {
+                $poDetails = PoDetails::orderBy('ID','desc')
+                ->whereNull('THUMBNAIL_IMAGE')
+                ->get(); 
+                
+            } else if($checkobx =='No') {
+               $poDetails = PoDetails::orderBy('ID','desc')
+                    ->whereNotNull('THUMBNAIL_IMAGE')
+                    ->get(); 
+            } else if($checkobx =='Both') {
+               $poDetails = PoDetails::orderBy('ID','desc')
+                   
+                    ->get(); 
+            }
+      
+                
+        } else if($type == 3 ) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             $COMMENTS = $request->COMMENTS;
             $hand_over_from = $request->hand_over_from;
@@ -280,6 +320,7 @@ class purchaseOrderDetails extends Controller
                     ->where('COMMENTS', $COMMENTS)
                     ->get(); 
                     
+<<<<<<< HEAD
             } else if(!empty($hand_over_from) && !empty($hand_over_to) && !empty($from) && !empty($to)  && !empty($WIP)) {
                 
                 $poDetails = PoDetails::orderBy('ID','desc')
@@ -289,6 +330,9 @@ class purchaseOrderDetails extends Controller
                     ->get(); 
                     
             }  elseif ( !empty($hand_over_from) && !empty($hand_over_to) && !empty($from) && !empty($to)) {
+=======
+            } elseif ( !empty($hand_over_from) && !empty($hand_over_to) && !empty($from) && !empty($to)) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                 $poDetails = PoDetails::orderBy('ID','desc')
                     ->whereBetween('CONFIRMED_EXF',[$hand_over_from, $hand_over_to])
@@ -302,6 +346,7 @@ class purchaseOrderDetails extends Controller
                     ->where('COMMENTS', $COMMENTS)
                     ->get();  
                 
+<<<<<<< HEAD
             }  elseif ( !empty($WIP) && !empty($COMMENTS) && !empty($from) ) {
                 // po no // commnents //from
                 $poDetails = PoDetails::orderBy('ID','desc')
@@ -342,12 +387,16 @@ class purchaseOrderDetails extends Controller
                     ->get();  
                 
             } elseif ( !empty($from) && !empty($to) && !empty($COMMENTS) ) {
+=======
+            }  elseif ( !empty($from) && !empty($to) && !empty($COMMENTS) ) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                 $poDetails = PoDetails::orderBy('ID','desc')
                     ->whereBetween('EXP_EXF_DT',[$from,$to])
                     ->where('COMMENTS', $COMMENTS)
                     ->get();  
                 
+<<<<<<< HEAD
             }  elseif ( !empty($hand_over_from) && !empty($hand_over_to) && !empty($WIP) ) {
                 
                 $poDetails = PoDetails::orderBy('ID','desc')
@@ -444,6 +493,15 @@ class purchaseOrderDetails extends Controller
                     ->where('CONFIRMED_EXF', '<=', $hand_over_to)
                     ->get();  
                 
+=======
+            } elseif ( !empty($from) && !empty($to)) {
+                
+                $poDetails = PoDetails::orderBy('ID','desc')
+                    ->whereBetween('CONFIRMED_EXF',[$hand_over_from, $hand_over_to])
+                    ->where('COMMENTS', $COMMENTS)
+                    ->get(); 
+                
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             }  elseif ( !empty($COMMENTS)) {
                 
                 $poDetails = PoDetails::orderBy('ID','desc')
@@ -577,6 +635,7 @@ class purchaseOrderDetails extends Controller
            
             DB::table('w2t_po_details')
             ->where('ID', $request->id)
+<<<<<<< HEAD
             ->update([
                 'CONFIRMED_EXF' => $request->CONFIRMED_EXF,
                 'CONFIRMED_EXF_CHANGE_DATE' => date('Y-m-d'),
@@ -591,6 +650,14 @@ class purchaseOrderDetails extends Controller
                 return '';
             }
             
+=======
+            ->update(['CONFIRMED_EXF' => $request->CONFIRMED_EXF]);
+            
+            
+            $CONFIRMED_EXF = $request->CONFIRMED_EXF;
+            $date = Carbon::createFromFormat('Y-m-d', $CONFIRMED_EXF)->format('d M Y');
+            return $date;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
            
         } 
         else if($type == 8) {
@@ -601,6 +668,7 @@ class purchaseOrderDetails extends Controller
             
             $ETD = $request->ETD;
             
+<<<<<<< HEAD
             if(!empty($ETD)) {
                 
                $date1 = Carbon::createFromFormat('Y-m-d', $ETD)->format('d M Y');
@@ -610,6 +678,10 @@ class purchaseOrderDetails extends Controller
                 return '';
             }
             
+=======
+            $date = Carbon::createFromFormat('Y-m-d', $ETD)->format('d M Y');
+            return $date;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
         }   else if($type == 9) {
            
@@ -619,6 +691,7 @@ class purchaseOrderDetails extends Controller
             
             $ETA = $request->ETA;
             
+<<<<<<< HEAD
             if(!empty($ETA)) {
                 
                $date1 = Carbon::createFromFormat('Y-m-d', $ETA)->format('d M Y');
@@ -629,6 +702,10 @@ class purchaseOrderDetails extends Controller
             }
             
            
+=======
+            $date = Carbon::createFromFormat('Y-m-d', $ETA)->format('d M Y');
+            return $date;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
         }  else if($type == 20) {
            
@@ -879,11 +956,15 @@ class purchaseOrderDetails extends Controller
                  
                 DB::table('w2t_po_details')
                     ->where('ID', $ID)
+<<<<<<< HEAD
                     ->update(
                         [
                             'CONFIRMED_EXF' => $CONFIRMED_EXF,
                             'CONFIRMED_EXF_CHANGE_DATE' => date('Y-m-d'),
                         ]);
+=======
+                    ->update(['CONFIRMED_EXF' => $CONFIRMED_EXF]);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
              }
             
         } 

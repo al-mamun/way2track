@@ -18,7 +18,10 @@ Route::get('/order/{id}', function () {
     return view('welcome');
 });
 Route::POST( '/order/comments/delivery', 'App\Http\Controllers\OrderController@orderCommentsDelivery' );
+<<<<<<< HEAD
 Route::POST( '/order/comments/delivery/count', 'App\Http\Controllers\OrderController@orderCommentsDeliveryCount' );
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
 Route::get('/admin_login', 'App\Http\Controllers\LoginController@login');
 Route::get('user/login', 'App\Http\Controllers\LoginController@otherUserLogin')->name('login');
@@ -30,6 +33,7 @@ Route::get( '/order/{id}', 'App\Http\Controllers\OrderController@orderDetails' )
 Route::get( '/generate', 'App\Http\Controllers\OrderController@generateUniqID' );
 
 Route::post('mail', 'App\Http\Controllers\MailController@mail')->name('mail');
+<<<<<<< HEAD
 
 Route::post('po/number/wise/confirmed/grd/mail', 'App\Http\Controllers\MailController@poNumberWiseConfirmGrdMail')->name('poNumberWiseConfirmGrdMail');
 Route::post('po/number/wip/wise/confirmed/grd/mail', 'App\Http\Controllers\MailController@poNumberWipWiseConfirmGrdMail')->name('poNumberWipWiseConfirmGrdMail');
@@ -37,6 +41,8 @@ Route::post('shipment/details/confirm/eta', 'App\Http\Controllers\MailController
 Route::post('shipment/details/confirm/eta/change', 'App\Http\Controllers\MailController@shipmentDetailsConfirmedEta')->name('shipmentDetailsConfirmedEtaChange');
 Route::post('warehouse/receipt/shipment/wip', 'App\Http\Controllers\MailController@warehouseReciptShipmentWIP')->name('warehouseReciptShipmentWIP');
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 $router->group( ['middleware' => 'auth'] , function($router) {
 
     Route::get( '/dashboard', 'App\Http\Controllers\DashboardController@dashboard' )->name('dashboard');
@@ -62,8 +68,11 @@ $router->group( ['middleware' => 'auth'] , function($router) {
 
     Route::get( '/new/order/details', 'App\Http\Controllers\Admin\OrderController@newOrderDetails');
     Route::post( '/sales_details_update', 'App\Http\Controllers\Admin\OrderController@newOrderDetailsUpdate');
+<<<<<<< HEAD
     Route::post( '/sales-details-descraption', 'App\Http\Controllers\Admin\OrderController@salesDetailsDescraption');
     
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     Route::post( '/new/order/details/submit', 'App\Http\Controllers\Admin\OrderController@newOrderDetailsSubmit');
     Route::post( '/new/order/details/submit/temp', 'App\Http\Controllers\Admin\OrderController@newOrderDetailsSubmitTemp');
    
@@ -99,8 +108,11 @@ $router->group( ['middleware' => 'auth'] , function($router) {
     Route::post( '/purchase_order_import', 'App\Http\Controllers\Admin\PurchaseOrderHeader@purchasesOrderImport' );
     Route::post( '/purchase_order_import_csv', 'App\Http\Controllers\Admin\PurchaseOrderHeader@purchasesOrderImportCsv' );
     Route::get( '/test/csv', 'App\Http\Controllers\Admin\PurchaseOrderHeader@testcsv' );
+<<<<<<< HEAD
     Route::post( '/purchase/order/po/no/check', 'App\Http\Controllers\Admin\PurchaseOrderHeader@purchaseOrderPoNoCheck' );
     
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
     Route::get( '/create/purchase/order/details', 'App\Http\Controllers\Admin\purchaseOrderDetails@create');
     Route::post( '/create/purchase/order/details/submit', 'App\Http\Controllers\Admin\purchaseOrderDetails@store');
@@ -209,9 +221,12 @@ $router->group( ['middleware' => 'auth'] , function($router) {
     Route::post( '/delivery/generate/shipmentid/wise/list', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@grnshipmentWiseList');
     Route::post( '/do/reports/generate', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@doReportsGenerate');
     Route::get( '/delivery/reports/pdf/{shipment_id}', 'App\Http\Controllers\Admin\Delivery\DeliverOrderController@grnReportsGeneratePdf');
+<<<<<<< HEAD
     
     Route::get( '/send/stage/change/email', 'App\Console\Commands\DemoCron@handle');
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 });
 
 

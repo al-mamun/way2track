@@ -94,14 +94,22 @@
                                 <input type="text" class="form-control" id="customer" name="customer" placeholder="Enter Customer Name">
                             </div>
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label for="customer"> Customer PO No<span style="color:red">*</span></label>
+=======
+                                <label for="customer"> Customer Po No<span style="color:red">*</span></label>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 <input type="text" class="form-control" id="CUSTOMER_PO_NO" name="CUSTOMER_PO_NO" placeholder="Enter Customer PO Number">
                             </div>
                             <div class="form-group">
                                 <label for="status">Status <span style="color:red">*</span></label>
                                 <select name="status" id="status" class="form-control" aria-label="Select Status" required>
                                     <option value="" selected>Select Status</option>
+<<<<<<< HEAD
                                     <option value="LIVE" selected>Live</option>
+=======
+                                    <option value="LIVE">Live</option>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     <option value="CLOSED">Closed</option>
                                     <option value="CANCELLED">Cancelled</option>
                                 </select>
@@ -137,6 +145,7 @@
                                 <label for="email"> Project Manager Email <span style="color:red">*</span></label>
                                 <input type="email" class="form-control" id="PROJECTMANAGER_EMAIL" name="PROJECTMANAGER_EMAIL" placeholder="Enter Project Manager Email">
                             </div>
+<<<<<<< HEAD
                             <div class="form-group">
                                 <label for="date"> Installation Time <span style="color:red">*</span></label>
                                 <input type="number" class="form-control" id="installtion_time" name="installtion_time" placeholder="Number of days" required>
@@ -146,6 +155,9 @@
                                 <input type="email" class="form-control" id="DESIGNER_EMAIL_ADDRESs" name="DESIGNER_EMAIL_ADDRESs" placeholder="Enter Designer Manager Email">
                             </div>
                             
+=======
+                       
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <div class="form-group">
                                 <label > Comments </label>
                                 <textarea class="form-control" id="comments" name="comments" placeholder="Enter Comments"> </textarea>
@@ -177,8 +189,11 @@
 <!-- /.content-wrapper -->
     <!--{!! Form::open(array('url'=>'new/order/status/submit','role'=>'form','method'=>'POST','class'=>'from-submit-status'))!!}-->
 <script>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     $('#salesOrder').on('submit', function(event) {
 	       	
 		event.preventDefault();                          // for demo

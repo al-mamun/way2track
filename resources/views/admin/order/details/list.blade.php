@@ -8,9 +8,12 @@ tr {
 tr.selected {
     background: #eee;
 }
+<<<<<<< HEAD
 .displayNone {
     display:none;
 }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 input#file {
     float: left;
     width: 176px;
@@ -159,6 +162,7 @@ table#joblist {
     /* Display nothing for the element */
     display: none;
 }
+<<<<<<< HEAD
 .fixedHeader-floating thead {
    
     padding-top: 10px !important;
@@ -206,6 +210,8 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
         display: block;
         clear: both;
     }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </style>
 {{ csrf_field() }}
 <!-- Main content -->
@@ -213,6 +219,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
+<<<<<<< HEAD
         <div class="row"  style="width:100%;">
             <div class="col-sm-6" >
                 <h1>@if(!empty($salesOrderDetailsTemp)) Import @else Export S.O Details @endif</h1>
@@ -263,6 +270,13 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                 </div>
             </div>
             @endif
+=======
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Export S.O Details</h1>
+            </div>
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -369,9 +383,15 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                 		                  <th>Item</th>
                 		                  <th>Description </th>
                 		                  <th>Qty</th>
+<<<<<<< HEAD
                 		                  <th>Exp Delivery</th>
                 		                  <th>Exp Handover</th>
                 		                  <th>Ex Comments</th>
+=======
+                		                  <th>EXP Delivery</th>
+                		                  <th>EXP Handover DT</th>
+                		                  <th>EX Comments</th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 		                  <th>Comments</th>
                 		                  <th>Supplier</th>
                 		                  <th>Image</th>
@@ -397,6 +417,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                     						<span id="QTY_{{ $data->ID }}" class="text">{{ $data->QTY }}</span>
                     						<input type="text" value="{{ $data->QTY }}" class="editbox" id="QTY_input_{{ $data->ID }}" style="display:none">
                     				  </td>
+<<<<<<< HEAD
                     				  <td style="background-color:#E8ECF1;" class="" id="{{ $data->ID }}">
                     				  <!--<td style="background-color:#E8ECF1;" class="editEXP_DELIVERYTEMP" id="{{ $data->ID }}">-->
                     						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text" style="width: 97px; display: block; text-align: center;"> {{  date("d M  Y", strtotime($data->EXP_DELIVERY)) }}</span>
@@ -404,6 +425,14 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                     				  </td>
                     				  <td style="background-color:#E8ECF1;" class="editEXP_HANDOVER_DTTEMP" id="{{ $data->ID }}">
                     						<span id="EXP_HANDOVER_DT_{{ $data->ID }}" class="text"  style="width: 97px; display: block; text-align: center;">{{ date("d M  Y", strtotime($data->EXP_HANDOVER_DT)) }}</span>
+=======
+                    				  <td style="background-color:#E8ECF1;" class="editEXP_DELIVERYTEMP" id="{{ $data->ID }}">
+                    						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text"> {{  date("d M  Y", strtotime($data->EXP_DELIVERY)) }}</span>
+                    						<input type="date" value="{{ $data->EXP_DELIVERY }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
+                    				  </td>
+                    				  <td style="background-color:#E8ECF1;" class="editEXP_HANDOVER_DTTEMP" id="{{ $data->ID }}">
+                    						<span id="EXP_HANDOVER_DT_{{ $data->ID }}" class="text">{{ date("d M  Y", strtotime($data->EXP_HANDOVER_DT)) }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     						<input type="date" value="{{ $data->EXP_HANDOVER_DT }}" class="editbox" id="EXP_HANDOVER_DT_input_{{ $data->ID }}" style="display:none">
                     				  </td>
                     				  <td style="background-color:#E8ECF1;" class="editEX_COMMENTSTEMP" id="{{ $data->ID }}">
@@ -421,7 +450,10 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                     				 
                     		   
             		                  <td style="background-color:#E8ECF1;" class="editThumbnailImage" id="{{ $data->ID }}"> 
+<<<<<<< HEAD
             		 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             		                        <!--<div id="image_upload_{{ $data->ID }}">-->
             		                        <!--    <input type="file" value="{{ $data->THUMBNAIL_IMAGE }}"  id="COMMENTS_input_{{ $data->ID }}">-->
             		                        <!--</div>-->
@@ -432,12 +464,20 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
             		                        @endphp
             		                        @if($total > 1)
             		                            <a style="display: block; border:2px solid red" class="example-image-link" href="javacript:void(0)" data-lightbox="example-1">
+<<<<<<< HEAD
         								            <img style="max-width: 80px; display: block;" class="example-image-link" src="{{ $uploadPath.'images/'.$data->THUMBNAIL_IMAGE }}" >
         								        </a>
             		                        @else
         										<a style=" display: block;" class="example-image-link" href="javacript:void(0)" data-lightbox="example-1">
         										     <!--<img style="max-width: 80px; display: block;" class="example-image-link" src="{{ URL::asset( 'images/'.$data->THUMBNAIL_IMAGE) }}" >-->
         								            <img style="max-width: 80px; display: block;" class="example-image-link" src="{{ $uploadPath.'images/'.$data->THUMBNAIL_IMAGE }}" >
+=======
+        								            <img style="max-width: 80px; display: block;" class="example-image-link" src="{{ URL::asset( 'images/'. $data->THUMBNAIL_IMAGE) }}" >
+        								        </a>
+            		                        @else
+        										<a style=" display: block;" class="example-image-link" href="javacript:void(0)" data-lightbox="example-1">
+        								            <img style="max-width: 80px; display: block;" class="example-image-link" src="{{ URL::asset( 'images/'.$data->THUMBNAIL_IMAGE) }}" >
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         								        </a>
         								        
         								    @endif
@@ -569,7 +609,50 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                         </div>
                     </div>
                     
+<<<<<<< HEAD
                    
+=======
+                    <div class="card-body">
+                            <div class="dropdown column_list_dropdown" >
+                                <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                    Customize column
+                                </button>
+                                <div class="dropdown-menu dropdown_menu_list">
+                                    <ul id="sortableOrderDetails" class="sortable">
+                                        @if(!empty($columnSync))
+                                            @foreach($columnSync as $key => $value)
+                                                @if(!empty($value))
+                                                 @php
+                                                    $exp = explode('_', $value);
+                                                    
+                                                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type',  2)
+                                                        ->first();
+                
+                                                @endphp
+                                                
+                                                <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                    <label class="switch">
+                                                      <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','2')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                      <span class="slider round"></span>
+                                                    </label>
+                                                    @if(!empty($exp[1]))
+                                                     {{ $exp[1] }} 
+                                                    @endif
+                                                </li>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        
+                                      
+                                    </ul>
+                                    <div class="ui-state-default save_button" >
+                                        <button class="btn btn-info" onclick="save()"> Save </button>     
+                                    </div>
+                                </div>
+                            </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         </div>
                      <!-- /.card-header -->
                     <div class="card-body">
@@ -577,6 +660,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                         
                           <!-- /.card-header -->
                             <div class="card-content list_of_card_result" style="padding:10px">
+<<<<<<< HEAD
                                 <div class="large-table-fake-top-scroll-container-3" >
                                     <div>&nbsp;</div>
                                 </div>
@@ -631,6 +715,38 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                                             </tr>
                                         </tfoot>
                                     </table>
+=======
+                                <div class="large-table-fake-top-scroll-container-3">
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="top_scroll">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            @foreach($columnSync as $key => $value)
+                                                @if(!empty($value))
+                                                    @php
+                                                        $exp = explode('_', $value);
+                                                        
+                                                        $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                            ->where('page_name', $exp[1])
+                                                            ->where('type',  2)
+                                                            ->first();
+                    
+                                                    @endphp
+                                                    @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                     <th scope="col">{{ $exp[1] }} </th>
+                                                     @endif
+                                                @endif
+                                             
+                                             @endforeach
+                                            <th width="100px">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             		            </div>
     	                    </div>
     	                 
@@ -654,7 +770,11 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
     <!-- /.content -->
   </div>
      <!-- /.card-header -->
+<<<<<<< HEAD
 <script src="{{ URL::asset( 'js/order_details.js') }}"></script>
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 <!-- /.content-wrapper -->
 <script type="text/javascript">
     
@@ -820,6 +940,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
             },
             url: baseUrl +'/sales_details_update' , 
             success: function(html) {
+<<<<<<< HEAD
                 
                 // $("#DESCRIPTION_"+ID).html(first);
                 
@@ -836,6 +957,11 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                 });
             }
         });
+=======
+                $("#DESCRIPTION_"+ID).html(first);
+                }
+            });
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     
     }).change(function() {});
      
@@ -1090,7 +1216,11 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
             },
             url: baseUrl +'/sales_details_update' , 
             success: function(html) {
+<<<<<<< HEAD
                 $("#EXP_DELIVERY_"+ID).html(html);
+=======
+                $("#EXP_DELIVERY_"+ID).html(first);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 }
             });
     
@@ -1117,7 +1247,11 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
             },
             url: baseUrl +'/sales_details_update' , 
             success: function(html) {
+<<<<<<< HEAD
                 $("#EXP_HANDOVER_DT_"+ID).html(html);
+=======
+                $("#EXP_HANDOVER_DT_"+ID).html(first);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 }
             });
     
@@ -1246,6 +1380,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
     //     });  
     // }
     
+<<<<<<< HEAD
    
     
     
@@ -1316,6 +1451,10 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
      function handoverDate() {
         
         // alert();
+=======
+    function handoverDate() {
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
          var WIP   = $("#WIP").val();
         var COMMENTS   = $("#COMMENTS").val();
         var from = $("#from").val();
@@ -1324,6 +1463,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
         var hand_over_to   = $("#hand_over_to").val();
         var checkbox = $('input[name="checkobx"]:checked').val();
         
+<<<<<<< HEAD
         
       
         if (WIP == "" && COMMENTS == "" && from == "" && to == "" && hand_over_from == ""  && hand_over_to == "" && typeof  checkbox === 'undefined' ) {
@@ -1566,6 +1706,119 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
         
         var table = $('.data-table').DataTable({
             // dom: 'Bfrtip',
+=======
+        $('.list_of_card_result').html(' <div class="loader"></div>');
+        $.ajax({
+            type: "POST",
+            url: baseUrl +'/list/order/details/expected/delivery', 
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'COMMENTS': COMMENTS,
+                'WIP': WIP,
+                'checkbox': checkbox,
+                'from': from,
+                'to': to,
+                'hand_over_from': hand_over_from,
+                'hand_over_to': hand_over_to,
+                'type': 3
+            },
+            success: function(result) { 
+                $('.list_of_card_result').html(result);
+            
+            }
+        });  
+    }
+    
+    
+    
+    function checkboxFilter() {
+        
+    //   var checkbox = $('input[name="checkobx"]:checked').serialize();
+       var checkbox = $('input[name="checkobx"]:checked').val();
+       $('.list_of_card_result').html(' <div class="loader"></div>');
+       
+       $.ajax({
+            type: "POST",
+            url: baseUrl +'/list/order/details/expected/delivery', 
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'checkbox': checkbox,
+                'type': 2,
+            },
+            success: function(result) { 
+                $('.list_of_card_result').html(result);
+            
+            }
+        });  
+        
+    }
+    
+    function searchInputFilterWIP() {
+        
+        var WIP   = $("#WIP").val();
+        $('.list_of_card_result').html(' <div class="loader"></div>');
+        $.ajax({
+            type: "POST",
+            url: baseUrl +'/list/order/details/expected/delivery', 
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'WIP': WIP,
+                'type': 4,
+            },
+            success: function(result) { 
+                $('.list_of_card_result').html(result);
+            
+            }
+        });
+    }
+    
+    function searchInputFilterCOMMENTS() {
+        
+        var COMMENTS   = $("#COMMENTS").val();
+        $('.list_of_card_result').html(' <div class="loader"></div>');
+       
+        $.ajax({
+            type: "POST",
+            url: baseUrl +'/list/order/details/expected/delivery', 
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'COMMENTS': COMMENTS,
+                'type': 5,
+            },
+            success: function(result) { 
+                $('.list_of_card_result').html(result);
+            
+            }
+        });
+    }
+    
+    $('#listOfOrderDetails').DataTable( {
+        buttons: [
+          {
+                extend: 'excelHtml5',
+                title:'Export S.O Details',
+                text: 'Export',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6,7,8]
+                }
+            }
+        ],
+         "ordering": false,
+        retrieve: true,
+        language: {
+          "emptyTable": "No result found"
+        },
+        pageLength: 10,
+        paging: true,
+        // sDom: "Rlfrtip",
+        dom: 'Bfrtip',
+    } );
+    
+      $(function () {
+        
+        var table = $('.data-table').DataTable({
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             processing: true,
             serverSide: true,
             ajax: baseUrl +'/list/order/details/ajax?wip=@if(!empty( $wip)){{ $wip }} @endif',
@@ -1593,7 +1846,11 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
                         @if($exp[1] == 'Qty' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                             {data: 'QTY', name: 'QTY',className: "editQty globalcss"},
                         @endif
+<<<<<<< HEAD
                         @if($exp[1] == 'Exp Delivery' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                        @if($exp[1] == 'EXP Delivery' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             {data: 'EXP_DELIVERY', name: 'EXP_DELIVERY',className: "editEXP_DELIVERY globalcss"},
                         @endif
                         
@@ -1626,6 +1883,7 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
               createdRow: function( row, data, dataIndex ) {
                 $( row ).find('td').attr('id', data.ID);
             },
+<<<<<<< HEAD
    
             info: false,
             // fixedHeader:           {
@@ -1645,6 +1903,11 @@ table.dataTable.fixedHeader-floating, table.dataTable.fixedHeader-locked {
             ],
         });
         //  new $.fn.dataTable.FixedHeader( table );
+=======
+             info: false,
+        });
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
       });
 </script>
 @endsection

@@ -33,12 +33,20 @@ button.btn.btn-success.assign_button {
       <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+<<<<<<< HEAD
                 <h1>Review Delivery Details</h1>
+=======
+                <h1>Export Delivery Details</h1>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
+<<<<<<< HEAD
                   <li class="breadcrumb-item active">Review Delivery Details</li>
+=======
+                  <li class="breadcrumb-item active">Export Delivery Details</li>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 </ol>
             </div>
         </div>
@@ -61,7 +69,11 @@ button.btn.btn-success.assign_button {
             			    </div>
             			@endif
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         	       @if(Session::has('success'))
         	          <div class="alert alert-success alert-dismissible fade show" role="alert">
         	            <strong>{{ Session::get('success')}}</strong>
@@ -70,7 +82,10 @@ button.btn.btn-success.assign_button {
         	            </button>
         	          </div>
         	        @endif
+<<<<<<< HEAD
         	        
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             {!! Form::open(array('url'=>'temp/delivery/details/submit','role'=>'form','method'=>'POST','class'=>'from-submit-status', 'enctype'=>'multipart/form-data'))!!}
         	   
         	        <input type="hidden" value="{{$token}}" name="token">
@@ -78,6 +93,7 @@ button.btn.btn-success.assign_button {
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="card"  style="padding:10px;">
+<<<<<<< HEAD
                          <div class="card"  style="padding:10px;">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
         	            <strong>Please REVIEW AND CLICK SAVE BELOW.</strong>
@@ -85,6 +101,9 @@ button.btn.btn-success.assign_button {
         	            	 <span aria-hidden="true">&times;</span>
         	            </button>
         	          </div>
+=======
+                        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         <!-- /.card-header -->
                         <div class="card-content table-reponsive" style="width: 100%;display: block;overflow-x: scroll;">
         		            <table class="table table-bordered " id="listShipment" border="1">

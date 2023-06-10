@@ -138,7 +138,11 @@ class ShipmentController extends Controller
         $WIPNumber = $request->WIPNumber;
         $PONumber  = $request->po_number;
         
+<<<<<<< HEAD
      
+=======
+       
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         foreach($WIPNumber as $key=> $value) {
                 
             $valueExp = explode(',', $value);
@@ -171,13 +175,23 @@ class ShipmentController extends Controller
             $shipmentDetailsInfo = ShipmentDetail::where('PO_NO',  $valueExp[1])
                 ->orderBy('ID', 'desc')
                 ->pluck('PO_DETAILS_ID');
+<<<<<<< HEAD
       
             
+=======
+                    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $poDetailsInfo = PoDetails::where('PO_NO', $valueExp[1])
                 ->whereNotIn('ID', $shipmentDetailsInfo)
                 ->orderBy('ID', 'desc')
                 ->get();
                 
+<<<<<<< HEAD
+=======
+            
+            
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $token = date('Ymdhim');
             
             foreach($poDetailsInfo as $poDetail) {
@@ -206,11 +220,17 @@ class ShipmentController extends Controller
             }
             
            
+<<<<<<< HEAD
             
         
         }
         return $token;
         //  die();  
+=======
+            return $token;
+        
+        }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
      
     }
     
@@ -337,6 +357,10 @@ class ShipmentController extends Controller
     public function listPurchaseorderAssignShipmentTemp(Request $request, $token) {
         
      
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $newShipmentView = ShipmentDetailTemp::where('TOKEN',$request->token)->orderBy('ID','desc')->get();
         
         return view('admin.shipment-details.temp_assign_list', compact('newShipmentView','token'));;

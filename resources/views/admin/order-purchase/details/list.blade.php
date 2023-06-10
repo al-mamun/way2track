@@ -29,9 +29,12 @@
             width: 100px;
             float: left;
         }
+<<<<<<< HEAD
         .form-group.input-from {
             width: 250px;
         }
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         svg.w-5.h-5 {
             font-size: .875rem!important;
             width: 21px;
@@ -44,6 +47,7 @@
             margin-right: 13px;
         }
         .date-form {
+<<<<<<< HEAD
             width: 250px;
             float: left;
             margin-top: 10px;
@@ -54,6 +58,18 @@
         }
         .date-formr {
             width: 250px;
+=======
+            width: 46%;
+            float: left;
+            margin-top: 10px;
+            margin-right: 4%;
+        }
+        .card-foote.date-formr {
+            margin-top: 40px;
+        }
+        .date-formr {
+            width: 18%;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             float: left;
             margin-top: 10px;
             margin-right: 0%;
@@ -69,9 +85,14 @@
             font-weight: bold;
             font-size: 16px;
             float: left;
+<<<<<<< HEAD
             margin-top: 3px;
             /*margin-right: 20px;*/
             padding-left:56px;
+=======
+            margin-top: 10px;
+            margin-right: 20px;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         }
         h5.by_date_check {
             font-weight: normal;
@@ -94,11 +115,15 @@
             background-color: #337ab7;
             border-color: #2e6da4;
         }
+<<<<<<< HEAD
         
         .date-filter {
             width: 61px;
             margin-left: 0px;
         }
+=======
+  
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
     </style>
     
@@ -118,6 +143,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+<<<<<<< HEAD
                 <h1>@if(!empty($poDetailsToken)) Import @else  Export P.O. Details @endif </h1>
             </div>
             <div class="col-sm-4"></div>
@@ -167,6 +193,17 @@
                     </div>
                 </div>
                 @endif
+=======
+                <h1> Export P.O. Details
+                   </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active"> Export P.O. Details
+                  </li>
+                </ol>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -216,8 +253,13 @@
                                         <th>Description</th>
                                         <th>Qty</th>
                                         <th>Comments</th>
+<<<<<<< HEAD
                                         <th>Exp GRD</th>
                                         <th>Confirmed GRD</th>
+=======
+                                        <th>EXP EXF DT</th>
+                                        <th>Confirmed EXF</th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                         <th>ETD</th>
                                         <th>ETA</th>
                 		              </tr>
@@ -246,8 +288,12 @@
                             						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
                             						<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
                             				  </td>
+<<<<<<< HEAD
                             				  <!--<td style="background-color:#E8ECF1;" class="editEXP_DELIVERYTEMP" id="{{ $data->ID }}">-->
                             		            <td style="background-color:#E8ECF1;"  id="{{ $data->ID }}">
+=======
+                            		            <td style="background-color:#E8ECF1;" class="editEXP_DELIVERYTEMP" id="{{ $data->ID }}">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             		                  @if(!empty($data->EXP_EXF_DT))
                                     				    @php 
                                                             $EXP_EXF_DT = date("d M  Y", strtotime( $data->EXP_EXF_DT)); 
@@ -260,22 +306,34 @@
                             						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
                             						<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
                             				    </td>
+<<<<<<< HEAD
                             				    <!--<td style="background-color:#E8ECF1;" class="editEXP_CONFIRMED_EXFTEMP" id="{{ $data->ID }}">-->
                             				    <td style="background-color:#E8ECF1;"  id="{{ $data->ID }}">
+=======
+                            				    <td style="background-color:#E8ECF1;" class="editEXP_CONFIRMED_EXFTEMP" id="{{ $data->ID }}">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             				          @if(!empty($data->CONFIRMED_EXF))
                                         				    @php 
                                                                 $CONFIRMED_EXF = date("d M  Y", strtotime( $data->CONFIRMED_EXF)); 
                                                             @endphp
                                                         @else
                                                             @php 
+<<<<<<< HEAD
                                                                 $CONFIRMED_EXF =  $data->CONFIRMED_EXF; 
+=======
+                                                                $CONFIRMED_EXF =  $data->ETA; 
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                             @endphp
                                                         @endif
                             						<span id="CONFIRMED_EXF_{{ $data->ID }}" class="text">{{ $CONFIRMED_EXF }}</span>
                             						<input type="date" value="{{ $data->CONFIRMED_EXF }}" class="editbox" id="CONFIRMED_EXF_input_{{ $data->ID }}" style="display:none">
                             				    </td>
+<<<<<<< HEAD
                             				     <td style="background-color:#E8ECF1;"  id="{{ $data->ID }}">
                             				    <!--<td style="background-color:#E8ECF1;" class="editETDTEMP" id="{{ $data->ID }}">-->
+=======
+                            				    <td style="background-color:#E8ECF1;" class="editETDTEMP" id="{{ $data->ID }}">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             				         @if(!empty($data->ETD))
                                     				    @php 
                                                             $ETD = date("d M  Y", strtotime( $data->ETD)); 
@@ -288,8 +346,12 @@
                             						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETD }}</span>
                             						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
                             				    </td>
+<<<<<<< HEAD
                             				    <!--<td style="background-color:#E8ECF1;" class="editETATEMP" id="{{ $data->ID }}">-->
                             				    <td style="background-color:#E8ECF1;" id="{{ $data->ID }}">
+=======
+                            				    <td style="background-color:#E8ECF1;" class="editETATEMP" id="{{ $data->ID }}">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             				         @if(!empty($data->ETA))
                                     				    @php 
                                                             $ETA = date("d M  Y", strtotime( $data->ETA)); 
@@ -321,6 +383,7 @@
                                 <div class="col-md-12 pull-right" style="float:right">
                                     <div class="row">
                                  
+<<<<<<< HEAD
                                            <div class="col-sm-5" >
                                                 <!-- checkbox -->
                                                 <div class="form-group">
@@ -370,6 +433,22 @@
                                             <div class="form-group">
                                                 <div class="form-group input-from">
                                                     <label class="by_date_check by_date" >Comments </label>
+=======
+                                       <div class="col-sm-3" >
+                                            <!-- checkbox -->
+                                            <div class="form-group">
+                                                <div class="form-group input-from">
+                                                    <label >PO No  </label>
+                                                    <input type="text"  class="form-control" id="WIP" name="WIP" placeholder="PO NO" required onKeyup="searchInputFilterWIP()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-3" >
+                                            <!-- checkbox -->
+                                            <div class="form-group">
+                                                <div class="form-group input-from">
+                                                    <label >Comments </label>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                     <select name="COMMENTS" id="COMMENTS" class="form-control"  required >
                                                      <!--<select name="COMMENTS" id="COMMENTS" class="form-control"  required  onChange="searchInputFilterCOMMENTS()">-->
                         							     <option value="" selected>Select Status</option>
@@ -381,6 +460,7 @@
                                                 </div>
                                             </div>
                                         </div>
+<<<<<<< HEAD
                                         <div class="col-sm-7" style="float:left">
                                         
                                             <h5 class="by_date_check by_date"> Confirmed GRD</h5>
@@ -400,18 +480,118 @@
                                         </div>
                                         
                                      </div>
+=======
+                                         <div class="col-sm-6" style="float:left;margin-top: 0px;">
+                                            <h5 class="by_date_check by_date"  style="float:left;margin-top: 0px;margin-bottom: 0px;">Expected ExF Date</h5>
+                        	                <div class="form-group date-form">
+                                                <label style="width: 50px;float: left;">From</label>
+                                                <input style="width: 160px;" type="date"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="from" name="from" placeholder="from" required>
+                                            </div>
+                                            <div class="form-group date-form">
+                                                <label style="width: 50px;float: left;">To</label>
+                                                <input style="width: 160px;" type="date"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="to" name="to" placeholder="to" required>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-sm-6" >-->
+                                            <!-- checkbox -->
+                                        <!--    <div class="form-group input-from">-->
+                                        <!--        <h5 class="by_date_check by_staus">Is Image Null?</h5>-->
+                                        <!--        <div class="form-check">-->
+                                        <!--          <input class="form-check-input" type="radio" value="Yes" name="checkobx" onclick="checkboxFilter()">-->
+                                        <!--          <label class="form-check-label">Yes </label>-->
+                                        <!--        </div>-->
+                                        <!--        <div class="form-check">-->
+                                        <!--          <input class="form-check-input" type="radio"  value="No" name="checkobx" onclick="checkboxFilter()">-->
+                                        <!--          <label class="form-check-label">No</label>-->
+                                        <!--        </div>-->
+                                        <!--          <div class="form-check">-->
+                                        <!--          <input class="form-check-input" type="radio"  value="Both" name="checkobx" onclick="checkboxFilter()">-->
+                                        <!--          <label class="form-check-label">Both</label>-->
+                                        <!--        </div>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-6" style="float:left">
+                                      
+    
+                                        <!--<div class="card-foote date-formr">-->
+                                        <!--  <button type="submit" class="btn btn-primary" onclick="exprected_date()">Filter</button>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-6" style="float:left">-->
+                                        <h5 class="by_date_check by_date"> Confirmed ExF Date</h5>
+                    	                <div class="form-group date-form">
+                                              <label style="width: 50px;float: left;">From</label>
+                                            <input type="date" style="width: 160px;"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="hand_over_from" name="hand_over_from" placeholder="from" required>
+                                        </div>
+                                        <div class="form-group date-form">
+                                              <label style="width: 50px;float: left;">To</label>
+                                            <input type="date" style="width: 160px;"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="hand_over_to" name="hand_over_to" placeholder="to" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" style="float:left">
+                                        <div class="card-foote date-formr">
+                                          <button type="submit" class="btn btn-primary" onclick="handoverDate()">Filter</button>
+                                        </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     </div>
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <!--<div class="card-body">-->
                             
                   
                         <!--</div>-->
+=======
+                        <div class="card-body">
+                            <div class="dropdown column_list_dropdown" >
+                                <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                                    Customize column
+                                </button>
+                                <div class="dropdown-menu dropdown_menu_list">
+                                    <ul id="sortable">
+                                        @if(!empty($columnSync))
+                                            @foreach($columnSync as $key => $value)
+                                                @if(!empty($value))
+                                                 @php
+                                                    $exp = explode('_', $value);
+                                                    
+                                                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                        ->where('page_name', $exp[1])
+                                                        ->where('type',  4)
+                                                        ->first();
+                
+                                                @endphp
+                                                
+                                                <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                                    <label class="switch">
+                                                      <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','4')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                                      <span class="slider round"></span>
+                                                    </label>
+                                                    @if(!empty($exp[1]))
+                                                     {{ $exp[1] }} 
+                                                    @endif
+                                                </li>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        
+                                    </ul>
+                                    <div class="ui-state-default save_button" >
+                                        <button class="btn btn-info" onclick="save()"> Save </button>     
+                                    </div>
+                                </div>
+                            </div>
+                  
+                        </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         	            <div class="card-body">
         	                <div class="card card-primary">
         	                  {{ csrf_field() }}
                               <!-- /.card-header -->
+<<<<<<< HEAD
                               
                                 <div class="card-content list_of_card_result table-responsive" style="padding: 2px 13px;">
                                     <div class="large-table-fake-top-scroll-container-3">
@@ -443,6 +623,34 @@
                             		              </tr>
                             		          </thead>
                         		                <tbody>
+=======
+                                <div class="card-content list_of_card_result table-responsive" style="padding: 2px 13px;">
+                		            <table class="table table-bordered"  id="listOfOrderDetails">
+                		                <thead>
+                        		              <tr style="color:#000">
+                        		                  <th style="display:none">SL.</th>
+                        		                    @foreach($columnSync as $key => $value)
+                                                        @if(!empty($value))
+                                                            @php
+                                                                $exp = explode('_', $value);
+                                                                
+                                                                $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                                    ->where('page_name', $exp[1])
+                                                                    ->where('type',  4)
+                                                                    ->first();
+                            
+                                                            @endphp
+                                                            @if(!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                             <th scope="col">{{ $exp[1] }} </th>
+                                                             @endif
+                                                        @endif
+                                                     
+                                                     @endforeach
+                        		                  <th>Action</th>
+                        		              </tr>
+                        		          </thead>
+                        		      <tbody>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 		                @foreach($poDetails as $key=>$data)
                 		                    <tr id="purchase_id_{{$data->ID}}">
                     		                   <td style="display:none">{{ $key + 1 }}</td>
@@ -458,7 +666,11 @@
                                                     @endphp
                                                     @if($exp[1] == 'PO No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                                         <td style="background-color:#E8ECF1;" class="edit_wip_no" id="{{ $data->ID }}">
+<<<<<<< HEAD
                                     						<span id="wip_{{ $data->ID }}" class="text" style=" width: 138px;display: block;">{{ $data->PO_NO }}</span>
+=======
+                                    						<span id="wip_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="wip_input_{{ $data->ID }}" style="display:none">
                                     				    </td>
                                                     @endif
@@ -472,14 +684,22 @@
                                                     
                                                     @if($exp[1] == 'Description' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                                         <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
+<<<<<<< HEAD
                                     						<span id="DESCRIPTION_{{ $data->ID }}" class="text" style=" width: 250px;display: block;">{{ $data->DESCRIPTION }}</span>
+=======
+                                    						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
                                     				    </td>
                                                     @endif
                                                     
                                                     @if($exp[1] == 'Qty' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                                         <td style="background-color:#E8ECF1;" class="editQty" id="{{ $data->ID }}">
+<<<<<<< HEAD
                                     						<span id="QTY_{{ $data->ID }}" class="text" >{{ $data->QTY }}</span>
+=======
+                                    						<span id="QTY_{{ $data->ID }}" class="text">{{ $data->QTY }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="text" value="{{ $data->QTY }}" class="editbox" id="QTY_input_{{ $data->ID }}" style="display:none">
                                     				  </td>
                                                     @endif
@@ -490,7 +710,12 @@
                                     						<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
                                     				  </td>
                                                     @endif
+<<<<<<< HEAD
                                                      @if($exp[1] == 'Exp GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                                                    
+                                                    @if($exp[1] == 'Confirmed EXF' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                                         <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
                                     		                @if(!empty($data->EXP_EXF_DT))
                                             				    @php 
@@ -501,11 +726,16 @@
                                                                     $EXP_EXF_DT =  $data->EXP_EXF_DT; 
                                                                 @endphp
                                                             @endif
+<<<<<<< HEAD
                                     						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $EXP_EXF_DT }}</span>
+=======
+                                    						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
                                     				    </td>
                                                     @endif
                                                     
+<<<<<<< HEAD
                                                     @if($exp[1] == 'Confirmed GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                                         <td style="background-color:#E8ECF1;" class="editEXP_CONFIRMED_EXF" id="{{ $data->ID }}">
                                     		                @if(!empty($data->CONFIRMED_EXF))
@@ -523,6 +753,23 @@
                                                     @endif
                                                     
                                                    
+=======
+                                                    @if($exp[1] == 'EXP EXF DT' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                                        <td style="background-color:#E8ECF1;" class="editEXP_DELIVERY" id="{{ $data->ID }}">
+                                    		                @if(!empty($data->EXP_EXF_DT))
+                                            				    @php 
+                                                                    $EXP_EXF_DT = date("d M  Y", strtotime( $data->EXP_EXF_DT)); 
+                                                                @endphp
+                                                            @else
+                                                                @php 
+                                                                    $EXP_EXF_DT =  $data->EXP_EXF_DT; 
+                                                                @endphp
+                                                            @endif
+                                    						<span id="EXP_DELIVERY_{{ $data->ID }}" class="text">{{ $EXP_EXF_DT }}</span>
+                                    						<input type="date" value="{{ $data->EXP_EXF_DT }}" class="editbox" id="EXP_DELIVERY_input_{{ $data->ID }}" style="display:none">
+                                    				    </td>
+                                                    @endif
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     		                        
                     		                      
                                                     @if($exp[1] == 'ETA' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
@@ -537,7 +784,11 @@
                                                                     $ETA =  $data->ETA; 
                                                                 @endphp
                                                             @endif
+<<<<<<< HEAD
                                     						<span id="ETD_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $ETA }}</span>
+=======
+                                    						<span id="ETD_{{ $data->ID }}" class="text">{{ $ETA }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
                                     				    </td>
                                                     @endif
@@ -553,7 +804,11 @@
                                                                     $ETD =  $data->ETD; 
                                                                 @endphp
                                                             @endif
+<<<<<<< HEAD
                                     						<span id="ETA_{{ $data->ID }}" class="text" style="width:86px; display:block; text-align:center">{{ $ETD }}</span>
+=======
+                                    						<span id="ETA_{{ $data->ID }}" class="text">{{ $ETD }}</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     						<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
                                     				    </td>
                                                     @endif
@@ -570,6 +825,7 @@
                 		                </tr>
                 		                @endforeach
                 		              </tbody>
+<<<<<<< HEAD
                 		                        <tfoot>
                             		              <tr style="color:#000">
                             		                  <th style="display:none">SL.</th>
@@ -595,6 +851,10 @@
                             		            </tfoot>
                 		                </table>
         		                    </div>
+=======
+                		          </table>
+        		                    
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         	                    </div>
                             </div>
                         </div>
@@ -1332,6 +1592,7 @@
     
     $('#listOfOrderDetails').DataTable( {
         buttons: [
+<<<<<<< HEAD
         //   {
         //         extend: 'excelHtml5',
         //         text: 'Export',
@@ -1340,6 +1601,16 @@
         //             columns: [ 1,2,3,4,5,6,7,8,9 ]
         //         }
         //     }
+=======
+          {
+                extend: 'excelHtml5',
+                text: 'Export',
+                title:'Export P.O. Details',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6,7,8,9 ]
+                }
+            }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ],
     
         retrieve: true,

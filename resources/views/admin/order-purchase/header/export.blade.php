@@ -21,7 +21,11 @@ button.btn.btn-success {
 .row.data-button {
     margin-bottom: 15px;
 }
+<<<<<<< HEAD
 
+=======
+<style>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 .row.data-button {
     padding: 14px 19px;
 }
@@ -39,6 +43,7 @@ svg.w-5.h-5 {
     padding-left: 1.25rem;
     float: left;
     margin-right: 13px;
+<<<<<<< HEAD
     margin-top: 12px;
 }
 .by_status_wise {
@@ -52,6 +57,17 @@ svg.w-5.h-5 {
 }
 .card-foote.date-formr {
     margin-top: 3px;
+=======
+}
+.date-form {
+    width: 25%;
+    float: left;
+    margin-top: 10px;
+    margin-right: 4%;
+}
+.card-foote.date-formr {
+    margin-top: 40px;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 }
 .date-formr {
     width: 18%;
@@ -65,12 +81,16 @@ h5.by_date_check.by_staus {
     margin-right: 20px;
     font-weight: bold;
     font-size: 17px;
+<<<<<<< HEAD
     width:100%;
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 }
 h5.by_date_check.by_date {
     font-weight: bold;
     font-size: 16px;
     float: left;
+<<<<<<< HEAD
     margin-top: 13px;
     margin-right: 20px;
     width: 100%;
@@ -79,17 +99,25 @@ h5.by_date_check.by_date {
 .form-control-panel {
     width: 150px;
     float: left;
+=======
+    margin-top: 43px;
+    margin-right: 20px;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 }
 h5.by_date_check {
     font-weight: normal;
     margin-top: 21px;
 }
+<<<<<<< HEAD
 label.form-control-label {
     float: left;
     width: 50px;
     padding-top: 8px;
     text-align: revert;
 }
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </style>
 {{ csrf_field() }}
 <!-- Main content -->
@@ -101,6 +129,7 @@ label.form-control-label {
             <div class="col-sm-6">
                 <h1> Export Purchase Order </h1>
             </div>
+<<<<<<< HEAD
             <div class="col-sm-4">
                 
             </div>
@@ -147,6 +176,13 @@ label.form-control-label {
                         </div>
                     </div>
                 </div>
+=======
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active"> Export Purchase Order </li>
+                </ol>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -158,6 +194,7 @@ label.form-control-label {
         <div class="row">
           <div class="col-12">
             <div class="card">
+<<<<<<< HEAD
                 <!--<div class="card-header">-->
                 <!--    <h3 class="card-title"> Export Purchase Order</h3>-->
                 <!--</div>-->
@@ -165,6 +202,15 @@ label.form-control-label {
                 <div class="card-content">
                     <div class="col-md-12 pull-right">
                         <div class="by_status_wise"  style="float:left; margin-top:14px;">
+=======
+                <div class="card-header">
+                    <h3 class="card-title"> Export Purchase Order</h3>
+                </div>
+                
+                <div class="card-content">
+                    <div class="col-md-12 pull-right">
+                        <div class="col-sm-4"  style="float:left; margin-top:50px;">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <!-- checkbox -->
                             <div class="form-group">
                                 <h5 class="by_date_check by_staus">By status</h5>
@@ -182,11 +228,16 @@ label.form-control-label {
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div class="col-sm-2"  style="float:left;margin-top: 11px;">
+=======
+                        <div class="col-sm-2"  style="float:left">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <!-- checkbox -->
                             <div class="form-group">
                                 <div class="form-group input-from">
                                     <label >PO No  </label>
+<<<<<<< HEAD
                                     <input type="text" class="form-control" id="PO_NO" name="PO_NO" placeholder="Enter Po No" required>
                                 </div>
                             </div>
@@ -204,6 +255,21 @@ label.form-control-label {
                                 <div class="form-control-panel">
                                     <input type="text" required class="form-control" id="to" name="to" placeholder="to" required>
                                 </div>
+=======
+                                    <input type="text"  class="form-control" id="PO_NO" name="PO_NO" placeholder="Enter Po No" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" style="float:right">
+                            <h5 class="by_date_check by_date">By PO Date</h5>
+        	                <div class="form-group date-form">
+                                <label >From</label>
+                                <input type="text"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="from" name="from" placeholder="from" required>
+                            </div>
+                            <div class="form-group date-form">
+                                <label >To </label>
+                                <input type="text"  placeholder="dd-mm-yyyy" data-date-format="DD-MMMM-YYYY" required class="form-control" id="to" name="to" placeholder="to" required>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             </div>
                         
                             <div class="card-foote date-formr">
@@ -212,9 +278,52 @@ label.form-control-label {
                         </div>
                     </div>
                 </div>   
+<<<<<<< HEAD
                 <!--<div class="card-body">-->
                     
                 <!--</div>-->
+=======
+                <div class="card-body">
+                    <div class="dropdown column_list_dropdown" >
+                        <button class="btn btn-secondary" type="button" style="float:right" onclick="dropdownList()">
+                            Customize column
+                        </button>
+                        <div class="dropdown-menu dropdown_menu_list">
+                            <ul id="sortablepageHeader" class="sortable">
+                                @if(!empty($columnSync))
+                                    @foreach($columnSync as $key => $value)
+                                        @if(!empty($value))
+                                         @php
+                                            $exp = explode('_', $value);
+                                            
+                                            $settingTableInfo = DB::table('w2t_setting_column_table')
+                                                ->where('page_name', $exp[1])
+                                                ->where('type',  3)
+                                                ->first();
+        
+                                        @endphp
+                                        
+                                        <li class="ui-state-default" id="{{ $value }}" switch_value="0">
+                                            <label class="switch">
+                                              <input type="checkbox"   name="checkbox_list_{{ $key }}" onchange="saveChecked_data('{{  $key }}','{{ $exp[1] }}','3')" @if(!empty($settingTableInfo) && $settingTableInfo->status == 1)  checked  value="1" @else value="1" @endif>
+                                              <span class="slider round"></span>
+                                            </label>
+                                            @if(!empty($exp[1]))
+                                             {{ $exp[1] }} 
+                                            @endif
+                                        </li>
+                                        @endif
+                                    @endforeach
+                                @endif
+                                
+                            </ul>
+                            <div class="ui-state-default save_button" >
+                                <button class="btn btn-info" onclick="save()"> Save </button>     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
               <!-- /.card-header -->
               <div class="card-body" style="position:relative">
                   @if ($errors->any())
@@ -293,7 +402,11 @@ label.form-control-label {
                                         @endif
                                         @if($exp[1] == 'PO Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                             <td style="background-color:#E8ECF1;" class="editPO_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+<<<<<<< HEAD
                         						<span id="PO_DATE_{{ $poOrderHeadersInfo->ID }}" class="text"  style="width:86px; display:block; text-align:center">
+=======
+                        						<span id="PO_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         						     @if(!empty($poOrderHeadersInfo->PO_DATE))
                             				            @php $PO_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->PO_DATE))  @endphp
                             				        @else
@@ -305,14 +418,22 @@ label.form-control-label {
                         						<input type="date" value="{{ $poOrderHeadersInfo->PO_DATE }}" class="editbox" id="PO_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
                         				    </td>
                                         @endif
+<<<<<<< HEAD
                                         @if($exp[1] == 'PO Status' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                                        @if($exp[1] == 'PO status' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                             <td style="background-color:#E8ECF1;" class="editPO_STATUS" id="{{ $poOrderHeadersInfo->ID }}">
                         						<span id="PO_STATUS_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->PO_STATUS }}</span>
                         						<input type="text" value="{{ $poOrderHeadersInfo->PO_STATUS }}" class="editbox" id="PO_STATUS_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
                         				    </td>
                         				    
                                         @endif
+<<<<<<< HEAD
                                         @if($exp[1] == 'Supplier' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                                        @if($exp[1] == 'Supplier Name' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                             <td style="background-color:#E8ECF1;" class="editSUPPLIER_NAME" id="{{ $poOrderHeadersInfo->ID }}">
                         						<span id="SUPPLIER_NAME_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->SUPPLIER_NAME }}</span>
                         						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_NAME }}" class="editbox" id="SUPPLIER_NAME_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
@@ -324,9 +445,15 @@ label.form-control-label {
                         						<input type="text" value="{{ $poOrderHeadersInfo->SUPPLIER_SITE }}" class="editbox" id="SUPPLIER_SITE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
                         				    </td>
                                         @endif
+<<<<<<< HEAD
                                          @if($exp[1] == 'Reqd GRD' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                             <td style="background-color:#E8ECF1;" class="editREQD_EXF_DATE" id="{{ $poOrderHeadersInfo->ID }}">
                         						<span id="REQD_EXF_DATE_{{ $poOrderHeadersInfo->ID }}" class="text"  style="width:86px; display:block; text-align:center">
+=======
+                                         @if($exp[1] == 'REQD EXF Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                            <td style="background-color:#E8ECF1;" class="editREQD_EXF_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+                        						<span id="REQD_EXF_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         						     @if(!empty($poOrderHeadersInfo->REQD_EXF_DATE))
                             				            @php $REQD_EXF_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->REQD_EXF_DATE))  @endphp
                             				        @else
@@ -337,15 +464,25 @@ label.form-control-label {
                         						<input type="date" value="{{ $poOrderHeadersInfo->REQD_EXF_DATE }}" class="editbox" id="REQD_EXF_DATE_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
                         				    </td>
                                         @endif
+<<<<<<< HEAD
                                         @if($exp[1] == 'Ack No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+=======
+                                        @if($exp[1] == 'ACK No' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                             <td style="background-color:#E8ECF1;" class="editACK_NO" id="{{ $poOrderHeadersInfo->ID }}">
                         						<span id="ACK_NO_{{ $poOrderHeadersInfo->ID }}" class="text">{{ $poOrderHeadersInfo->ACK_NO }}</span>
                         						<input type="text" value="{{ $poOrderHeadersInfo->ACK_NO }}" class="editbox" id="ACK_NO_input_{{ $poOrderHeadersInfo->ID }}" style="display:none">
                         				    </td>
                                         @endif
+<<<<<<< HEAD
                                         @if($exp[1] == 'Ack Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
                                             <td style="background-color:#E8ECF1;" class="editACK_DATE" id="{{ $poOrderHeadersInfo->ID }}">
                         						<span id="ACK_DATE_{{ $poOrderHeadersInfo->ID }}" class="text"  style="width:86px; display:block; text-align:center">
+=======
+                                        @if($exp[1] == 'ACK Date' &&!empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                                            <td style="background-color:#E8ECF1;" class="editACK_DATE" id="{{ $poOrderHeadersInfo->ID }}">
+                        						<span id="ACK_DATE_{{ $poOrderHeadersInfo->ID }}" class="text">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         						    @if(!empty($poOrderHeadersInfo->ACK_DATE))
                             				            @php $ACK_DATE = date("d M  Y", strtotime($poOrderHeadersInfo->ACK_DATE))  @endphp
                             				        @else
@@ -398,6 +535,7 @@ label.form-control-label {
                 timePicker: false,
                 singleDatePicker: true,
                 showDropdowns: true,
+<<<<<<< HEAD
                 autoUpdateInput: false,  
                 locale: {
                 //   format: 'DD/MMM/YYYY'
@@ -412,10 +550,18 @@ label.form-control-label {
                 $(this).val('');
             });
             
+=======
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $('input[name="to"]').daterangepicker({
                 timePicker: false,
                 singleDatePicker: true,
                 showDropdowns: true,
+<<<<<<< HEAD
                 autoUpdateInput: false,  
                 locale: {
                 //   format: 'DD/MMM/YYYY'
@@ -430,6 +576,13 @@ label.form-control-label {
                 $(this).val('');
             });
             
+=======
+                locale: {
+                  format: 'DD/MMM/YYYY'
+                }
+            });
+            
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
          
         });
     function deleteData(ID) {
@@ -845,6 +998,7 @@ label.form-control-label {
         
     }
 
+<<<<<<< HEAD
         $('#tableResponsive2').DataTable( {
             buttons: [
             //   {
@@ -867,6 +1021,29 @@ label.form-control-label {
             // sDom: "Rlfrtip",
             dom: 'Bfrtip',
         } );
+=======
+    $('#tableResponsive2').DataTable( {
+        buttons: [
+          {
+                extend: 'excelHtml5',
+                text:'Export',
+                title:'Export Purchase Order',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5,6,7,8 ]
+                }
+            }
+        ],
+    
+        retrieve: true,
+        language: {
+          "emptyTable": "No result found"
+        },
+        pageLength: 10,
+        paging: true,
+        // sDom: "Rlfrtip",
+        dom: 'Bfrtip',
+    } );
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $("tbody tr").click(function () {
             $('.selected').removeClass('selected');
             $(this).addClass("selected");

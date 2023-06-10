@@ -173,9 +173,13 @@ class DeliveryController extends Controller
         $itemID = $request->itemID;
         // $deliveryInfo = Shipment::get();
         
+<<<<<<< HEAD
         $shipmentHeader = Shipment::where('ASSIGN_STATUS' , 0)
             ->orderBy('SHIPMENT_ID','desc')
             ->get();
+=======
+        $shipmentHeader = Shipment::where('ASSIGN_STATUS' , 0)->get();
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
         $deliveryInfo = [];
         foreach($shipmentHeader as $hedingInfo) {

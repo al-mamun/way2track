@@ -29,6 +29,7 @@
 </div>
 <div class="top_scroll">
     <table class="table table-bordered " id="listShipment" border="1">
+<<<<<<< HEAD
         <thead>
           <tr style="color:#000">
               
@@ -618,6 +619,502 @@
             </tr>
         </tfoot>
     </table>
+=======
+    <thead>
+      <tr style="color:#000">
+          
+            <th style="display:none">SL.</th>
+            @foreach($columnSync as $key => $value)
+                @php
+                    $exp = explode('_', $value);
+                    
+                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                        ->where('page_name', $exp[1])
+                        ->where('type',  6)
+                        ->first();
+
+                @endphp
+                
+                @if($exp[1] == 'Shipment ID' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Shipment ID <br><span class="shipment_id_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                
+                @if($exp[1] == 'Container NO' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Container NO <br><span class="container_no_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                @if($exp[1] == 'Vessel' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Vessel  <br><span class="vessel_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                @if($exp[1] == 'Qty' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Qty <br><span class="qty_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                @if($exp[1] == 'ETD' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>ETD <br><span class="etd_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                @if($exp[1] == 'ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>ETA <br><span class="eta_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                
+                @if($exp[1] == 'Supplier' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Supplier <br><span class="supplier_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+
+                @if($exp[1] == 'PO No' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                     <th>PO No <br><span class="po_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                
+                @if($exp[1] == 'Receive Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Receive Date<br><span class="receivecopy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+           
+                @endif
+                
+                @if($exp[1] == 'Item' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Item <br><span class="item_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+            
+                @endif
+
+                @if($exp[1] == 'Description' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Description  <br><span class="description_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+            
+                @endif
+                
+                @if($exp[1] == 'Comments' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                   <th>Comments <br><span class="comments_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>  </th>
+            
+                @endif
+                
+                @if($exp[1] == 'Act Exf Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Act Exf Date <br><span class="act_exf_date_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>  </th>
+                @endif
+                
+                @if($exp[1] == 'MBL MAWB' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>MBL MAWB <br><span class="mbl_mawb_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span>  </th>
+                @endif
+                
+                @if($exp[1] == 'Vessel Sailing Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Vessel Sailing Date  <br><span class="vessel_selling_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th> 
+                @endif
+                
+                @if($exp[1] == 'Confirmed ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Confirmed ETA  <br><span class="pconfirmed_eta_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th> 
+                @endif
+                
+                @if($exp[1] == 'Shipment Status' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <th>Shipment Status <br><span class="shipment_status_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>
+                @endif
+                
+            @endforeach
+            
+            <!--<th>Warehouse Date <br><span class="wip_copy_to_all copy_to_all"> <i class="fas fa-copy"></i></span> </th>-->
+            
+            <th>Action</th>
+      </tr>
+      <tr class="showCommentsDetails" style="display:none">
+            <td style="display:none"></td>
+            
+            
+            @foreach($columnSync as $key => $value)
+                @php
+                    $exp = explode('_', $value);
+                    
+                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                        ->where('page_name', $exp[1])
+                        ->where('type',  6)
+                        ->first();
+
+                @endphp
+                
+                @if($exp[1] == 'Shipment ID' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="shipment_id_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="shipment_id_box" id="shipment_id_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="shipmentIDSAVE()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                        
+                    </td>
+                @endif
+                
+                @if($exp[1] == 'Container NO' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="container_no_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="container_no_box" id="container_no_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveContainer()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                        
+                    </td>
+                @endif
+                @if($exp[1] == 'Vessel' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                     <td>
+                        <div class="vessel_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="vessel_box" id="vessel_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveVessel()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                @if($exp[1] == 'Qty' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="qty_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="qty_box" id="qty_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveQty()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                @if($exp[1] == 'ETD' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="etd_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="etd_box" id="etd_box" name="ETDBOX"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveETD()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td> 
+                @endif
+                @if($exp[1] == 'ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="eta_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="eta_box" id="eta_box" name="ETABOX" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveETA()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td> 
+                @endif
+                
+                @if($exp[1] == 'Supplier' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                     <td>
+                        <div class="supplier_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="supplier_box" id="supplier_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveSupplier()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+
+                @if($exp[1] == 'PO No' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="po_no_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="po_no_box" id="po_no_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="savePoNo()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+           
+                @endif
+                
+                @if($exp[1] == 'Receive Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                       <div class="receive_date_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="receiveDate" id="receiveDate" name="receiveDate" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="savereceiveDate()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                        
+                    </td>
+           
+                @endif
+                
+                @if($exp[1] == 'Item' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                   <td>
+                
+                        <div class="item_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="item_box" id="item_box" name="item_box" style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveITEM()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+            
+                @endif
+
+                @if($exp[1] == 'Description' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="description_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="description_box" id="description_box" name="description_box"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveDescription()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+            
+                @endif
+                
+                @if($exp[1] == 'Comments' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    
+                   
+                    <td>
+                        <div class="comments_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="comments_box" id="comments_box" name="comments_box"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveComments()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                    
+            
+                @endif
+                
+                @if($exp[1] == 'Act Exf Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="exp_confirm_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="exp_confirm" id="exp_confirm" name="exp_confirm"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveexpConfirm()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                
+                @if($exp[1] == 'MBL MAWB' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="MBL_MAWB_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="MBL_MAWB_BOX" id="MBL_MAWB_BOX" name="MBL_MAWB_BOX"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveMBLMAWB()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                
+                @if($exp[1] == 'Vessel Sailing Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="vessel_selling_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="vessel_selling_box" id="vessel_selling_box" name="vessel_selling_box"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="SaveSellingVessel()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                
+                @if($exp[1] == 'Confirmed ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>
+                        <div class="exp_confirm_etd_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="exp_confirm_eta" id="exp_confirm_eta" name="exp_confirm_eta"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveexpConfirmETA()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                
+                @if($exp[1] == 'Shipment Status' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    
+                    <td>
+                        <div class="shipment_status_td box_header" style="display:none; width:150px;">
+                            <input type="text"  class="shipment_status_box" id="shipment_status_box" name="shipment_status_box"  style="width: 65%;float: left;font-size: 15px;">
+                            <button class="btn btn-success" onclick="saveShipmentStatus()" style="width: 35%;float: left;font-size: 10px;">Save</button>
+                        </div>
+                    </td>
+                @endif
+                
+            @endforeach
+          
+            
+           
+            <!-- <td>-->
+            <!--      <div class="waireHouse_td box_header" style="display:none; width:150px;">-->
+            <!--        <input type="text"  class="waireHuseDate" id="waireHuseDate" name="waireHuseDate" style="width: 65%;float: left;font-size: 15px;">-->
+            <!--        <button class="btn btn-success" onclick="saveWare()" style="width: 35%;float: left;font-size: 10px;">Save</button>-->
+            <!--    </div>-->
+               
+            <!--</td>-->
+           
+           
+            
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+     @foreach($newShipmentView as $key=>$data)
+       <tr id="{{ $data->SHIPMENT_ID }}">
+          <td style="display:none">{{ $key+1 }}</td>
+          @foreach($columnSync as $key => $value)
+                @php
+                    $exp = explode('_', $value);
+                    
+                    $settingTableInfo = DB::table('w2t_setting_column_table')
+                        ->where('page_name', $exp[1])
+                        ->where('type',  6)
+                        ->first();
+    
+                @endphp
+                @if($exp[1] == 'Shipment ID' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td>{{ $data->SHIPMENT_ID }}</td>
+                @endif
+                
+                @if($exp[1] == 'Container NO' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" id="{{ $data->ID }}" class="editCONTAINER_NO">
+        				<span id="CONTAINER_NO_{{ $data->ID }}" class="text">{{ $data->CONTAINER_NO }}</span>
+        				<input type="text" value="{{ $data->CONTAINER_NO }}" class="editbox" id="CONTAINER_NO_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                @if($exp[1] == 'Vessel' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editVESSEL" id="{{ $data->ID }}">
+        				<span id="VESSEL_{{ $data->ID }}" class="text vessel_box_id">{{ $data->VESSEL }}</span>
+        				<input type="text" value="{{ $data->VESSEL }}" class="editbox" id="VESSEL_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                @if($exp[1] == 'Qty' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    
+                    <td style="background-color:#E8ECF1;" class="editQty" id="{{ $data->ID }}">
+        				<span id="Qty_{{ $data->ID }}" class="text">{{ $data->Qty }}</span>
+        				<input type="text" value="{{ $data->Qty }}" class="editbox" id="Qty_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+        		    
+                @endif
+                @if($exp[1] == 'ETD' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editETD" id="{{ $data->ID }}">
+        		        @if(!empty($data->ETD))
+        				    @php 
+                                $ETD = date("d M  Y", strtotime($data->ETD)); 
+                            @endphp
+                        @else
+                            @php 
+                                $ETD =  $data->ETD; 
+                            @endphp
+                        @endif
+        				<span id="ETD_{{ $data->ID }}" class="text">{{ $ETD }}</span>
+        				<input type="date" value="{{ $data->ETD }}" class="editbox" id="ETD_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+        		    
+                @endif
+                @if($exp[1] == 'ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editETA" id="{{ $data->ID }}">
+        		        @if(!empty($data->ETA))
+        				    @php 
+                                $ETA = date("d M  Y", strtotime( $data->ETA)); 
+                            @endphp
+                        @else
+                            @php 
+                                $ETA =  $data->ETA; 
+                            @endphp
+                        @endif
+        				<span id="ETA_{{ $data->ID }}" class="text">{{ $ETA}}</span>
+        				<input type="date" value="{{ $data->ETA }}" class="editbox" id="ETA_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                
+                @if($exp[1] == 'Supplier' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editSUPPLIER" id="{{ $data->ID }}">
+        				<span id="SUPPLIER_{{ $data->ID }}" class="text">{{ $data->SUPPLIER }}</span>
+        				<input type="text" value="{{ $data->SUPPLIER }}" class="editbox" id="SUPPLIER_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+        		    
+    			    
+                @endif
+                
+                
+                @if($exp[1] == 'PO No' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editPO_NO" id="{{ $data->ID }}">
+        				<span id="PO_NO_{{ $data->ID }}" class="text">{{ $data->PO_NO }}</span>
+        				<input type="text" value="{{ $data->PO_NO }}" class="editbox" id="PO_NO_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+        	
+        		    
+                @endif
+                
+                
+                @if($exp[1] == 'Receive Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editSHIPMENTRECDDATE" id="{{ $data->ID }}">
+        		         @if(!empty($data->SHIPMENT_RECD_DATE))
+        				    @php 
+                                $SHIPMENT_RECD_DATE = date("d M  Y", strtotime( $data->SHIPMENT_RECD_DATE)); 
+                            @endphp
+                        @else
+                            @php 
+                                $SHIPMENT_RECD_DATE =  $data->SHIPMENT_RECD_DATE; 
+                            @endphp
+                        @endif
+        				<span id="SHIPMENT_RECD_DATE_{{ $data->ID }}" class="text">{{ $SHIPMENT_RECD_DATE }}</span>
+        				<input type="date" value="{{ $SHIPMENT_RECD_DATE}}" class="editbox" id="SHIPMENT_RECD_DATE_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                @if($exp[1] == 'Item' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                     <td style="background-color:#E8ECF1;" class="editITEM" id="{{ $data->ID }}">
+        				<span id="ITEM_{{ $data->ID }}" class="text">{{ $data->ITEM }}</span>
+        				<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                
+                @if($exp[1] == 'Description' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
+        				<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
+        				<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+        		    
+        		    
+    	  
+                @endif
+                
+                @if($exp[1] == 'Comments' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                   <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
+        				<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
+        				<input type="text" value="{{ $data->COMMENTS }}" class="editbox" id="COMMENTS_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                @if($exp[1] == 'Act Exf Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editACT_EXF_DATE" id="{{ $data->ID }}">
+        		       @if(!empty($data->ACT_EXF_DATE))
+        				    @php 
+                                $ACT_EXF_DATE = date("d M  Y", strtotime( $data->ACT_EXF_DATE)); 
+                            @endphp
+                        @else
+                            @php 
+                                $ACT_EXF_DATE =  $data->ACT_EXF_DATE; 
+                            @endphp
+                        @endif
+        				<span id="ACT_EXF_DATE_{{ $data->ID }}" class="text">{{ $ACT_EXF_DATE }}</span>
+        				<input type="date" value="{{ $ACT_EXF_DATE}}" class="editbox" id="ACT_EXF_DATE_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+        		    
+                @endif
+                
+                @if($exp[1] == 'MBL MAWB' &&  !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                   <td style="background-color:#E8ECF1;" class="editMBL_MAWB" id="{{ $data->ID }}">
+        				<span id="MBL_MAWB_{{ $data->ID }}" class="text">{{ $data->MBL_MAWB }}</span>
+        				<input type="text" value="{{ $data->MBL_MAWB }}" class="editbox" id="MBL_MAWB_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                @if($exp[1] == 'Vessel Sailing Date' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                   <td style="background-color:#E8ECF1;" class="editVESSEL_SAILING_DATE" id="{{ $data->ID }}">
+        		       @if(!empty($data->VESSEL_SAILING_DATE))
+        				    @php 
+                                $VESSEL_SAILING_DATE = date("d M  Y", strtotime( $data->VESSEL_SAILING_DATE)); 
+                            @endphp
+                        @else
+                            @php 
+                                $VESSEL_SAILING_DATE =  $data->VESSEL_SAILING_DATE; 
+                            @endphp
+                        @endif
+        				<span id="VESSEL_SAILING_DATE_{{ $data->ID }}" class="text">{{ $VESSEL_SAILING_DATE}}</span>
+        				<input type="date" value="{{ $data->VESSEL_SAILING_DATE }}" class="editbox" id="VESSEL_SAILING_DATE_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                @if($exp[1] == 'Confirmed ETA' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editCONFIRMED_ETA" id="{{ $data->ID }}">
+        		         @if(!empty($data->CONFIRMED_ETA))
+        				    @php 
+                                $CONFIRMED_ETA = date("d M  Y", strtotime( $data->CONFIRMED_ETA)); 
+                            @endphp
+                        @else
+                            @php 
+                                $CONFIRMED_ETA =  $data->CONFIRMED_ETA; 
+                            @endphp
+                        @endif
+        				<span id="CONFIRMED_ETA_{{ $data->ID }}" class="text">{{ $CONFIRMED_ETA }}</span>
+        				<input type="date" value="{{ $data->CONFIRMED_ETA }}" class="editbox" id="CONFIRMED_ETA_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+                @if($exp[1] == 'Shipment Status' && !empty( $settingTableInfo) &&  $settingTableInfo->status == 1)
+                    <td style="background-color:#E8ECF1;" class="editSHIPMENT_STATUS" id="{{ $data->ID }}">
+        				<span id="SHIPMENT_STATUS_{{ $data->ID }}" class="text">{{ $data->SHIPMENT_STATUS }}</span>
+        				<input type="text" value="{{ $data->SHIPMENT_STATUS }}" class="editbox" id="SHIPMENT_STATUS_input_{{ $data->ID }}" style="display:none">
+        		    </td>
+                @endif
+                
+            @endforeach
+          
+            
+            
+		   
+     
+          <td>
+                <!--<a href="javascript:void(0)" onClick="edit('{{ $data->ID }}')"  class="btn btn-primary btn-circle btn-sm"><i class="fas fa-edit"></i></a> -->
+                <!-- <a href="{{ URL::to( 'edit/shipment/details/' .$data->ID) }}"  class="btn btn-primary btn-circle btn-sm"><i class="fas fa-edit"></i></a> -->
+                <button  onClick="deleteData('{{$data->ID}}')" id="deleteList" type="button" class="btn btn-danger btn-sm">Delete</button>
+               <!--<a href="{{ URL::to( 'export/shipment/order/delete/' .$data->ID)  }}" id="delete" class="btn btn-danger btn-circle btn-sm">Delete</a>-->
+          </td>
+        </tr>
+      @endforeach
+  </tbody>
+</table>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 </div>
    <script src="{{ URL::asset( 'js/shipment_details.js') }}"></script>
    <!-- /.content-wrapper -->
@@ -1170,17 +1667,27 @@
     
         $('#listShipment').DataTable( {
          buttons: [
+<<<<<<< HEAD
              @if( $status == 1)
             {
+=======
+          {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 extend: 'excelHtml5',
                 text:'Export',
                 title:'Export Shipment Details',
                 exportOptions: {
+<<<<<<< HEAD
                     columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17],
                      rows: [@foreach($newShipmentView as $key=>$data) @php  $key = $key @endphp {{ $key .',' }} @endforeach]
                 }
             }
             @endif
+=======
+                    columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17]
+                }
+            }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ],
     
     

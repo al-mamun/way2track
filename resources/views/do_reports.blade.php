@@ -35,6 +35,7 @@
         .goods_recipe tr td:last-child {
             /*border-right: 2px solid #000;*/
         }
+<<<<<<< HEAD
         br {
         display: none;
         }
@@ -46,11 +47,18 @@
     </style>
 </head>
 <body style=" size: letter;">
+=======
+       
+    </style>
+</head>
+<body>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     <div style="width:600px; margin:0 auto;">
         <header>
             <div class="logo"  style="opacity: 1; width:150px; margin: 30 auto">
                 <img src="{{ URL::asset( 'assets/img/logo.png') }}" alt="Total Office Logo" class="brand-image" style="opacity: 1; width:100%; margin: 0 auto">
             </div>
+<<<<<<< HEAD
             <h4 style="text-align: center;"><u>Delivery  Note</u></h4>
         </header>
         <div class="main">
@@ -82,6 +90,12 @@
                     </div>
                             
                 </div>
+=======
+            <h4 style="text-align: center;"><u>Delivery Order Receipt Note</u></h4>
+        </header>
+        <div class="main">
+            <div style="width:100%;overflow: hidden; height:150px;">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 <div style="width:200px; float:right; display:block">
                     <table class="table table-right">
                         <thead>
@@ -110,8 +124,22 @@
                             </tr>
                             <tr>
                                 <th scope="row">
+<<<<<<< HEAD
                                    
                                     Customer PO No
+=======
+                                    @php $totalAdress = count($deliveryAddress) -1; @endphp
+                                    
+                                    @foreach($deliveryAddress as $key => $addressInfo)
+                                        
+                                        @if($totalAdress == $key)
+                                            {{ $addressInfo }}
+                                        @else
+                                            {{ $addressInfo.',' }}
+                                        @endif
+                                      
+                                    @endforeach
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 </th>
                                 <td>
                                     @php $total = count($salesOrderHeaderPoNO) -1; @endphp
@@ -119,7 +147,11 @@
                                         @if($total == $key)
                                             {{ $customerPoNo }}
                                         @else
+<<<<<<< HEAD
                                             {!! $customerPoNo.'<br>' !!}
+=======
+                                            {{ $customerPoNo.',' }}
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                         @endif
                                         
                                     @endforeach
@@ -135,7 +167,11 @@
                         <tr>
                             <th scope="col">Sl</th>
                             <th scope="col">Delivery ID</th>
+<<<<<<< HEAD
                             <!--<th scope="col">PO Number</th>-->
+=======
+                            <th scope="col">PO Number</th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <th scope="col">Item Description</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Remark</th>
@@ -147,7 +183,11 @@
                         <tr>
                             <th scope="row">{{ $sl++ }}</th>
                             <td> {{ $doData->DELIVERY_ID }} </td>
+<<<<<<< HEAD
                             <!--<td>  <span class="width:250px; display:block;">{{ $doData->PO_NO }}  </td>-->
+=======
+                            <td>  <span class="width:250px; display:block;">{{ $doData->PO_NO }}  </td>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             <td> {{ $doData->DESCRIPTION }}  </td>
                             <td>  {{ $doData->QTY }}  </td>
                             <td>  </td>
@@ -159,6 +199,7 @@
 
             </div>
             <div style="width:100%; margin-top:20px; display:block">
+<<<<<<< HEAD
                 <div style="width:300px; float:left; display:block">
                     <p style="font-size:14px;margin-top: 48px; ">For <b> The Total Office Furniture LLC</b></p>
                 </div>
@@ -171,6 +212,13 @@
             <div style="width:100%; margin-top:130px; left:10px; clear:both; position:absolute; bottom:20px;">
                 <p style="text-align:center; font-size:12px;">Office # 1702 (17th Floor) Grosvenor Business Tower,Tecom,Dubai,U.A.E,P.O.BOX26326 Tel+97144508700</p>
             </div>
+=======
+                <div style="width:200px; float:right; display:block">
+                    <h4 style="margin-top: 35px; font-weight: normal;">Received Above Items</h4>
+                    <h4 style="margin-top: 35px; font-weight: normal;">Receiver Sign</h4>
+                </div>
+            </div>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         </div>
     </div>
 </body>

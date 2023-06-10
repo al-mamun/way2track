@@ -150,7 +150,11 @@ h5.by_date_check {
                                      {!! Form::open(array('url'=>'purchase_order_import_csv','role'=>'form','method'=>'POST','enctype'=>'multipart/form-data','class'=>'from-submit-status'))!!}
                                         <input id="file" accept="csv,exl" name="fileToUpload" type="file" style="width:371px !important"/> 
                                         <input  name="wip_hidden_csv" id="wip_hidden_csv" type="hidden"  @if(isset($id)) value="{{ $saledOrderHeaders[0]->PO_NO }}" @endif/> 
+<<<<<<< HEAD
                                         <button class="btn btn-success import_button" name="submit" type="submit">XLS Import </button>
+=======
+                                        <button class="btn btn-success import_button" name="submit" type="submit">CSV Import </button>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                     </form>
                                 </div>
                                 <!--<a href="{{ URL::to( 'new/order/details') }}" class="btn btn-success"> Export </a>-->
@@ -174,11 +178,19 @@ h5.by_date_check {
                                 <th scope="col">WIP</th>
                                 <th scope="col">PO No</th>
                                 <th scope="col"><span style="width:auto; display:block">PO Status</span></th>
+<<<<<<< HEAD
                                 <th scope="col"><span style="width:auto; display:block">Supplier </span></th>
                                 <th scope="col"><span style="width:auto; display:block">Supplier Site</span></th>
                                 <th scope="col"><span style="width:auto; display:block">Reqd GRD</span></th>
                                 <th scope="col"><span style="width:auto; display:block">Ack No</span></th>
                                 <th scope="col"><span style="width:auto; display:block">Ack Date</span></th>
+=======
+                                <th scope="col"><span style="width:auto; display:block">Supplier Name</span></th>
+                                <th scope="col"><span style="width:auto; display:block">Supplier Site</span></th>
+                                <th scope="col"><span style="width:auto; display:block">REQD Exf Date</span></th>
+                                <th scope="col"><span style="width:auto; display:block">ACK No</span></th>
+                                <th scope="col"><span style="width:auto; display:block">ACK Date</span></th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -198,7 +210,11 @@ h5.by_date_check {
         				        @else
         				            @php $REQD_EXF_DATE =$salesOrderInfo->REQD_EXF_DATE; @endphp
         				        @endif
+<<<<<<< HEAD
         				        <span i class="text" style="width:86px; display:block; text-align:center"> {{ $REQD_EXF_DATE }}</span>
+=======
+        				        {{ $REQD_EXF_DATE }}
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             </td>
                             <td>{{ $salesOrderInfo->ACK_NO }}</td>
                             <td>
@@ -207,12 +223,21 @@ h5.by_date_check {
         				        @else
         				            @php $ACK_DATE =$salesOrderInfo->ACK_DATE; @endphp
         				        @endif
+<<<<<<< HEAD
         				        	<span i class="text" style="width:86px; display:block; text-align:center">{{ $ACK_DATE }}</span>
                             
                             </td>
                             <td>
                                 @can('check po and details')
                                     <a href="{{ URL::to( 'purchase/order/detail/view/' . $salesOrderInfo->PO_NO) }}" type="button" class="btn btn-block btn-info btn-sm">Details</a>
+=======
+        				        {{ $ACK_DATE }}
+                            
+                            </td>
+                            <td>
+                                 @can('check po and details')
+                                <a href="{{ URL::to( 'purchase/order/detail/view/' . $salesOrderInfo->PO_NO) }}" type="button" class="btn btn-block btn-info btn-sm">Details</a>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                 @endcan
                                 <!--<a href="{{ URL::to( '/purchase/order/list/edit/' . $salesOrderInfo->ID) }}" type="button" class="btn btn-block btn-success btn-sm">Edit</a>-->
                                 <!--<a href="{{ route('purchase.delete',$salesOrderInfo->ID) }}" type="button" class="btn btn-block btn-danger btn-sm">Delete</a>-->
@@ -289,13 +314,17 @@ h5.by_date_check {
         language: {
           "emptyTable": "No result found"
         },
+<<<<<<< HEAD
         // fixedHeader: true,
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         "autoWidth": false,
         pageLength: 10,
         paging: true,
         // sDom: "Rlfrtip",
         dom: 'Bfrtip',
     } );
+<<<<<<< HEAD
     
     $('#tableResponsive5 tbody').on('click', 'tr', function () {
          $('.selected').removeClass('selected');
@@ -306,6 +335,9 @@ h5.by_date_check {
         $("#wip_hidden_csv").val(id);
         
     });
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     $("tbody tr").click(function () {
         $('.selected').removeClass('selected');
         $(this).addClass("selected");

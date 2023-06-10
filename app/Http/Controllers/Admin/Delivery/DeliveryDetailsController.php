@@ -245,7 +245,11 @@ class DeliveryDetailsController extends Controller
 
             DeliveryDetailTemp::truncate();
             
+<<<<<<< HEAD
             return redirect('/export/delivery/details')->with(['success' => "Delivery details have been successfully added."]); 
+=======
+            return redirect('/export/delivery/details')->with(['success' => "Delivery details has been successfully added."]); 
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
     }
     // delivery Export
@@ -259,10 +263,15 @@ class DeliveryDetailsController extends Controller
      // delivery Export
     public function deliveryDetailsExportSearch(Request $request) {
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $shipmentID = $request->shipment_id;
         $deliveryID = $request->delivery_id;
         $PO_NO      = $request->PO_NO;
         
+<<<<<<< HEAD
         if(empty($shipmentID) && empty($deliveryID) && empty($PO_NO) ){
             
             $deliveryExportDetails = DeliveryDetail::latest()
@@ -273,6 +282,8 @@ class DeliveryDetailsController extends Controller
             return view('admin.export-delivery-details.search',compact('deliveryExportDetails','status'));
         }
          
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         if(!empty($shipmentID) && !empty($deliveryID) && !empty($PO_NO) ){
             
             $deliveryExportDetails = DeliveryDetail::latest()
@@ -317,8 +328,13 @@ class DeliveryDetailsController extends Controller
                 ->get();
         }
         
+<<<<<<< HEAD
           $status = 0;
         return view('admin.export-delivery-details.search',compact('deliveryExportDetails','status'));
+=======
+        
+        return view('admin.export-delivery-details.search',compact('deliveryExportDetails'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     }
     
      // delivery Export

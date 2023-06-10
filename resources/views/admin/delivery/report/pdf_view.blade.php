@@ -45,7 +45,11 @@
                       <!-- form start -->
                     
                         <div class="card-body">
+<<<<<<< HEAD
                             <iframe src="{{ $headerInfo->FILE_NAME }}" style="width:100%; height:600px;"></iframe>
+=======
+                            <iframe src="{{ URL::asset( $headerInfo->FILE_NAME ) }}" style="width:100%; height:600px;"></iframe>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             
                             
                         </div>

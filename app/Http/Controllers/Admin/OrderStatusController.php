@@ -9,8 +9,12 @@ use App\Models\Wips;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
+<<<<<<< HEAD
 use App\Models\SalesOrderDetailstem;
 use App\Models\Settings;
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use Carbon\Carbon;
 use Rap2hpoutre\FastExcel\FastExcel;
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
@@ -68,17 +72,25 @@ class OrderStatusController extends Controller
         
          $date = $request->get('date');
          $TGT_HANDOVER_DT = Carbon::createFromFormat('d/F/Y', $date)->format('Y-m-d');
+<<<<<<< HEAD
     
         $installtion_time = $request->get('installtion_time');
         // $installtion_times = Carbon::createFromFormat('d/F/Y', $installtion_time)->format('Y-m-d');
          
+=======
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         if ($validator->passes()) {
             
             $customer = $request->get('customer');
             $salesOrder = new SalesOrderHeader();
             
             if(!empty( $request->get('WIP1')) && !empty( $request->get('WIP') )) {
+<<<<<<< HEAD
                 $salesOrder->WIP                     = $request->get('WIP1').'-'.$request->get('WIP');
+=======
+                $salesOrder->WIP                     =  $request->get('WIP1').'-'.$request->get('WIP');
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 $salesOrder->CUSTOMER_NAME           = $request->get('customer');
                 $salesOrder->CUSTOMER_PO_NO          = $request->get('CUSTOMER_PO_NO');
                 $salesOrder->PROJECT_NAME            = $request->get('PROJECT_NAME');
@@ -88,8 +100,11 @@ class OrderStatusController extends Controller
                 $salesOrder->PROJECTMANAGER          = $request->get('PROJECTMANAGER');
                 $salesOrder->PROJECTMANAGER_EMAIL    = $request->get('PROJECTMANAGER_EMAIL');
                 $salesOrder->SALESPERSON_EMAIL       = $request->get('SALESPERSON_EMAIL');
+<<<<<<< HEAD
                 $salesOrder->INSTALLATION_TIME       = $installtion_time;
                 $salesOrder->DESIGNER_EMAIL_ADDRESs  = $request->get('DESIGNER_EMAIL_ADDRESs');
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 $salesOrder->COMMENTS                = $request->get('comments');
            
                 if( $salesOrder->save()) {
@@ -151,9 +166,12 @@ class OrderStatusController extends Controller
             DB::table('w2t_sales_order_header')
             ->where('ID', $request->id)
             ->update(['SO_STATUS' => $request->SO_STATUS]);
+<<<<<<< HEAD
             
             return $request->SO_STATUS;
             
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         } else if($type == 3) {
            
         //   $date = $request->get('hand_over_date');
@@ -213,6 +231,7 @@ class OrderStatusController extends Controller
             ->where('ID', $request->id)
             ->update(['CUSTOMER_PO_NO' => $request->CUSTOMER_PO_NO]);
             
+<<<<<<< HEAD
             return  $request->CUSTOMER_PO_NO;
             
         } else if($type == 12) {
@@ -237,6 +256,9 @@ class OrderStatusController extends Controller
             
         }
         
+=======
+        }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
           
        
     }
@@ -321,11 +343,16 @@ class OrderStatusController extends Controller
         if(!empty($salesOrderDetailsInfo)) {
               SalesOrderHeader::where('WIP', $WIP )->delete();
            SalesOrderDetails::where('WIP', $WIP )->delete(); 
+<<<<<<< HEAD
         } else {
              SalesOrderHeader::where('WIP', $WIP )->delete();
         }
        
        
+=======
+        }
+       
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
       
         
         return 201;
@@ -347,7 +374,10 @@ class OrderStatusController extends Controller
             'status'            => 3,
             'menu_open'         => 2,
         ]);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     }
     
    
@@ -371,16 +401,29 @@ class OrderStatusController extends Controller
         
         $type   = $request->type;
        
+<<<<<<< HEAD
         $checkobx = $request->checkbox;
         $from     = $request->from;
         $to       = $request->to;
         $wip      = $request->wip;
       
+=======
+      
+            
+        $checkobx = $request->checkbox;
+        $from = $request->from;
+        $to   = $request->to;
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $columnSync        = DB::table('w2t_setting_table')->first();
         
         $columnSync        =  json_decode($columnSync->SALES_ORDER_HEADER);
         
+<<<<<<< HEAD
         if(empty($checkobx) && empty($from) && empty($to) && empty($wip)) {
+=======
+        if(empty($checkobx) && empty($from) && empty($to)) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
             $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
                 ->get(); 
@@ -392,11 +435,16 @@ class OrderStatusController extends Controller
                 'menu_open'         => 2,
             ]);
         }
+<<<<<<< HEAD
         if(!empty($checkobx) && !empty($from) && !empty($to) && !empty($wip)) {
+=======
+        if(!empty($checkobx) && !empty($from) && !empty($to)) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
                 ->whereBetween('TGT_HANDOVER_DT',[$from,$to ])
                 ->whereIn('SO_STATUS', $checkobx)
+<<<<<<< HEAD
                 ->where('wip', $wip)
                 ->get(); 
                 
@@ -457,6 +505,8 @@ class OrderStatusController extends Controller
             $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
                 ->where('TGT_HANDOVER_DT','>=', $from)
                 ->whereIn('SO_STATUS', $checkobx)
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 ->get(); 
                 
         } else if(!empty($from) && !empty($to)) {
@@ -465,6 +515,7 @@ class OrderStatusController extends Controller
                 ->whereBetween('TGT_HANDOVER_DT',[$from,$to ])
                 ->get(); 
                 
+<<<<<<< HEAD
         } else if(!empty($wip) &&  !empty($checkobx) ) {
             
             $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
@@ -488,6 +539,12 @@ class OrderStatusController extends Controller
             
             $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
                 ->where('TGT_HANDOVER_DT','<=', $to)
+=======
+        } else if(!empty($from) && !empty($to)) {
+            
+            $salesOrderHeaders = SalesOrderHeader::orderBy('ID','desc')
+                ->whereBetween('TGT_HANDOVER_DT',[$from,$to ])
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 ->get(); 
                 
         } else {
@@ -497,6 +554,13 @@ class OrderStatusController extends Controller
                 ->get(); 
         }
             
+<<<<<<< HEAD
+=======
+            
+      
+       
+
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
        return view('admin.order.header.list-export-search',[
             'saledOrderHeaders' =>  $salesOrderHeaders,
             'columnSync'        =>  $columnSync,
@@ -509,8 +573,11 @@ class OrderStatusController extends Controller
 
     public function fileUpload(Request $request) {
         
+<<<<<<< HEAD
         // echo base_path();
         // die();
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         if( $request->hasFile('fileToUpload')) {
             
             $this->validate($request, [
@@ -529,11 +596,19 @@ class OrderStatusController extends Controller
             
        
             $i = 0;
+<<<<<<< HEAD
             // $path= public_path().'/images/sales/'.$request->get('session_id');
             
             // if(!File::exists( $path)) {
             //   File::makeDirectory($path, 0777, true, true);
             // }
+=======
+            $path= public_path().'/images/sales/'.$request->get('session_id');
+            
+            if(!File::exists( $path)) {
+               File::makeDirectory($path, 0777, true, true);
+            }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             $checkExistFirst = DB::table('w2t_wips')
                 ->where('WIP', $request->get('wip_hidden'))
@@ -594,9 +669,13 @@ class OrderStatusController extends Controller
                     }
                     
                     $myFileName = $request->get('session_id').'_'.time() .++$i. '.' . $extension;
+<<<<<<< HEAD
                     // file_put_contents('images/'. $myFileName, $imageContents);
                     
                     file_put_contents( base_path().Settings::UPLOAD_PATH.'images/'. $myFileName, $imageContents);
+=======
+                    file_put_contents('images/'. $myFileName, $imageContents);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                  
               
                     DB::table('w2t_sales_image')->insert(
@@ -610,7 +689,12 @@ class OrderStatusController extends Controller
                     );
         
                 
+<<<<<<< HEAD
                 }  elseif(!empty($mapDrawingListC[1])) {
+=======
+                }
+                elseif(!empty($mapDrawingListC[1])) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                      if ($drawing instanceof MemoryDrawing) {
                         
                         //  echo "<pre>";
@@ -649,9 +733,13 @@ class OrderStatusController extends Controller
                     }
                     
                     $myFileName = $request->get('session_id').'_'.time() .++$i. '.' . $extension;
+<<<<<<< HEAD
                     
                     // file_put_contents('images/'. $myFileName, $imageContents);
                     file_put_contents(base_path().Settings::UPLOAD_PATH.'images/'. $myFileName, $imageContents);
+=======
+                    file_put_contents('images/'. $myFileName, $imageContents);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                  
               
                     DB::table('w2t_sales_image')->insert(
@@ -659,7 +747,11 @@ class OrderStatusController extends Controller
                             'WIP'          => $request->get('wip_hidden'), 
                             'uniq_id'      => $request->get('session_id'), 
                             'key'          => $key,
+<<<<<<< HEAD
                             'image'        => Settings::UPLOAD_PATH.'images/'.$myFileName,
+=======
+                            'image'        => $myFileName,
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                             'cell_number'  => $drawing->getCoordinates()
                         ]
                     );
@@ -681,11 +773,17 @@ class OrderStatusController extends Controller
             ini_set('max_execution_time', 0);
     
             $fileExtension = $request->file('fileToUpload')->getClientOriginalExtension();
+<<<<<<< HEAD
             
             SalesOrderDetailstem::truncate();
             // die();
             Excel::import(new UsersImport($wipNo),request()->file('fileToUpload'), $fileExtension);
            
+=======
+            // die();
+            Excel::import(new UsersImport($wipNo),request()->file('fileToUpload'),$fileExtension);
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $checkExist = DB::table('w2t_wips')
                 ->where('WIP', $request->get('wip_hidden'))
                 ->first();
@@ -703,7 +801,11 @@ class OrderStatusController extends Controller
             
             
             Session::flash('success','File uploaded. PLEASE REVIEW AND CLICK SAVE BELOW.');
+<<<<<<< HEAD
             
+=======
+           
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             return redirect('list/order/details?token='.$session_id);
         } else {
             Session::flash('error','Please select a file to import first.');

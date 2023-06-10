@@ -39,12 +39,20 @@
       <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+<<<<<<< HEAD
                 <h1>Review Shipment Details</h1>
+=======
+                <h1>Export Shipment Details</h1>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
+<<<<<<< HEAD
                   <li class="breadcrumb-item active">Review Shipment Details</li>
+=======
+                  <li class="breadcrumb-item active">Export Shipment Details</li>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 </ol>
             </div>
         </div>
@@ -83,12 +91,15 @@
               <!-- /.card-header -->
                 <div class="card-body">
                     <div class="card"  style="padding:10px;">
+<<<<<<< HEAD
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
         	            <strong>Please Review And Click Save Below.</strong>
         	            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         	            	 <span aria-hidden="true">&times;</span>
         	            </button>
         	          </div>
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         
                         <!-- /.card-header -->
                         <div class="card-content table-reponsive list_of_card_result" style="width: 100%;display: block;overflow-x: scroll;">
@@ -105,7 +116,11 @@
                                         <th>Supplier</th>
                                         <th>PO No</th>
                                         <!--<th>WIP</th>-->
+<<<<<<< HEAD
                                         <th>Receive date</th>
+=======
+                                        <th>Warehouse date</th>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                                         <th>Item</th>
                                         <th>Description  </th>
                                         <th>Comments </th>
@@ -192,6 +207,7 @@
                     						<input type="text" value="{{ $data->ITEM }}" class="editbox" id="ITEM_input_{{ $data->ID }}" style="display:none">
                     				  </td>
             		                   <td style="background-color:#E8ECF1;" class="editDESCRIPTION" id="{{ $data->ID }}">
+<<<<<<< HEAD
             		                       <div  class="editDESCRIPTION" id="{{ $data->ID }}">
                 						        <span id="DESCRIPTION_{{ $data->ID }}" class="text"  style="width: 300px; display: block;">
                 						    
@@ -220,6 +236,10 @@
                                             @endif
                     						<!--<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>-->
                     						<!--<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">-->
+=======
+                    						<span id="DESCRIPTION_{{ $data->ID }}" class="text">{{ $data->DESCRIPTION }}</span>
+                    						<input type="text" value="{{ $data->DESCRIPTION }}" class="editbox" id="DESCRIPTION_input_{{ $data->ID }}" style="display:none">
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     				  </td>
                     				  <td style="background-color:#E8ECF1;" class="editCOMMENTS" id="{{ $data->ID }}">
                     						<span id="COMMENTS_{{ $data->ID }}" class="text">{{ $data->COMMENTS }}</span>
@@ -303,6 +323,7 @@
     </section>
     <!-- /.content -->
   </div>
+<<<<<<< HEAD
   @foreach($newShipmentView as $key=>$data)
         <style>
             #moreText_{{ $data->ID }} {
@@ -345,6 +366,8 @@
             }
         </script>
 @endforeach
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 <!-- /.content-wrapper -->
 <!-- /.content-wrapper -->
 <script type="text/javascript">
@@ -877,6 +900,7 @@
     
     $('#listShipment').DataTable( {
          buttons: [
+<<<<<<< HEAD
         //   {
         //         extend: 'excelHtml5',
         //         text:'Export',
@@ -885,6 +909,16 @@
         //             columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17]
         //         }
         //     }
+=======
+          {
+                extend: 'excelHtml5',
+                text:'Export',
+                title:'Export Shipment Details',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6,7,8,9 ,10,11,12,13,14,15,16,17]
+                }
+            }
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ],
     
     

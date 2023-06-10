@@ -10,10 +10,16 @@ use Rap2hpoutre\FastExcel\FastExcel;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
+<<<<<<< HEAD
 use App\Models\Settings;
 use App\Models\SalesOrderDetailstem;
 use DB;
 use Session;
+=======
+use Session;
+use App\Models\SalesOrderDetailstem;
+use DB;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 use Validator;
 use Carbon\Carbon;
 use URL;
@@ -28,7 +34,11 @@ class OrderController extends Controller
         $status     =  4;
         $menu_open  =  2;
         $salesOrderWp = SalesOrderHeader::get();
+<<<<<<< HEAD
         $sodCommentValue = SodCommentValue::orderBy('FLOW','ASC')->get();
+=======
+        $sodCommentValue = SodCommentValue::get();
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
      
 
@@ -80,12 +90,19 @@ class OrderController extends Controller
         $detailsOption = SalesOrderDetailstem::where('temp_time', $token)->get();
         
         foreach($detailsOption as $detailsInfo) {
+<<<<<<< HEAD
             
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $newOrder = new SalesOrderDetails;
             $newOrder->WIP             = $detailsInfo->WIP;
             $newOrder->ITEM            = $detailsInfo->ITEM;
             $newOrder->QTY             = $detailsInfo->QTY;
+<<<<<<< HEAD
             $newOrder->DESCRIPTION     = !empty($detailsInfo->DESCRIPTION) ? $detailsInfo->DESCRIPTION : '';
+=======
+            $newOrder->DESCRIPTION     = !empty($detailsInfo->DESCRIPTION)?$detailsInfo->DESCRIPTION : '';
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             $newOrder->COMMENTS        = $detailsInfo->COMMENTS;
             $newOrder->EXP_HANDOVER_DT = $detailsInfo->EXP_HANDOVER_DT;
             $newOrder->EXP_DELIVERY    = $detailsInfo->EXP_DELIVERY;
@@ -133,7 +150,11 @@ class OrderController extends Controller
                 #Image upload section
                 $thumbImage         = $request->file('THUMBNAIL_IMAGE');
                 $input['imagename'] = time().'.'.$thumbImage->getClientOriginalExtension();
+<<<<<<< HEAD
                 $destinationPath    = base_path().Settings::UPLOAD_PATH.'images/';
+=======
+                $destinationPath    = public_path('images');
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 
                 $thumbImage->move($destinationPath, $input['imagename']);
             }
@@ -180,10 +201,16 @@ class OrderController extends Controller
             #Image upload section
             $thumbImage         = $request->file('THUMBNAIL_IMAGE');
             $input['imagename'] = time().'.'.$thumbImage->getClientOriginalExtension();
+<<<<<<< HEAD
             $destinationPath    = base_path().Settings::UPLOAD_PATH.'images/';
 
             $thumbImage->move($destinationPath, $input['imagename']);
             
+=======
+            $destinationPath    = public_path('images');
+
+            $thumbImage->move($destinationPath, $input['imagename']);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         } else {
 
             $salesOrderDetails  = SalesOrderDetails::where('ID', $id)->first();
@@ -204,7 +231,11 @@ class OrderController extends Controller
        
         return json_encode([
                 "status" => 200,
+<<<<<<< HEAD
                 'image_url' =>Settings::UPLOAD_PATH.'images/'.$input['imagename'],
+=======
+                'image_url' => URL::asset('images/'.$input['imagename']),
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         ]);
         
         return 401;
@@ -308,9 +339,15 @@ class OrderController extends Controller
     public function listOfOrderDetails(Request $request) {
 
         $salesOrderDetails = SalesOrderDetails::latest()->paginate(1);
+<<<<<<< HEAD
         $status                = 5;
         $menu_open             = 2;
         $token                 = $request->token;
+=======
+        $status     = 5;
+        $menu_open  = 2;
+        $token  = $request->token;
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         $salesOrderDetailsTemp = [];
         
         if(isset($token)) {
@@ -323,9 +360,14 @@ class OrderController extends Controller
         $columnSync        = DB::table('w2t_setting_table')->first();
         
         $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
+<<<<<<< HEAD
         $uploadPath = Settings::UPLOAD_PATH;
         
         return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue','columnSync','uploadPath'));
+=======
+        
+        return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue','columnSync'));
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
 
     }
     
@@ -366,6 +408,7 @@ class OrderController extends Controller
                 	     return view('admin.order.details.descraption',compact('dataInfo'));
                 	
                 	})
+<<<<<<< HEAD
                 	->editColumn('DESCRIPTION2', function ($dataInfo) {
                 	    return $dataInfo->DESCRIPTION;
                 	
@@ -374,13 +417,22 @@ class OrderController extends Controller
                 	    
                 	     return '
                     						<span id="EXP_DELIVERY_'.$dataInfo->ID.'" class="text EXP_DELIVERY_box_text" style="width:80px; display:block">'. date("d M  Y", strtotime($dataInfo->EXP_DELIVERY)) .'</span>
+=======
+                	->editColumn('EXP_DELIVERY', function ($dataInfo) {
+                	     return '
+                    						<span id="EXP_DELIVERY_'.$dataInfo->ID.'" class="text EXP_DELIVERY_box_text">'.$dataInfo->EXP_DELIVERY.'</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     						<input type="date" value="'. $dataInfo->EXP_DELIVERY.'" class="editbox" id="EXP_DELIVERY_input_'. $dataInfo->ID.'" style="display:none">
                     	
                     			';
                 	})
                 	->editColumn('EXP_HANDOVER_DT', function ($dataInfo) {
                 	     return '
+<<<<<<< HEAD
                     						<span id="EXP_HANDOVER_DT_'.$dataInfo->ID.'" class="text exp_handover_box_text"  style="width:80px; display:block">'.date("d M  Y", strtotime($dataInfo->EXP_HANDOVER_DT)).'</span>
+=======
+                    						<span id="EXP_HANDOVER_DT_'.$dataInfo->ID.'" class="text exp_handover_box_text">'.$dataInfo->EXP_HANDOVER_DT.'</span>
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                     						<input type="date" value="'. $dataInfo->EXP_HANDOVER_DT.'" class="editbox" id="EXP_HANDOVER_DT_input_'. $dataInfo->ID.'" style="display:none">
                     			';
                 	})
@@ -412,6 +464,7 @@ class OrderController extends Controller
                 	})
                 	
                 	->editColumn('THUMBNAIL_IMAGE', function ($dataInfo) {
+<<<<<<< HEAD
                 	        
                 	        $upload_path = Settings::UPLOAD_PATH.'images/';
                 	        
@@ -422,6 +475,16 @@ class OrderController extends Controller
             //     	        return '<a style=" display: block;" class="example-image-link" href="javacript:void(0)" data-lightbox="example-1">
 							     //       <img style="max-width: 80px; display: block;" class="example-image-link" src= '.$url.'>
 							     //   </a>';
+=======
+                	    
+                	        $url = URL::asset('images/'.$dataInfo->THUMBNAIL_IMAGE);
+                	        
+                	        return view('admin.order.details.image_preview',compact('dataInfo'));
+                	        
+                	        return '<a style=" display: block;" class="example-image-link" href="javacript:void(0)" data-lightbox="example-1">
+							            <img style="max-width: 80px; display: block;" class="example-image-link" src= '.$url.'>
+							        </a>';
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 	})
                     ->addColumn('action', function($row){
      
@@ -484,9 +547,14 @@ class OrderController extends Controller
             $hand_over_to   = $request->hand_over_to;
             
             if(empty($WIP) && empty($COMMENTS) && empty($from)  && empty($to) && empty($hand_over_from) && empty($hand_over_to) &&  empty($checkobx)) {
+<<<<<<< HEAD
                 
                 $salesOrderDetails = SalesOrderDetails::latest()->limit(500)->get();
                 
+=======
+                $salesOrderDetails = SalesOrderDetails::latest()->limit(500)->get();
+               
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 return view('admin.order.details.result',[
                     'salesOrderDetails' =>  $salesOrderDetails,
                     'columnSync'        =>  $columnSync,
@@ -549,10 +617,15 @@ class OrderController extends Controller
                     ->get(); 
             } else if(!empty($hand_over_from) && !empty($hand_over_to)) {
             
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
                     ->whereBetween('EXP_HANDOVER_DT',[$hand_over_from, $hand_over_to])
                     ->get(); 
 
+<<<<<<< HEAD
             }  else if(!empty($hand_over_from) && !empty($from)) {
                 
               
@@ -609,10 +682,57 @@ class OrderController extends Controller
     //         'status'            => 3,
     //         'menu_open'         => 2,
     //     ]);
+=======
+            }   
+           
+         }
+                
+        // } else if($type == 4 ) {
+             
+        //     $WIP = $request->WIP;
+            
+        //     if(!empty($WIP)) {
+        //         $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+        //         ->where('WIP', $WIP)
+        //         ->get(); 
+        //     } else {
+        //       $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+        //         ->get();  
+        //     }
+            
+                
+        // }  else if($type == 5 ) {
+             
+        //     $COMMENTS = $request->COMMENTS;
+            
+        //     $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+        //         ->where('EX_COMMENTS', $COMMENTS)
+        //         ->get(); 
+                
+                
+        // }   else {
+            
+        //     $from = $request->from;
+        //     $to   = $request->to;
+            
+        //     $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+        //         ->whereBetween('EXP_DELIVERY',[$from,$to])
+        //         ->get(); 
+        // }
+       
+
+       return view('admin.order.details.result',[
+            'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
+            'status'            => 3,
+            'menu_open'         => 2,
+        ]);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
         
     }
     
+<<<<<<< HEAD
     private function ajaxDatatableSearch($data) {
         return Datatables::of($data)
             ->addIndexColumn()
@@ -705,6 +825,8 @@ class OrderController extends Controller
         return view('users');
     }
     
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     private function wpAllFilter($request) {
         
         $WIP        = $request->WIP;
@@ -733,6 +855,7 @@ class OrderController extends Controller
                 ->get(); 
                 
                 
+<<<<<<< HEAD
         }   elseif( !empty($to) && !empty($hand_over_from) && !empty($hand_over_to)) {
 
             $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -770,6 +893,9 @@ class OrderController extends Controller
                 
                 
         }    else if(!empty($from) && !empty($to) && !empty($COMMENTS) ) {
+=======
+        }  else if(!empty($from) && !empty($to) && !empty($COMMENTS) ) {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
       
             $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -804,6 +930,7 @@ class OrderController extends Controller
                 ->get(); 
                 
                 
+<<<<<<< HEAD
         }  else if(!empty($from) && !empty($WIP) )  {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -853,6 +980,36 @@ class OrderController extends Controller
              
         
        return $this->ajaxDatatableSearch($salesOrderDetails);   
+=======
+        }  else if(!empty($COMMENTS)) {
+            
+      
+            $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->where('WIP', $WIP)
+                ->where('EX_COMMENTS', $COMMENTS)
+                ->get(); 
+                
+                
+        } else {
+            
+            $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->where('WIP', $WIP)
+                ->get(); 
+        }
+         
+        
+        $columnSync        = DB::table('w2t_setting_table')->first();
+        
+        $columnSync        =  json_decode($columnSync->SALES_ORDER_DETAILS);
+        
+            
+        return view('admin.order.details.result',[
+            'salesOrderDetails' =>  $salesOrderDetails,
+            'columnSync'        =>  $columnSync,
+            'status'            => 3,
+            'menu_open'         => 2,
+        ]);
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         
     }
     
@@ -927,6 +1084,7 @@ class OrderController extends Controller
                     ->whereBetween('EXP_DELIVERY',[$from,$to])
                     ->get();
                 
+<<<<<<< HEAD
                 }  else if(!empty($from) )  {
                 
                     $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -961,6 +1119,8 @@ class OrderController extends Controller
                         ->whereNull('THUMBNAIL_IMAGE')
                         ->get(); 
     
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                 } else if(!empty($WIP)) {
                 
                   $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1007,6 +1167,7 @@ class OrderController extends Controller
                     ->where('EX_COMMENTS', $COMMENTS)
                     ->get();
                 
+<<<<<<< HEAD
             } else if(!empty($from) )  {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1042,11 +1203,17 @@ class OrderController extends Controller
                     ->whereNotNull('THUMBNAIL_IMAGE')
                     ->get(); 
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             } else if(!empty($WIP)) {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
                     ->whereNotNull('THUMBNAIL_IMAGE')
+<<<<<<< HEAD
               
+=======
+                    ->where('WIP', $WIP)
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
                         
                     ->get(); 
             } else {
@@ -1078,6 +1245,7 @@ class OrderController extends Controller
                     ->whereBetween('EXP_DELIVERY',[$from,$to])
                     ->get();
                 
+<<<<<<< HEAD
             } else if( !empty($from) && !empty($to)) {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1091,6 +1259,8 @@ class OrderController extends Controller
                     ->whereBetween('EXP_HANDOVER_DT',[$hand_over_from, $hand_over_to])
                     ->get();
                 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             } else if(!empty($WIP) && !empty($COMMENTS)) {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1099,6 +1269,7 @@ class OrderController extends Controller
                     ->where('EX_COMMENTS', $COMMENTS)
                     ->get();
                 
+<<<<<<< HEAD
             } else if(!empty($from) )  {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1131,6 +1302,8 @@ class OrderController extends Controller
                 
                     ->get(); 
 
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             } else if(!empty($WIP)) {
                 
                 $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1143,7 +1316,11 @@ class OrderController extends Controller
             }
         }
         
+<<<<<<< HEAD
         return $this->ajaxDatatableSearch($salesOrderDetails);   
+=======
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
             'columnSync'        =>  $columnSync,
@@ -1191,6 +1368,7 @@ class OrderController extends Controller
                 ->get(); 
                 
                 
+<<<<<<< HEAD
         }   else if(!empty($from) )  {
                 
             $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
@@ -1225,13 +1403,20 @@ class OrderController extends Controller
                 ->get(); 
 
         } else {
+=======
+        }  else {
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
             $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
                 ->where('EX_COMMENTS', $COMMENTS)
                 ->get(); 
         }
          
+<<<<<<< HEAD
         return $this->ajaxDatatableSearch($salesOrderDetails);   
+=======
+        
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
         return view('admin.order.details.result',[
             'salesOrderDetails' =>  $salesOrderDetails,
@@ -1262,13 +1447,19 @@ class OrderController extends Controller
             DB::table('w2t_sales_order_detail')
             ->where('ID', $request->id)
             ->update(['DESCRIPTION' => $request->DESCRIPTION]);
+<<<<<<< HEAD
             
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         } else if($type == 4) {
            
             DB::table('w2t_sales_order_detail')
             ->where('ID', $request->id)
             ->update(['QTY' => $request->QTY]);
+<<<<<<< HEAD
             
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         } else if($type == 5) {
            
             DB::table('w2t_sales_order_detail')
@@ -1320,14 +1511,20 @@ class OrderController extends Controller
             ->where('ID', $request->id)
              ->update(['EXP_DELIVERY' => $request->EXP_DELIVERY]);
              
+<<<<<<< HEAD
              echo date("d M  Y", strtotime( $request->EXP_DELIVERY)) ;
              
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
         } else if($type == 15) {
            
             DB::table('w2t_sales_order_detail_temporary')
             ->where('ID', $request->id)
             ->update(['EXP_HANDOVER_DT' => $request->EXP_HANDOVER_DT]);
+<<<<<<< HEAD
              echo date("d M  Y", strtotime( $request->EXP_HANDOVER_DT)) ;
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
             
         }else if($type == 16) {
            
@@ -1349,6 +1546,7 @@ class OrderController extends Controller
        
     }
     
+<<<<<<< HEAD
     public function salesDetailsDescraption(Request $request) {
         
         $dataInfo =  DB::table('w2t_sales_order_detail')
@@ -1362,6 +1560,8 @@ class OrderController extends Controller
 
     }
    
+=======
+>>>>>>> 117d0602e1f6f1193779b274c288052495a44cf7
     public function salesDetailsCommentsUpdate(Request $request) {
         
         $type = $request->type;
