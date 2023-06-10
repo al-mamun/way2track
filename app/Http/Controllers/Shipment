@@ -1,0 +1,446 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Models\SalesOrderDetails;
+use App\Models\SalesOrderHeader;
+use App\Models\SodCommentValue;
+use Rap2hpoutre\FastExcel\FastExcel;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use Session;
+use App\Models\SalesOrderDetailstem;
+use DB;
+use Validator;
+use Carbon\Carbon;
+
+class OrderController extends Controller
+{
+    
+
+    public function newOrderDetails(Request $request) {
+
+        $status     =  4;
+        $menu_open  =  2;
+        $salesOrderWp = SalesOrderHeader::get();
+        $sodCommentValue = SodCommentValue::get();
+
+     
+
+        return view('admin.order.details.new',compact('salesOrderWp', 'menu_open', 'status', 'sodCommentValue'));
+    }
+    /*
+    public function newOrderDetailsSubmit(Request $request) {
+
+         $this->validate($request, [
+            'ITEM'             =>'required',
+            'Qty'              =>'required',
+            'WIP'              => 'required',
+        ]);
+
+
+        if( $request->hasFile('thumbnail_image')) {
+            #Image upload section
+            $thumbImage         = $request->file('thumbnail_image');
+            $input['imagename'] = time().'.'.$thumbImage->getClientOriginalExtension();
+            $destinationPath    = public_path('images');
+
+            $thumbImage->move($destinationPath, $input['imagename']);
+        }
+
+        $newOrder = new SalesOrderDetails;
+        $newOrder->WIP             = $request->WIP;
+        $newOrder->ITEM            = $request->ITEM;
+        $newOrder->Qty             = $request->Qty;
+        $newOrder->DESCRIPTION     = $request->DESCRIPTION;
+        $newOrder->comments        = $request->comments;
+        $newOrder->EXP_HANDOVER_DT = $request->EXP_HANDOVER_DT;
+        $newOrder->thumbnail_image =  isset($input['imagename'])?$input['imagename']:'default.png';
+        if( $newOrder->save()) {
+            return redirect('/list/order/details')->with([
+                'status' => 1,
+                'success' => "Success fully order details create.",
+            ]);
+        }
+        Session::flash('success','Created Successfully.');
+        return redirect()->route('admin.order.new-order-details');
+       
+     }
+
+*/
+    public function newOrderDetailsSubmitTemp(Request $request) {
+        $token = $request->token;
+        
+        $detailsOption = SalesOrderDetailstem::where('temp_time', $token)->get();
+        
+        foreach($detailsOption as $detailsInfo) {
+            $newOrder = new SalesOrderDetails;
+            $newOrder->WIP             = $detailsInfo->WIP;
+            $newOrder->ITEM            = $detailsInfo->ITEM;
+            $newOrder->QTY             = $detailsInfo->QTY;
+            $newOrder->DESCRIPTION     = !empty($detailsInfo->DESCRIPTION)?$detailsInfo->DESCRIPTION : '';
+            $newOrder->COMMENTS        = $detailsInfo->COMMENTS;
+            $newOrder->EXP_HANDOVER_DT = $detailsInfo->EXP_HANDOVER_DT;
+            $newOrder->EXP_DELIVERY    = $detailsInfo->EXP_DELIVERY;
+            $newOrder->EX_COMMENTS     = $detailsInfo->EX_COMMENTS;
+            $newOrder->save();
+        }
+        SalesOrderDetailstem::truncate();
+        Session::flash('success','File uploaded success fully.');
+        
+        return redirect('list/order/details');
+        
+    }
+    public function newOrderDetailsSubmit(Request $request) {
+
+        $validator   = Validator::make($request->all(), [
+            'WIP'                  => 'required',
+            'ITEM'             =>'required',
+             'QTY'              =>'required',
+          
+        ]);
+        
+        if ($validator->passes()) {
+            
+            $salesOrderHeader = SalesOrderHeader::where('WIP', $request->get('WIP'))->first();
+            
+            if(empty($salesOrderHeader)){
+                return response()->json(
+                    [
+                        'error'=>'WIP number invalid',
+                        'status'=> 401,
+                        
+                    ]);  
+            }
+            
+             
+            $customer = $request->get('customer');
+            $newOrder = new SalesOrderDetails;
+        
+            if( $request->hasFile('THUMBNAIL_IMAGE')) {
+                #Image upload section
+                $thumbImage         = $request->file('THUMBNAIL_IMAGE');
+                $input['imagename'] = time().'.'.$thumbImage->getClientOriginalExtension();
+                $destinationPath    = public_path('images');
+                
+                $thumbImage->move($destinationPath, $input['imagename']);
+            }
+            //return $request;
+            $newOrder = new SalesOrderDetails();
+            
+            $dateEXP_DELIVERY = $request->get('EXP_DELIVERY');
+            $EXP_DELIVERY = Carbon::createFromFormat('d/F/Y', $dateEXP_DELIVERY)->format('Y-m-d');
+            
+            $dateEXP_HANDOVER_DT = $request->get('EXP_HANDOVER_DT');
+            $EXP_HANDOVER_DT = Carbon::createFromFormat('d/F/Y', $dateEXP_HANDOVER_DT)->format('Y-m-d');
+            
+            $newOrder->WIP             = $request->WIP;
+            $newOrder->ITEM            = $request->ITEM;
+            $newOrder->QTY             = $request->QTY;
+            $newOrder->DESCRIPTION     = $request->DESCRIPTION;
+            $newOrder->COMMENTS        = $request->EX_COMMENTS;
+            $newOrder->EX_COMMENTS     = $request->EX_COMMENTS;
+            $newOrder->EXP_HANDOVER_DT = $EXP_HANDOVER_DT;
+            $newOrder->EXP_DELIVERY    = $EXP_DELIVERY;
+            $newOrder->THUMBNAIL_IMAGE = isset($input['imagename'])?$input['imagename']:'default.png';
+            if( $newOrder->save()){
+                
+                return response()->json(
+                [
+                    'success'=>'Added new records.',
+                    'id'=> $newOrder->id,
+                ]);
+            //   Session::flash('success','Created Successfully.');
+            //   return redirect('list/order/details');
+          }
+          
+        }
+        
+        return response()->json(['error'=>$validator->errors()->all()]);
+     }
+     
+    public function listOrderEdit($id) {
+        $status     =  5;
+        $menu_open  =  2;
+        $salesOrderWp = SalesOrderHeader::get();
+        $salesOrderDetails = SalesOrderDetails::where('ID', $id)->first();
+        $sodCommentValue = SodCommentValue::get();
+        
+        return view('admin.order.details.edit',compact('salesOrderWp','salesOrderDetails', 'menu_open', 'status','sodCommentValue'));
+    }
+
+    public function listOrderUpdate(Request $request,$id) {
+
+        $status            =  5;
+        $menu_open         =  2;
+
+        $this->validate($request, [
+            'ITEM'             =>'required',
+            'QTY'              =>'required',
+            'WIP'              =>'required',
+        ]);
+
+
+        if( $request->hasFile('THUMBNAIL_IMAGE')) {
+
+            #Image upload section
+            $thumbImage         = $request->file('THUMBNAIL_IMAGE');
+            $input['imagename'] = time().'.'.$thumbImage->getClientOriginalExtension();
+            $destinationPath    = public_path('images');
+
+            $thumbImage->move($destinationPath, $input['imagename']);
+        } else {
+
+            $salesOrderDetails  = SalesOrderDetails::where('ID', $id)->first();
+            
+            $input['imagename'] = $salesOrderDetails->THUMBNAIL_IMAGE;
+        }
+
+
+        $saverOrder =  SalesOrderDetails::where('ID', $id)->update(
+            [
+                'WIP'             => $request->WIP,
+                'ITEM'            => $request->ITEM,
+                'QTY'             => $request->QTY,
+                'DESCRIPTION'     => $request->DESCRIPTION,
+                'COMMENTS'        => $request->EX_COMMENTS,
+                'EX_COMMENTS'     => $request->EX_COMMENTS,
+                'EXP_HANDOVER_DT' => $request->EXP_HANDOVER_DT,
+                'EXP_DELIVERY' => $request->EXP_DELIVERY,
+                
+                'THUMBNAIL_IMAGE' => isset($input['imagename'])?$input['imagename']:'default.png',
+            ]
+        );
+
+        return redirect('/list/order/details')->with([
+            'status' => 1,
+            'success' => "Successfully update order details .",
+        ]);
+        // $saverOrder->WIP             = $request->WIP;
+        // $saverOrder->ITEM            = $request->ITEM;
+        // $saverOrder->Qty             = $request->Qty;
+        // $saverOrder->DESCRIPTION     = $request->DESCRIPTION;
+        // $saverOrder->comments        = $request->comments;
+        // $saverOrder->EXP_HANDOVER_DT = $request->EXP_HANDOVER_DT;
+        // $saverOrder->thumbnail_image =  isset($input['imagename'])?$input['imagename']:'default.png';
+        // if($saverOrder->save()) {
+        //     return redirect('/list/order/details')->with([
+        //         'status' => 1,
+        //         'success' => "Success fully order details create.",
+        //     ]);
+        // }
+
+    }
+
+    
+    /**
+     * [listOfOrderDetails description]
+     * @return [type] [description]
+     */
+    public function listOfOrderDetails(Request $request) {
+
+        $salesOrderDetails = SalesOrderDetails::latest()->get();
+        $status     = 5;
+        $menu_open  = 2;
+        $token  = $request->token;
+        $salesOrderDetailsTemp = [];
+        
+        if(isset($token)) {
+             $salesOrderDetailsTemp = SalesOrderDetailstem::latest()->where('temp_time',$token)->get(); 
+        }
+        
+        $sodCommentValue = SodCommentValue::get();
+         
+        return view('admin.order.details.list',compact('salesOrderDetails','status','menu_open','salesOrderDetailsTemp','token','sodCommentValue'));
+
+    }
+
+    public function listOfOrderDetailsShow($id) {
+
+         $orderShow = SalesOrderDetails::get();
+         return view('admin.order.new-order-show',compact('orderShow'));
+
+    }
+    
+    public function listOfOrderDetailsDelete($id){
+        $salesOrderWp = SalesOrderHeader::get();
+        $orderDelete = SalesOrderDetails::where('ID', $id)->delete();
+        return redirect()->back()->with(['success' => 'Data Deleted Successfully.']);
+      
+
+    }
+    
+    public function listOfOrderDetailsExpecctedDelivery(Request $request) {
+        
+        $type   = $request->type;
+        $checkobx   = $request->checkbox;
+        if($type == 2  ) {
+             
+      
+            if($checkobx =='Yes') {
+                $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->whereNull('THUMBNAIL_IMAGE')
+                ->get(); 
+                
+            } else if($checkobx =='No') {
+                
+               $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                    ->whereNotNull('THUMBNAIL_IMAGE')
+                    ->get(); 
+                    
+            } else if($checkobx =='Both') {
+               $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                   
+                    ->get(); 
+            }
+      
+                
+        } else if($type == 3 ) {
+             
+            $hand_over_from = $request->hand_over_from;
+            $hand_over_to   = $request->hand_over_to;
+            
+            $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->whereBetween('EXP_HANDOVER_DT',[$hand_over_from, $hand_over_to])
+                ->get(); 
+                
+        } else if($type == 4 ) {
+             
+            $WIP = $request->WIP;
+            
+            if(!empty($WIP)) {
+                $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->where('WIP', $WIP)
+                ->get(); 
+            } else {
+               $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->get();  
+            }
+            
+                
+        }  else if($type == 5 ) {
+             
+            $COMMENTS = $request->COMMENTS;
+            
+            $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->where('EX_COMMENTS', $COMMENTS)
+                ->get(); 
+                
+                
+        }   else {
+            
+            $from = $request->from;
+            $to   = $request->to;
+            
+            $salesOrderDetails = SalesOrderDetails::orderBy('ID','desc')
+                ->whereBetween('EXP_DELIVERY',[$from,$to])
+                ->get(); 
+        }
+       
+
+       return view('admin.order.details.result',[
+            'salesOrderDetails' =>  $salesOrderDetails,
+            'status'            => 3,
+            'menu_open'         => 2,
+        ]);
+        
+        
+    }
+    
+     public function newOrderDetailsUpdate(Request $request) {
+        
+        $type = $request->type;
+        
+        if($type == 1) {
+            
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['WIP' => $request->wip_id]);
+            
+        } else if($type == 2) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['ITEM' => $request->ITEM]);
+            
+        } else if($type == 3) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['DESCRIPTION' => $request->DESCRIPTION]);
+        } else if($type == 4) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['QTY' => $request->QTY]);
+        } else if($type == 5) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+             ->update(['EXP_DELIVERY' => $request->EXP_DELIVERY]);
+             
+        } else if($type == 6) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['EXP_HANDOVER_DT' => $request->EXP_HANDOVER_DT]);
+            
+        }else if($type == 7) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['EX_COMMENTS' => $request->EX_COMMENTS]);
+        }else if($type == 8) {
+           
+            DB::table('w2t_sales_order_detail')
+            ->where('ID', $request->id)
+            ->update(['COMMENTS' => $request->COMMENTS]);
+            
+        } else if($type == 11) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+            ->update(['ITEM' => $request->ITEM]);
+            
+        } else if($type == 12) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+            ->update(['DESCRIPTION' => $request->DESCRIPTION]);
+        } else if($type == 13) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+            ->update(['QTY' => $request->QTY]);
+        } else if($type == 14) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+             ->update(['EXP_DELIVERY' => $request->EXP_DELIVERY]);
+             
+        } else if($type == 15) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+            ->update(['EXP_HANDOVER_DT' => $request->EXP_HANDOVER_DT]);
+            
+        }else if($type == 16) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+            ->update(['EX_COMMENTS' => $request->EX_COMMENTS]);
+        }else if($type == 17) {
+           
+            DB::table('w2t_sales_order_detail_temporary')
+            ->where('ID', $request->id)
+            ->update(['COMMENTS' => $request->COMMENTS]);
+        }
+          
+       
+    }
+  
+}
+
+

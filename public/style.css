@@ -1,0 +1,142 @@
+.dropdown-menu.dropdown_menu_list {
+    width: 300px;
+    right: 0px !important;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 19px;
+    margin-right: 18px;
+}
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+#sortable, .sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 97%;
+    margin-left: 1%;
+}
+#sortable li, .sortable li {
+    margin: 0 3px 3px 3px;
+    padding: 0.4em;
+    padding-left: 1.5em;
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    position: relative;
+    cursor:pointer;
+}
+#sortable li .ui-icon , .sortable li .ui-icon {
+    position: absolute;
+    margin-left: -1.3em;
+    float: left;
+    top: 7px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.dropdown.column_list_dropdown {
+    width: 300px;
+    float: right;
+}
+.ui-state-default.save_button {
+    width: 59px;
+    margin: 11px auto;
+    background: none;
+    border: none;
+    overflow: hidden;
+}
+.table thead th {
+    /* vertical-align: bottom; */
+    border-bottom: 2px solid #dee2e6;
+    vertical-align: top !important;
+}
+.group_list {
+    width: 222px;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.group_list .form-check {
+    text-align:center;
+}
+.by_status_wise {
+    margin-left: 14px;
+    margin-right: 25px;
+}
+ .sticky {
+  position: fixed;
+  top: 0;
+}
+
+.sticky + .content {
+  padding-top: 500px;
+}
+.large-table-fake-top-scroll-container-3 {
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: auto;
+    z-index: 99;
+}
+.displayNone {
+    display:none;
+}

@@ -1,0 +1,418 @@
+.header_wrap ul {
+    display: none !important;
+}
+.header_wrap {
+
+    background-size: 100% 100%;
+  
+    height: 188px;
+}
+.footer-logo img {
+    width: 190px;
+}
+.btn-prime {
+    background-color: #084E8D!important;
+    color: #fff;
+    text-shadow: none;
+    font-size: 16px;
+}
+a.slicknav_btn.slicknav_collapsed, a.slicknav_btn.slicknav_open {
+    position: absolute;
+    z-index: 999;
+    left: 0px;
+    background: none;
+    top: 18px;
+}
+.slicknav_menu {
+    position: absolute;
+    z-index: 99;
+    background: none;
+
+}
+.slicknav_menu .slicknav_icon-bar {
+    background-color: #000;
+}
+.logo img {
+    width: 124px;
+    height: 24px;
+    margin-left: 20px;
+    margin-top: 7px;
+}
+.order_summary_list {
+    height: 55px;
+
+}
+.popup_container table th, .popup_container table td {
+  
+    font-size: 8px;
+  
+}
+span.icon-manager-arrow {
+    position: absolute;
+    right: 20px;
+    top: 11px;
+}
+span.icon-manager {
+    float: left;
+    width: 100%;
+    height: 29px;
+    margin-top: 15px;
+    text-align: left;
+}
+.button_area_sales {
+    width: 317px;
+    margin: 20px auto;
+}
+ul.list_order_header.order_summary_list {
+    width: 100%;
+    background: #fff;
+    padding: 5px 11px;
+}
+.popup_container, .popup_container_contact {
+    width: 90% !important;
+}
+.button_area_sales button {
+    width: 100%;
+    height: 128px;
+    left: 0px;
+    top: 0px;
+    background: #F8FAFC !important;
+    border-radius: 6px;
+    margin-bottom: 23px;
+    text-shadow: none;
+    position: relative;
+}
+span.modal-item {
+    width: 100px;
+    display: block;
+}
+ul.slicknav_nav {
+    margin-top: 44px;
+    background: #333;
+}
+.header-right.d-flex.align-items-stretch {
+    width: 127px;
+    float: right;
+    margin-top: 18px;
+}
+#search {
+    width: 148px;
+    height: 35px;
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    color: #64748B;
+    padding-left: 38px;
+}
+.footer-bottom {
+    padding: 50px 0;
+}
+.popup_container, .popup_container_contact {
+
+    width: 276px;
+
+}
+.order_summary_header {
+ 
+    font-size: 14px;
+ 
+}
+span.all_text.active.status_title {
+    padding-top: 5px;
+}
+.list-body-header {
+    overflow: hidden;
+    /* display: flex; */
+    width: 100%;
+    height: 55px;
+    background: #F8FAFC;
+    margin-top: 40px;
+    border-top: 1px solid #E2E8F0;
+    padding: 9px 20px;
+}
+.search_area svg {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+}
+ul.list_search {
+    width: 148px;
+    float: right;
+}
+h3.status_title, span.status_title {
+    /* padding-left: 6px; */
+    font-family: 'Inter', sans-serif;
+  
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+    align-items: center;
+    
+    /* Light/Text/Default-Text */
+    
+    color: #1E293B;
+    display: block;
+}
+ul.list_table_header {
+    width: 123px;
+    display: flex;
+    float: left;
+}
+a.logo {
+    margin-left: 66px;
+    margin-top: 14px;
+    overflow: hidden;
+    display: block;
+    width: 175px;
+    float: left;
+}
+.header_services {
+    height: 81px;
+    left: 0px;
+    top: 0px;
+    
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(4.5px);
+    /* Note: backdrop-filter has minimal browser support */
+}
+.table-responsive.table-status-content {
+    margin-top: 44px;
+    margin-bottom: 44px;
+}
+.row.align-items-end.row_footer_container {
+    padding-left: 0px;
+    text-align: center;
+}
+
+.container-xl {
+    margin: 0px;
+    padding: 0px;
+}
+.mobile_mergin {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.list_order_header {
+    width: auto;
+    height: auto;
+    display: flex;
+    background: #FAFAFA;
+    border-radius: 6px;
+}
+.footer-top .subscribe input {
+   
+    width: 280px;
+ 
+}
+.footer-top .subscribe form {
+    /* margin-top: 24px; */
+    width: 300px;
+    display: flex;
+    margin: 10px auto 40px;
+     margin-top: 25px;
+}
+.footer-top h4 {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #919191;
+    text-align: center;
+    display: block;
+}
+.fottoer_row {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.table-status-content table thead tr th span {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #1E293B;
+    width: 100%;
+    display: block;
+}
+
+.table-status-content table tbody tr td {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 28px;
+    /* identical to box height, or 350% */
+    
+    /*display: flex;*/
+    align-items: center;
+    
+    color: #1E293B;
+
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: #FFFFFF;
+    border-width: 1px 0px 1px 1px;
+    border-style: solid;
+    border-color: #E2E8F0;
+    border-radius: 0px !important;
+    margin: 0px !important;
+    flex-grow: 0;
+    
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 19PX;
+    padding: 6PX 7PX;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333 !important;
+ 
+    border-radius: 2px;
+}
+button.btn-xs.btn-prime.see-summary {
+    width: 140px;
+}
+.see-summary span {
+    width: 82px;
+    height: 24px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+.see-summary svg {
+    margin-left: 3px;
+}
+@media screen and (max-width: 540px) {
+    
+    a.logo {
+        margin-left: 35px;
+        margin-top: 14px;
+        overflow: hidden;
+        display: block;
+        width: 145px;
+        float: left;
+    }
+    .header-right .social-media a {
+        color: #000;
+        font-size: 24px;
+        padding: 6px;
+    }
+    .order_title {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 8px;
+        line-height: 28px;
+        /* identical to box height, or 350% */
+        
+        display: flex;
+        align-items: center;
+        
+        color: #1E293B;
+
+    }
+    .order_content {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 8px;
+        line-height: 28px;
+        /* identical to box height, or 350% */
+        
+        display: flex;
+        align-items: center;
+        
+        color: #000000;
+    }
+    .list_order_header li {
+        padding: 14px 5px;
+        width: 176px;
+    }
+    h3.status_title, span.status_title {
+        /* padding-left: 6px; */
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+        /* identical to box height, or 156% */
+        padding-top: 7px;
+        display: flex;
+        align-items: center;
+        
+        /* Light/Text/Default-Text */
+        
+        color: #1E293B;
+
+    }
+}
+@media screen and (max-width: 400px) {
+    .svg_contact_icon svg {
+        margin-left: 15px;
+        margin-top: 0px;
+        width: 33px;
+    }
+    button.btn-xs.btn-prime.see-summary {
+        width: 140px;
+    }
+}
+div#tableresponsive_info {
+    float: left;
+    margin-left: 0%;
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 24px;
+    /* identical to box height, or 240% */
+   
+    align-items: center;
+    
+    /* Light / Text / Secondary-Text */
+    
+    color: #64748B;
+
+}
+div#tableresponsive_paginate {
+    float: none;
+    margin-left: 12px;
+    margin-top: 21px;
+}
+.dataTables_wrapper {
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+div#tableresponsive_info {
+    position: absolute;
+    bottom: 10px;
+}
